@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FESTIVAL ASIK ASIA 2026 - Layar Kehadiran</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: radial-gradient(circle at top, #1a1a3a, #0d0d1a);
+    color: #fff;
+    margin: 0;
+    padding: 30px 20px;
+    text-align: center;
+    min-height: 100vh;
+  }
+  h1 { color: #ffd700; margin-bottom: 2px; font-size: 40px; letter-spacing: 1px; }
+  h3 { margin-top: 6px; color: #ccc; font-weight: normal; font-size: 18px; }
+  #lastBox {
+    background: linear-gradient(135deg, #1e7d32, #2e9e42);
+    border-radius: 24px;
+    padding: 36px 20px;
+    margin: 28px auto;
+    max-width: 850px;
+    box-shadow: 0 0 40px rgba(46, 158, 66, 0.4);
+    transition: transform 0.15s ease;
+  }
+  #lastBox.pulse { transform: scale(1.02); }
+  #lastLabel { font-size: 16px; letter-spacing: 2px; opacity: 0.85; margin-bottom: 8px; }
+  #lastName { font-size: 56px; font-weight: 800; line-height: 1.15; word-break: break-word; }
+  #listWrap {
+    max-width: 950px;
+    margin: 20px auto;
+    padding: 18px;
+    background: #15152b;
+    border-radius: 18px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  #listTitle { font-size: 14px; color: #999; margin-bottom: 12px; letter-spacing: 1px; }
+  #list { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .chip { background: #2a2a4a; padding: 6px 14px; border-radius: 20px; font-size: 14px; color: #e5e5e5; }
+  #counter { font-size: 26px; margin-top: 26px; font-weight: bold; color: #ffd700; }
+  #status { font-size: 12px; color: #666; margin-top: 8px; }
+</style>
+</head>
+<body>
+  <h1>FESTIVAL ASIK ASIA 2026</h1>
+  <h3>Ajang Seni Inovasi Kreatif - Kampus Asia — Sabtu, 11 Juli 2026</h3>
+
+  <div id="lastBox">
+    <div id="lastLabel">PESERTA TERBARU CHECK-IN</div>
+    <div id="lastName">-</div>
+  </div>
+
+  <div id="listWrap">
+    <div id="listTitle">DAFTAR PESERTA YANG SUDAH HADIR</div>
+    <div id="list"></div>
+  </div>
+
+  <div id="counter">Peserta sudah datang : 0</div>
+  <div id="status"></div>
+
+  <script>
+    // =========================================================
+    // GANTI dengan URL Web App Apps Script kamu (setelah deploy)
+    // Contoh: 'https://script.google.com/macros/s/XXXXXXXXXXXX/exec'
+    // =========================================================
+    const APPS_SCRIPT_URL = 'PASTE_URL_WEB_APP_APPS_SCRIPT_DI_SINI';
+
+    let lastKnownCount = -1;
+
+    function refresh() {
+      fetch(APPS_SCRIPT_URL + '?action=getdata')
+        .then(function (r) { return r.json(); })
+        .then(render)
+        .catch(function (err) {
+          document.getElementById('status').innerText = 'Gagal ambil data: ' + err;
+        });
+    }
+
+    function render(data) {
+      document.getElementById('status').innerText = '';
+      if (data.hadir !== lastKnownCount) {
+        if (data.list.length > 0) {
+          document.getElementById('lastName').innerText = data.list[0].nama;
+          const box = document.getElementById('lastBox');
+          box.classList.add('pulse');
+          setTimeout(function () { box.classList.remove('pulse'); }, 300);
+        }
+
+        const listEl = document.getElementById('list');
+        listEl.innerHTML = '';
+        data.list.forEach(function (p) {
+          const span = document.createElement('span');
+          span.className = 'chip';
+          span.innerText = p.nama;
+          listEl.appendChild(span);
+        });
+
+        document.getElementById('counter').innerText =
+          'Peserta sudah datang : ' + data.hadir + ' / ' + data.total;
+
+        lastKnownCount = data.hadir;
+      }
+    }
+
+    refresh();
+    setInterval(refresh, 3000);
+  </script>
+</body>
+</html>

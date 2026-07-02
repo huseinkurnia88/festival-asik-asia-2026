@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Check-in - FESTIVAL ASIK ASIA 2026</title>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #0d0d1a;
+    color: #fff;
+    margin: 0;
+    padding: 16px;
+    text-align: center;
+  }
+  h2 { color: #ffd700; margin-bottom: 4px; font-size: 20px; }
+  p.sub { margin-top: 0; color: #aaa; font-size: 13px; }
+  #reader {
+    width: 100%;
+    max-width: 420px;
+    margin: 12px auto;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  #result {
+    margin-top: 16px;
+    padding: 18px;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    min-height: 30px;
+    background: #1a1a2e;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .ok  { background: #1e7d32 !important; }
+  .dup { background: #e6a700 !important; color: #000; }
+  .err { background: #c62828 !important; }
+</style>
+</head>
+<body>
+  <h2>📷 Scan QR Peserta</h2>
+  <p class="sub">FESTIVAL ASIK ASIA 2026</p>
+
+  <div id="reader"></div>
+  <div id="result">Memuat...</div>
+
+  <script>
+    // =========================================================
+    // GANTI dengan URL Web App Apps Script kamu (setelah deploy)
+    // Contoh: 'https://script.google.com/macros/s/XXXXXXXXXXXX/exec'
+    // =========================================================
+    const APPS_SCRIPT_URL = 'PASTE_URL_WEB_APP_APPS_SCRIPT_DI_SINI';
+
+    const resultEl = document.getElementById('result');
+
+    function extractId(text) {
+      text = (text || '').trim();
+      try {
+        const url = new URL(text);
+        const idParam = url.searchParams.get('id');
+        if (idParam) return idParam;
+      } catch (e) {
+        // bukan URL, anggap teks mentah adalah ID
+      }
+      return text;
+    }
+
+    function checkin(id) {
+      resultEl.className = '';
+      resultEl.innerText = 'Memproses...';
+      fetch(APPS_SCRIPT_URL + '?action=checkin&id=' + encodeURIComponent(id))
+        .then(function (r) { return r.json(); })
+        .then(showResult)
+        .catch(function (err) {
+          resultEl.className = 'err';
+          resultEl.innerText = '✖ Gagal terhubung ke server. Cek koneksi internet.';
+          console.error(err);
+        });
+    }
+
+    function showResult(res) {
+      if (res.success) {
+        resultEl.className = 'ok';
+        resultEl.innerText = '✔ ' + res.nama + ' berhasil check-in!';
+      } else if (res.duplicate) {
+        resultEl.className = 'dup';
+        resultEl.innerText = '⚠ ' + res.message;
+      } else {
+        resultEl.className = 'err';
+        resultEl.innerText = '✖ ' + (res.message || 'Terjadi kesalahan.');
+      }
+    }
+
+    // Jika halaman dibuka lewat link yang bawa ?id=xxx
+    // (misalnya hasil scan dari kamera bawaan HP / Google Lens),
+    // langsung proses check-in tanpa perlu buka kamera lagi.
+    const urlParams = new URLSearchParams(window.location.search);
+    const idFromLink = urlParams.get('id');
+
+    if (idFromLink) {
+      document.getElementById('reader').style.display = 'none';
+      checkin(idFromLink);
+    } else {
+      // Mode kamera langsung di halaman ini (live scan)
+      resultEl.innerText = 'Arahkan kamera ke QR Code peserta';
+      let processing = false;
+      const scanner = new Html5Qrcode('reader');
+
+      scanner.start(
+        { facingMode: 'environment' },
+        { fps: 10, qrbox: 250 },
+        function (decodedText) {
+          if (processing) return;
+          processing = true;
+          scanner.pause();
+          checkin(extractId(decodedText));
+          setTimeout(function () {
+            resultEl.className = '';
+            resultEl.innerText = 'Arahkan kamera ke QR Code peserta';
+            scanner.resume();
+            processing = false;
+          }, 2200);
+        }
+      ).catch(function (err) {
+        resultEl.className = 'err';
+        resultEl.innerText = 'Gagal akses kamera: ' + err;
+      });
+    }
+  </script>
+</body>
+</html>
