@@ -20,13 +20,12 @@
   html, body {
     height: 100%;
     background: var(--navy-1);
+    overflow: hidden; /* halaman kiosk: tidak ada scroll manual sama sekali */
   }
 
   body {
     font-family: 'Segoe UI', Arial, sans-serif;
     color: #fff;
-    min-height: 100vh;
-    overflow-x: hidden;
     position: relative;
     background:
       radial-gradient(circle at 15% 10%, rgba(62,166,255,0.16), transparent 40%),
@@ -35,7 +34,6 @@
       linear-gradient(180deg, var(--navy-1) 0%, var(--navy-2) 55%, var(--navy-1) 100%);
   }
 
-  /* garis grid futuristik tipis di background */
   body::before {
     content: "";
     position: fixed;
@@ -48,24 +46,31 @@
     z-index: 0;
   }
 
+  /* ===== LAYOUT UTAMA: mengisi 100vh, tidak pernah terpotong ===== */
   .wrap {
     position: relative;
     z-index: 1;
-    padding: 22px 34px 40px;
+    height: 100vh;
+    padding: 1.6vh 2.5vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2vh;
   }
 
-  /* ===== TOP BAR: logo kiri, jam tengah, logo kanan ===== */
+  /* ===== TOP BAR ===== */
   .topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: 2vw;
+    flex: 0 0 auto;
   }
 
   .logo-box {
     display: flex;
     align-items: center;
-    height: 84px;
+    height: clamp(40px, 7vh, 84px);
+    flex: 0 0 auto;
   }
   .logo-box img {
     height: 100%;
@@ -76,15 +81,16 @@
 
   .clock-box {
     text-align: center;
-    padding: 10px 26px;
+    padding: 0.8vh 2vw;
     border-radius: 14px;
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(255,255,255,0.10);
     backdrop-filter: blur(6px);
-    min-width: 180px;
+    min-width: 160px;
+    flex: 0 0 auto;
   }
   #clockTime {
-    font-size: 30px;
+    font-size: clamp(18px, 2.4vh, 30px);
     font-weight: 800;
     letter-spacing: 2px;
     color: var(--gold);
@@ -92,7 +98,7 @@
     font-variant-numeric: tabular-nums;
   }
   #clockDate {
-    font-size: 12px;
+    font-size: clamp(9px, 1.1vh, 12px);
     color: #b9c2e0;
     letter-spacing: 1px;
     margin-top: 2px;
@@ -102,12 +108,12 @@
   /* ===== HEADLINE ===== */
   .headline-wrap {
     text-align: center;
-    margin-top: 22px;
+    flex: 0 0 auto;
   }
   h1.headline {
-    font-size: 66px;
+    font-size: clamp(28px, 5.2vh, 60px);
     font-weight: 900;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     line-height: 1.05;
     background: linear-gradient(90deg, var(--gold-soft), var(--gold) 45%, #ffb200 100%);
     -webkit-background-clip: text;
@@ -117,27 +123,23 @@
     text-transform: uppercase;
   }
   p.subheadline {
-    margin-top: 10px;
-    font-size: 22px;
+    margin-top: 0.6vh;
+    font-size: clamp(13px, 1.9vh, 21px);
     color: #d9e0ff;
     font-weight: 500;
     letter-spacing: 0.5px;
   }
-  p.subheadline .dot {
-    color: var(--accent);
-    margin: 0 10px;
-  }
+  p.subheadline .dot { color: var(--accent); margin: 0 10px; }
   p.eventdate {
-    margin-top: 4px;
-    font-size: 16px;
+    margin-top: 2px;
+    font-size: clamp(11px, 1.3vh, 15px);
     color: #8b95c2;
     letter-spacing: 1px;
   }
-
   .divider {
-    width: 140px;
+    width: 120px;
     height: 3px;
-    margin: 20px auto 0;
+    margin: 1vh auto 0;
     border-radius: 3px;
     background: linear-gradient(90deg, transparent, var(--gold), transparent);
   }
@@ -145,35 +147,33 @@
   /* ===== WELCOME BOX ===== */
   #lastBox {
     position: relative;
-    margin: 34px auto 0;
+    flex: 0 0 auto;
     max-width: 900px;
-    padding: 44px 30px;
-    border-radius: 26px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2vh 2vw;
+    border-radius: 22px;
     text-align: center;
     background: linear-gradient(160deg, rgba(41,209,122,0.16), rgba(19,28,68,0.55));
     border: 1px solid rgba(41,209,122,0.45);
-    box-shadow:
-      0 0 60px rgba(41,209,122,0.20),
-      inset 0 0 40px rgba(41,209,122,0.06);
+    box-shadow: 0 0 50px rgba(41,209,122,0.20), inset 0 0 40px rgba(41,209,122,0.06);
     backdrop-filter: blur(8px);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   #lastBox.pulse {
     transform: scale(1.015);
-    box-shadow:
-      0 0 90px rgba(41,209,122,0.38),
-      inset 0 0 50px rgba(41,209,122,0.12);
+    box-shadow: 0 0 80px rgba(41,209,122,0.38), inset 0 0 50px rgba(41,209,122,0.12);
   }
   #lastLabel {
-    font-size: 15px;
-    letter-spacing: 4px;
+    font-size: clamp(11px, 1.5vh, 15px);
+    letter-spacing: 3px;
     color: var(--green);
     font-weight: 700;
     text-transform: uppercase;
-    margin-bottom: 14px;
+    margin-bottom: 0.8vh;
   }
   #lastName {
-    font-size: 58px;
+    font-size: clamp(24px, 4.6vh, 52px);
     font-weight: 900;
     line-height: 1.15;
     word-break: break-word;
@@ -181,60 +181,75 @@
     text-shadow: 0 0 26px rgba(255,255,255,0.25);
   }
 
-  /* ===== LIST PESERTA ===== */
+  /* ===== LIST PESERTA — mengisi sisa ruang, auto-scroll ===== */
   #listWrap {
-    max-width: 1000px;
-    margin: 26px auto 0;
-    padding: 20px 22px;
-    border-radius: 20px;
+    flex: 1 1 auto;
+    min-height: 0; /* wajib supaya flex-child bisa scroll, bukan overflow ke luar */
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.4vh 1.6vw 0.4vh;
+    border-radius: 18px;
     background: rgba(255,255,255,0.035);
     border: 1px solid rgba(255,255,255,0.09);
     backdrop-filter: blur(6px);
-    max-height: 260px;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
   }
   #listTitle {
-    font-size: 13px;
+    font-size: clamp(10px, 1.2vh, 13px);
     color: #8b95c2;
     letter-spacing: 2px;
-    margin-bottom: 14px;
+    margin-bottom: 1vh;
     text-transform: uppercase;
     text-align: center;
+    flex: 0 0 auto;
   }
-  #list { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  #listScroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: scroll;
+    scrollbar-width: none;      /* Firefox: sembunyikan scrollbar */
+    -ms-overflow-style: none;   /* IE/Edge lama */
+  }
+  #listScroll::-webkit-scrollbar { display: none; } /* Chrome/Safari: sembunyikan scrollbar */
+
+  #list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8vh 10px;
+    justify-content: center;
+    align-content: flex-start;
+    padding-bottom: 0.6vh;
+  }
   .chip {
     background: rgba(62,166,255,0.12);
     border: 1px solid rgba(62,166,255,0.35);
-    padding: 7px 16px;
+    padding: 0.6vh 14px;
     border-radius: 20px;
-    font-size: 14px;
+    font-size: clamp(11px, 1.5vh, 14px);
     color: #eaf1ff;
     letter-spacing: 0.3px;
+    white-space: nowrap;
   }
 
   /* ===== COUNTER ===== */
   #counterWrap {
     text-align: center;
-    margin-top: 30px;
+    flex: 0 0 auto;
   }
   #counter {
     display: inline-block;
-    font-size: 26px;
+    font-size: clamp(16px, 2.4vh, 25px);
     font-weight: 800;
-    padding: 14px 34px;
+    padding: 1vh 3vw;
     border-radius: 40px;
     color: var(--navy-1);
     background: linear-gradient(90deg, var(--gold-soft), var(--gold));
-    box-shadow: 0 0 34px rgba(255,210,63,0.45);
+    box-shadow: 0 0 30px rgba(255,210,63,0.45);
     letter-spacing: 0.5px;
   }
-  #status { font-size: 12px; color: #5a638a; margin-top: 10px; }
-
-  @media (max-width: 900px) {
-    h1.headline { font-size: 40px; }
-    #lastName { font-size: 38px; }
-    .logo-box { height: 56px; }
-  }
+  #status { font-size: 11px; color: #5a638a; margin-top: 6px; }
 </style>
 </head>
 <body>
@@ -269,7 +284,9 @@
 
   <div id="listWrap">
     <div id="listTitle">Daftar Peserta yang Sudah Hadir</div>
-    <div id="list"></div>
+    <div id="listScroll">
+      <div id="list"></div>
+    </div>
   </div>
 
   <div id="counterWrap">
@@ -340,6 +357,32 @@
   }
   updateClock();
   setInterval(updateClock, 1000);
+
+  // ===== Auto-scroll daftar peserta (naik terus dari atas ke bawah, lalu kembali ke atas) =====
+  const scrollEl = document.getElementById('listScroll');
+  let pauseUntil = 0;
+  const SCROLL_SPEED = 0.5;   // px per tick — makin besar makin cepat
+  const PAUSE_MS = 1800;      // jeda di atas & bawah sebelum lanjut/loop
+
+  function autoScrollTick() {
+    const now = Date.now();
+    if (now < pauseUntil) return;
+
+    const maxScroll = scrollEl.scrollHeight - scrollEl.clientHeight;
+    if (maxScroll <= 2) return; // konten belum melebihi area, tidak perlu scroll
+
+    if (scrollEl.scrollTop >= maxScroll - 1) {
+      // sudah sampai bawah -> jeda, lalu loop ke atas
+      pauseUntil = now + PAUSE_MS;
+      setTimeout(function () {
+        scrollEl.scrollTop = 0;
+        pauseUntil = Date.now() + PAUSE_MS;
+      }, PAUSE_MS);
+    } else {
+      scrollEl.scrollTop += SCROLL_SPEED;
+    }
+  }
+  setInterval(autoScrollTick, 30);
 </script>
 </body>
 </html>
