@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FESTIVAL ASIK ASIA 2026 - Layar Kehadiran</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -46,6 +49,46 @@
     z-index: 0;
   }
 
+  /* orb cahaya yang bergerak pelan di background, biar lebih hidup */
+  .glow-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.55;
+  }
+  .glow-orb.o1 {
+    width: 380px; height: 380px;
+    background: radial-gradient(circle, rgba(255,210,63,0.35), transparent 70%);
+    top: -80px; left: -60px;
+    animation: floatA 16s ease-in-out infinite;
+  }
+  .glow-orb.o2 {
+    width: 420px; height: 420px;
+    background: radial-gradient(circle, rgba(62,166,255,0.30), transparent 70%);
+    bottom: -100px; right: -80px;
+    animation: floatB 20s ease-in-out infinite;
+  }
+  .glow-orb.o3 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(41,209,122,0.25), transparent 70%);
+    bottom: 10%; left: 40%;
+    animation: floatC 24s ease-in-out infinite;
+  }
+  @keyframes floatA {
+    0%,100% { transform: translate(0,0); }
+    50% { transform: translate(60px, 40px); }
+  }
+  @keyframes floatB {
+    0%,100% { transform: translate(0,0); }
+    50% { transform: translate(-50px, -35px); }
+  }
+  @keyframes floatC {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(-30px, 20px) scale(1.08); }
+  }
+
   /* ===== LAYOUT UTAMA: mengisi 100vh, tidak pernah terpotong ===== */
   .wrap {
     position: relative;
@@ -54,7 +97,8 @@
     padding: 1.6vh 2.5vw;
     display: flex;
     flex-direction: column;
-    gap: 1.2vh;
+    justify-content: space-between;
+    gap: 1vh;
   }
 
   /* ===== TOP BAR ===== */
@@ -111,30 +155,39 @@
     flex: 0 0 auto;
   }
   h1.headline {
-    font-size: clamp(28px, 5.2vh, 60px);
+    font-size: clamp(32px, 6.2vh, 70px);
     font-weight: 900;
     letter-spacing: 1.5px;
-    line-height: 1.05;
-    background: linear-gradient(90deg, var(--gold-soft), var(--gold) 45%, #ffb200 100%);
+    line-height: 1.1;
+    background: linear-gradient(90deg, var(--gold-soft), var(--gold) 25%, #ffb200 50%, var(--gold) 75%, var(--gold-soft));
+    background-size: 250% auto;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     text-shadow: 0 0 40px rgba(255,178,0,0.35);
     text-transform: uppercase;
+    animation: shimmer 6s linear infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: 0% center; }
+    100% { background-position: -250% center; }
   }
   p.subheadline {
     margin-top: 0.6vh;
-    font-size: clamp(13px, 1.9vh, 21px);
-    color: #d9e0ff;
-    font-weight: 500;
+    font-size: clamp(24px, 4.4vh, 50px);
+    font-weight: 900;
+    line-height: 1.1;
+    color: #eaf1ff;
     letter-spacing: 0.5px;
+    text-shadow: 0 0 24px rgba(62,166,255,0.30);
   }
-  p.subheadline .dot { color: var(--accent); margin: 0 10px; }
+  p.subheadline .dot { color: var(--accent); margin: 0 14px; }
   p.eventdate {
-    margin-top: 2px;
-    font-size: clamp(11px, 1.3vh, 15px);
-    color: #8b95c2;
-    letter-spacing: 1px;
+    margin-top: 0.6vh;
+    font-size: clamp(12px, 1.6vh, 17px);
+    font-weight: 800;
+    color: var(--gold-soft);
+    letter-spacing: 2px;
   }
   .divider {
     width: 120px;
@@ -142,68 +195,128 @@
     margin: 1vh auto 0;
     border-radius: 3px;
     background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    background-size: 200% auto;
+    animation: shimmer 3s linear infinite;
   }
 
-  /* ===== WELCOME BOX ===== */
+  /* ===== WELCOME BOX — bingkai emas dekoratif ala kartu undangan ===== */
   #lastBox {
     position: relative;
     flex: 0 0 auto;
     max-width: 900px;
     width: 100%;
     margin: 0 auto;
-    padding: 2vh 2vw;
-    border-radius: 22px;
+    padding: 2vh 3vw;
+    border-radius: 14px;
     text-align: center;
-    background: linear-gradient(160deg, rgba(41,209,122,0.16), rgba(19,28,68,0.55));
-    border: 1px solid rgba(41,209,122,0.45);
-    box-shadow: 0 0 50px rgba(41,209,122,0.20), inset 0 0 40px rgba(41,209,122,0.06);
+    background:
+      linear-gradient(160deg, rgba(19,28,68,0.75), rgba(5,6,15,0.85));
+    border: 1.5px solid rgba(255,210,63,0.55);
     backdrop-filter: blur(8px);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    animation: breathe 3.2s ease-in-out infinite;
+  }
+  /* garis bingkai ganda ala undangan, sedikit di dalam border utama */
+  #lastBox::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(255,210,63,0.28);
+    border-radius: 8px;
+    pointer-events: none;
+  }
+  /* ornamen sudut emas — 4 sudut */
+  .corner {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    pointer-events: none;
+  }
+  .corner::before, .corner::after {
+    content: "";
+    position: absolute;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .corner::before { width: 100%; height: 2px; }
+  .corner::after   { width: 2px; height: 100%; background: linear-gradient(180deg, var(--gold), transparent); }
+  .corner.tl { top: -2px; left: -2px; }
+  .corner.tr { top: -2px; right: -2px; transform: scaleX(-1); }
+  .corner.bl { bottom: -2px; left: -2px; transform: scaleY(-1); }
+  .corner.br { bottom: -2px; right: -2px; transform: scale(-1,-1); }
+
+  @keyframes breathe {
+    0%,100% { box-shadow: 0 0 40px rgba(255,210,63,0.14), inset 0 0 30px rgba(41,209,122,0.04); }
+    50%     { box-shadow: 0 0 65px rgba(255,210,63,0.26), inset 0 0 40px rgba(41,209,122,0.08); }
   }
   #lastBox.pulse {
-    transform: scale(1.015);
-    box-shadow: 0 0 80px rgba(41,209,122,0.38), inset 0 0 50px rgba(41,209,122,0.12);
+    transform: scale(1.02);
+    box-shadow: 0 0 90px rgba(255,210,63,0.4), inset 0 0 55px rgba(41,209,122,0.12) !important;
   }
   #lastLabel {
-    font-size: clamp(11px, 1.5vh, 15px);
-    letter-spacing: 3px;
-    color: var(--green);
-    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(10px, 1.3vh, 14px);
+    letter-spacing: 5px;
+    color: var(--gold-soft);
+    font-weight: 600;
     text-transform: uppercase;
-    margin-bottom: 0.8vh;
+    margin-bottom: 1vh;
+  }
+  #lastLabel::before, #lastLabel::after {
+    content: "✦";
+    color: var(--gold);
+    font-size: 10px;
+    margin: 0 10px;
+    vertical-align: middle;
+    opacity: 0.8;
   }
   #lastName {
-    font-size: clamp(24px, 4.6vh, 52px);
-    font-weight: 900;
-    line-height: 1.15;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4.2vh, 48px);
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1.2;
     word-break: break-word;
-    color: #fff;
-    text-shadow: 0 0 26px rgba(255,255,255,0.25);
+    background: linear-gradient(90deg, #fff, var(--gold-soft) 50%, #fff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 30px rgba(255,210,63,0.25);
+    animation: nameIn 0.5s ease;
+  }
+  @keyframes nameIn {
+    0%   { opacity: 0; transform: translateY(8px) scale(0.96); letter-spacing: 4px; }
+    100% { opacity: 1; transform: translateY(0) scale(1); letter-spacing: normal; }
   }
 
-  /* ===== LIST PESERTA — mengisi sisa ruang, auto-scroll ===== */
+  /* ===== LIST PESERTA — kartu elegan, ukuran kecil & tetap, auto-scroll ===== */
   #listWrap {
-    flex: 1 1 auto;
-    min-height: 0; /* wajib supaya flex-child bisa scroll, bukan overflow ke luar */
+    flex: 0 0 auto;
+    height: clamp(110px, 18vh, 190px);
     max-width: 1100px;
     width: 100%;
     margin: 0 auto;
-    padding: 1.4vh 1.6vw 0.4vh;
-    border-radius: 18px;
-    background: rgba(255,255,255,0.035);
-    border: 1px solid rgba(255,255,255,0.09);
+    padding: 1.2vh 1.6vw 0.6vh;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,210,63,0.22);
     backdrop-filter: blur(6px);
     display: flex;
     flex-direction: column;
   }
   #listTitle {
-    font-size: clamp(10px, 1.2vh, 13px);
-    color: #8b95c2;
-    letter-spacing: 2px;
-    margin-bottom: 1vh;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(9px, 1.1vh, 12px);
+    color: var(--gold-soft);
+    letter-spacing: 3px;
+    margin-bottom: 0.8vh;
     text-transform: uppercase;
     text-align: center;
     flex: 0 0 auto;
+  }
+  #listTitle::before, #listTitle::after {
+    content: "—";
+    color: rgba(255,210,63,0.5);
+    margin: 0 10px;
   }
   #listScroll {
     flex: 1 1 auto;
@@ -223,14 +336,21 @@
     padding-bottom: 0.6vh;
   }
   .chip {
-    background: rgba(62,166,255,0.12);
-    border: 1px solid rgba(62,166,255,0.35);
-    padding: 0.6vh 14px;
-    border-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(160deg, rgba(255,210,63,0.10), rgba(19,28,68,0.5));
+    border: 1px solid rgba(255,210,63,0.35);
+    padding: 0.6vh 16px;
+    border-radius: 8px;
     font-size: clamp(11px, 1.5vh, 14px);
-    color: #eaf1ff;
-    letter-spacing: 0.3px;
+    font-weight: 500;
+    color: #f5efe0;
+    letter-spacing: 0.4px;
     white-space: nowrap;
+    animation: cardIn 0.45s ease;
+  }
+  @keyframes cardIn {
+    0%   { opacity: 0; transform: translateY(6px) scale(0.94); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
   }
 
   /* ===== COUNTER ===== */
@@ -253,6 +373,9 @@
 </style>
 </head>
 <body>
+<div class="glow-orb o1"></div>
+<div class="glow-orb o2"></div>
+<div class="glow-orb o3"></div>
 <div class="wrap">
 
   <div class="topbar">
@@ -278,6 +401,10 @@
   </div>
 
   <div id="lastBox">
+    <span class="corner tl"></span>
+    <span class="corner tr"></span>
+    <span class="corner bl"></span>
+    <span class="corner br"></span>
     <div id="lastLabel">Selamat Datang Kepada</div>
     <div id="lastName">-</div>
   </div>
@@ -361,8 +488,8 @@
   // ===== Auto-scroll daftar peserta (naik terus dari atas ke bawah, lalu kembali ke atas) =====
   const scrollEl = document.getElementById('listScroll');
   let pauseUntil = 0;
-  const SCROLL_SPEED = 0.5;   // px per tick — makin besar makin cepat
-  const PAUSE_MS = 1800;      // jeda di atas & bawah sebelum lanjut/loop
+  const SCROLL_SPEED = 0.6;   // px per tick — makin besar makin cepat
+  const PAUSE_MS = 1400;      // jeda di atas & bawah sebelum lanjut/loop
 
   function autoScrollTick() {
     const now = Date.now();
