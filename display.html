@@ -199,124 +199,82 @@
     animation: shimmer 3s linear infinite;
   }
 
-  /* ===== WELCOME BOX — bingkai emas dekoratif ala kartu undangan ===== */
+  /* ===== WELCOME BOX — sesuai referensi: kotak navy rounded, font tegak & tebal ===== */
   #lastBox {
     position: relative;
     flex: 0 0 auto;
     max-width: 900px;
     width: 100%;
     margin: 0 auto;
-    padding: 2vh 3vw;
-    border-radius: 14px;
+    padding: 2.2vh 3vw;
+    border-radius: 20px;
     text-align: center;
-    background:
-      linear-gradient(160deg, rgba(19,28,68,0.75), rgba(5,6,15,0.85));
-    border: 1.5px solid rgba(255,210,63,0.55);
+    background: linear-gradient(160deg, rgba(30,45,110,0.55), rgba(8,12,32,0.75));
+    border: 1.5px solid rgba(120,170,255,0.45);
     backdrop-filter: blur(8px);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     animation: breathe 3.2s ease-in-out infinite;
   }
-  /* garis bingkai ganda ala undangan, sedikit di dalam border utama */
-  #lastBox::before {
-    content: "";
-    position: absolute;
-    inset: 8px;
-    border: 1px solid rgba(255,210,63,0.28);
-    border-radius: 8px;
-    pointer-events: none;
-  }
-  /* ornamen sudut emas — 4 sudut */
-  .corner {
-    position: absolute;
-    width: 34px;
-    height: 34px;
-    pointer-events: none;
-  }
-  .corner::before, .corner::after {
-    content: "";
-    position: absolute;
-    background: linear-gradient(90deg, var(--gold), transparent);
-  }
-  .corner::before { width: 100%; height: 2px; }
-  .corner::after   { width: 2px; height: 100%; background: linear-gradient(180deg, var(--gold), transparent); }
-  .corner.tl { top: -2px; left: -2px; }
-  .corner.tr { top: -2px; right: -2px; transform: scaleX(-1); }
-  .corner.bl { bottom: -2px; left: -2px; transform: scaleY(-1); }
-  .corner.br { bottom: -2px; right: -2px; transform: scale(-1,-1); }
-
   @keyframes breathe {
-    0%,100% { box-shadow: 0 0 40px rgba(255,210,63,0.14), inset 0 0 30px rgba(41,209,122,0.04); }
-    50%     { box-shadow: 0 0 65px rgba(255,210,63,0.26), inset 0 0 40px rgba(41,209,122,0.08); }
+    0%,100% { box-shadow: 0 0 35px rgba(120,170,255,0.18), inset 0 0 25px rgba(120,170,255,0.05); }
+    50%     { box-shadow: 0 0 55px rgba(120,170,255,0.32), inset 0 0 35px rgba(120,170,255,0.10); }
   }
   #lastBox.pulse {
     transform: scale(1.02);
-    box-shadow: 0 0 90px rgba(255,210,63,0.4), inset 0 0 55px rgba(41,209,122,0.12) !important;
+    box-shadow: 0 0 80px rgba(120,170,255,0.45), inset 0 0 45px rgba(120,170,255,0.14) !important;
   }
   #lastLabel {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(10px, 1.3vh, 14px);
-    letter-spacing: 5px;
-    color: var(--gold-soft);
-    font-weight: 600;
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+    font-size: clamp(13px, 1.8vh, 19px);
+    letter-spacing: 3px;
+    color: #fff;
+    font-weight: 700;
     text-transform: uppercase;
-    margin-bottom: 1vh;
-  }
-  #lastLabel::before, #lastLabel::after {
-    content: "✦";
-    color: var(--gold);
-    font-size: 10px;
-    margin: 0 10px;
-    vertical-align: middle;
-    opacity: 0.8;
+    margin-bottom: 1.2vh;
   }
   #lastName {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(22px, 4.2vh, 48px);
-    font-weight: 700;
-    font-style: italic;
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+    font-size: clamp(28px, 5.2vh, 58px);
+    font-weight: 800;
+    font-style: normal;
     line-height: 1.2;
+    letter-spacing: 1px;
     word-break: break-word;
-    background: linear-gradient(90deg, #fff, var(--gold-soft) 50%, #fff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: 0 0 30px rgba(255,210,63,0.25);
+    color: #ffffff;
+    text-transform: uppercase;
+    text-shadow: 0 0 24px rgba(150,190,255,0.55), 0 2px 6px rgba(0,0,0,0.4);
     animation: nameIn 0.5s ease;
   }
   @keyframes nameIn {
-    0%   { opacity: 0; transform: translateY(8px) scale(0.96); letter-spacing: 4px; }
-    100% { opacity: 1; transform: translateY(0) scale(1); letter-spacing: normal; }
+    0%   { opacity: 0; transform: translateY(8px) scale(0.97); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
   }
 
-  /* ===== LIST PESERTA — kartu elegan, ukuran kecil & tetap, auto-scroll ===== */
+  /* ===== LIST PESERTA — kartu pil biru bernomor, sesuai referensi ===== */
   #listWrap {
     flex: 0 0 auto;
-    height: clamp(110px, 18vh, 190px);
-    max-width: 1100px;
+    height: clamp(180px, 30vh, 330px);
+    max-width: 1150px;
     width: 100%;
     margin: 0 auto;
-    padding: 1.2vh 1.6vw 0.6vh;
-    border-radius: 14px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,210,63,0.22);
+    padding: 1.4vh 1.8vw 0.8vh;
+    border-radius: 16px;
+    background: rgba(20,30,70,0.28);
+    border: 1px solid rgba(120,170,255,0.22);
     backdrop-filter: blur(6px);
     display: flex;
     flex-direction: column;
   }
   #listTitle {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(9px, 1.1vh, 12px);
-    color: var(--gold-soft);
-    letter-spacing: 3px;
-    margin-bottom: 0.8vh;
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+    font-size: clamp(11px, 1.4vh, 14px);
+    color: #dfe8ff;
+    letter-spacing: 2px;
+    margin-bottom: 1vh;
     text-transform: uppercase;
     text-align: center;
     flex: 0 0 auto;
-  }
-  #listTitle::before, #listTitle::after {
-    content: "—";
-    color: rgba(255,210,63,0.5);
-    margin: 0 10px;
+    font-weight: 600;
   }
   #listScroll {
     flex: 1 1 auto;
@@ -336,17 +294,24 @@
     padding-bottom: 0.6vh;
   }
   .chip {
-    font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(160deg, rgba(255,210,63,0.10), rgba(19,28,68,0.5));
-    border: 1px solid rgba(255,210,63,0.35);
-    padding: 0.6vh 16px;
-    border-radius: 8px;
-    font-size: clamp(11px, 1.5vh, 14px);
-    font-weight: 500;
-    color: #f5efe0;
-    letter-spacing: 0.4px;
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+    background: linear-gradient(160deg, rgba(90,140,255,0.22), rgba(20,30,80,0.55));
+    border: 1px solid rgba(120,170,255,0.45);
+    padding: 0.7vh 18px;
+    border-radius: 24px;
+    font-size: clamp(12px, 1.6vh, 15px);
+    font-weight: 700;
+    font-style: normal;
+    color: #ffffff;
+    letter-spacing: 0.3px;
     white-space: nowrap;
+    text-transform: uppercase;
     animation: cardIn 0.45s ease;
+  }
+  .chip .num {
+    color: var(--gold);
+    font-weight: 800;
+    margin-right: 4px;
   }
   @keyframes cardIn {
     0%   { opacity: 0; transform: translateY(6px) scale(0.94); }
@@ -401,10 +366,6 @@
   </div>
 
   <div id="lastBox">
-    <span class="corner tl"></span>
-    <span class="corner tr"></span>
-    <span class="corner bl"></span>
-    <span class="corner br"></span>
     <div id="lastLabel">Selamat Datang Kepada</div>
     <div id="lastName">-</div>
   </div>
@@ -452,10 +413,13 @@
 
       const listEl = document.getElementById('list');
       listEl.innerHTML = '';
-      data.list.forEach(function (p) {
+      // data.list terurut dari yang paling baru check-in.
+      // Dibalik supaya urut sesuai kedatangan (#1, #2, ... ) seperti di layar referensi.
+      const urutKedatangan = data.list.slice().reverse();
+      urutKedatangan.forEach(function (p, idx) {
         const span = document.createElement('span');
         span.className = 'chip';
-        span.innerText = p.nama;
+        span.innerHTML = '<span class="num">#' + (idx + 1) + '</span>' + p.nama;
         listEl.appendChild(span);
       });
 
