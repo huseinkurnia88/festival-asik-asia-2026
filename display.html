@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FESTIVAL ASIK ASIA 2026 - Layar Kehadiran</title>
+<title>Trial Class Institut Teknologi & Bisnis Asia Malang - Layar Kehadiran</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -149,16 +149,18 @@
     text-transform: uppercase;
   }
 
-  /* ===== HEADLINE ===== */
+  /* ===== HEADLINE (judul tunggal) ===== */
   .headline-wrap {
     text-align: center;
     flex: 0 0 auto;
   }
   h1.headline {
-    font-size: clamp(32px, 6.2vh, 70px);
+    font-size: clamp(22px, 4.4vh, 46px);
     font-weight: 900;
-    letter-spacing: 1.5px;
-    line-height: 1.1;
+    letter-spacing: 1px;
+    line-height: 1.25;
+    max-width: 90vw;
+    margin: 0 auto;
     background: linear-gradient(90deg, var(--gold-soft), var(--gold) 25%, #ffb200 50%, var(--gold) 75%, var(--gold-soft));
     background-size: 250% auto;
     -webkit-background-clip: text;
@@ -172,22 +174,13 @@
     0% { background-position: 0% center; }
     100% { background-position: -250% center; }
   }
-  p.subheadline {
-    margin-top: 0.6vh;
-    font-size: clamp(24px, 4.4vh, 50px);
-    font-weight: 900;
-    line-height: 1.1;
-    color: #eaf1ff;
-    letter-spacing: 0.5px;
-    text-shadow: 0 0 24px rgba(62,166,255,0.30);
-  }
-  p.subheadline .dot { color: var(--accent); margin: 0 14px; }
   p.eventdate {
-    margin-top: 0.6vh;
-    font-size: clamp(12px, 1.6vh, 17px);
-    font-weight: 800;
-    color: var(--gold-soft);
-    letter-spacing: 2px;
+    margin-top: 0.8vh;
+    font-size: clamp(13px, 1.9vh, 19px);
+    font-weight: 500;
+    color: #d9e0ff;
+    letter-spacing: 0.6px;
+    text-shadow: 0 0 18px rgba(62,166,255,0.25);
   }
   .divider {
     width: 120px;
@@ -359,9 +352,8 @@
   </div>
 
   <div class="headline-wrap">
-    <h1 class="headline">FESTIVAL ASIK ASIA 2026</h1>
-    <p class="subheadline">Ajang Seni Inovasi Kreatif <span class="dot">&bull;</span> Kampus Asia</p>
-    <p class="eventdate">SABTU, 11 JULI 2026</p>
+    <h1 class="headline">Trial Class Institut Teknologi &amp; Bisnis Asia Malang</h1>
+    <p class="eventdate">Jl. Soekarno Hatta, Rembuksari No.1A Kota Malang</p>
     <div class="divider"></div>
   </div>
 
@@ -427,6 +419,9 @@
         'Peserta sudah datang : ' + data.hadir + ' / ' + data.total;
 
       lastKnownCount = data.hadir;
+
+      // Siapkan ulang konten list untuk auto-scroll looping yang mulus
+      setupSeamlessLoop();
     }
   }
 
@@ -449,28 +444,40 @@
   updateClock();
   setInterval(updateClock, 1000);
 
-  // ===== Auto-scroll daftar peserta (naik terus dari atas ke bawah, lalu kembali ke atas) =====
+  // ===== Auto-scroll daftar peserta — loop mulus tanpa jeda/lompatan =====
   const scrollEl = document.getElementById('listScroll');
-  let pauseUntil = 0;
-  const SCROLL_SPEED = 0.6;   // px per tick — makin besar makin cepat
-  const PAUSE_MS = 1400;      // jeda di atas & bawah sebelum lanjut/loop
+  const listElForLoop = document.getElementById('list');
+  const SCROLL_SPEED = 0.35;  // px per tick — sedikit lebih pelan dari sebelumnya
+  let loopHeight = 0;         // tinggi satu set konten (sebelum digandakan)
+  let loopActive = false;
+
+  function setupSeamlessLoop() {
+    // reset dulu ke satu set konten (buang duplikat lama, kalau ada)
+    scrollEl.scrollTop = 0;
+
+    const singleSetHeight = listElForLoop.scrollHeight;
+    const containerHeight = scrollEl.clientHeight;
+
+    if (singleSetHeight > containerHeight) {
+      // gandakan kontennya persis sama, supaya saat loop balik ke awal
+      // tampilannya identik dan tidak terlihat lompatan/jeda
+      listElForLoop.innerHTML += listElForLoop.innerHTML;
+      loopHeight = singleSetHeight;
+      loopActive = true;
+    } else {
+      // semua nama masih muat di layar, tidak perlu auto-scroll
+      loopHeight = 0;
+      loopActive = false;
+    }
+  }
 
   function autoScrollTick() {
-    const now = Date.now();
-    if (now < pauseUntil) return;
-
-    const maxScroll = scrollEl.scrollHeight - scrollEl.clientHeight;
-    if (maxScroll <= 2) return; // konten belum melebihi area, tidak perlu scroll
-
-    if (scrollEl.scrollTop >= maxScroll - 1) {
-      // sudah sampai bawah -> jeda, lalu loop ke atas
-      pauseUntil = now + PAUSE_MS;
-      setTimeout(function () {
-        scrollEl.scrollTop = 0;
-        pauseUntil = Date.now() + PAUSE_MS;
-      }, PAUSE_MS);
-    } else {
-      scrollEl.scrollTop += SCROLL_SPEED;
+    if (!loopActive || loopHeight <= 0) return;
+    scrollEl.scrollTop += SCROLL_SPEED;
+    if (scrollEl.scrollTop >= loopHeight) {
+      // lompat balik sejauh satu set konten — karena kontennya digandakan
+      // identik, ini tidak terlihat sebagai jeda/lompatan sama sekali
+      scrollEl.scrollTop -= loopHeight;
     }
   }
   setInterval(autoScrollTick, 30);
