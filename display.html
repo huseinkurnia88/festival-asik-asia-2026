@@ -225,6 +225,21 @@
     text-transform: uppercase;
     margin-bottom: 1.2vh;
   }
+  #lastPhoto {
+    display: none;
+    width: clamp(70px, 13vh, 140px);
+    height: clamp(70px, 13vh, 140px);
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0.4vh auto 1.2vh;
+    border: 3px solid rgba(120,170,255,0.55);
+    box-shadow: 0 0 30px rgba(120,170,255,0.4);
+    animation: photoIn 0.5s ease;
+  }
+  @keyframes photoIn {
+    0%   { opacity: 0; transform: scale(0.85); }
+    100% { opacity: 1; transform: scale(1); }
+  }
   #lastName {
     font-family: 'Montserrat', 'Segoe UI', sans-serif;
     font-size: clamp(28px, 5.2vh, 58px);
@@ -359,6 +374,7 @@
 
   <div id="lastBox">
     <div id="lastLabel">Selamat Datang Kepada</div>
+    <img id="lastPhoto" src="" alt="Foto peserta">
     <div id="lastName">-</div>
   </div>
 
@@ -398,6 +414,17 @@
     if (data.hadir !== lastKnownCount) {
       if (data.list.length > 0) {
         document.getElementById('lastName').innerText = data.list[0].nama;
+
+        const photoEl = document.getElementById('lastPhoto');
+        const fotoUrl = data.list[0].foto;
+        if (fotoUrl) {
+          photoEl.onerror = function () { photoEl.style.display = 'none'; };
+          photoEl.src = fotoUrl;
+          photoEl.style.display = 'block';
+        } else {
+          photoEl.style.display = 'none';
+        }
+
         const box = document.getElementById('lastBox');
         box.classList.add('pulse');
         setTimeout(function () { box.classList.remove('pulse'); }, 400);
