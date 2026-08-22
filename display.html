@@ -232,13 +232,13 @@
   }
   #lastPhoto {
     display: none;
-    width: clamp(120px, 26vh, 300px);
-    height: clamp(120px, 26vh, 300px);
+    width: clamp(180px, 38vh, 460px);
+    height: clamp(180px, 38vh, 460px);
     border-radius: 50%;
     object-fit: cover;
     margin: 0.4vh auto 2vh;
-    border: 4px solid rgba(120,170,255,0.55);
-    box-shadow: 0 0 45px rgba(120,170,255,0.45);
+    border: 5px solid rgba(120,170,255,0.6);
+    box-shadow: 0 0 60px rgba(120,170,255,0.5);
     animation: photoIn 0.5s ease;
   }
   @keyframes photoIn {
@@ -403,8 +403,6 @@
   // =========================================================
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzyD3Rs3MxcRWMfl4HKaIWtaHc2ZvqejhAAYpS8r8Ik4ZalvKHBrLcIUSFN7dGC-MAKOA/exec';
 
-  let lastKnownCount = -1;
-
   function refresh() {
     fetch(APPS_SCRIPT_URL + '?action=getdata')
       .then(function (r) { return r.json(); })
@@ -414,17 +412,28 @@
       });
   }
 
+  let lastKnownCount = -1;
+  let lastTopSignature = ''; // gabungan nama+foto+waktu peserta teratas, buat deteksi foto yang baru selesai diupload
+
   function render(data) {
     document.getElementById('status').innerText = '';
-    if (data.hadir !== lastKnownCount) {
-      if (data.list.length > 0) {
-        document.getElementById('lastName').innerText = data.list[0].nama;
+
+    // ===== Update box "Selamat Datang" =====
+    // Dicek terpisah dari jumlah hadir, karena foto selfie sering baru
+    // selesai diupload BEBERAPA DETIK setelah check-in tercatat —
+    // jadi jumlah total peserta hadir bisa saja tidak berubah lagi,
+    // padahal fotonya baru saja siap dan perlu ditampilkan.
+    if (data.list.length > 0) {
+      const top = data.list[0];
+      const signature = top.nama + '|' + top.foto + '|' + top.waktu;
+
+      if (signature !== lastTopSignature) {
+        document.getElementById('lastName').innerText = top.nama;
 
         const photoEl = document.getElementById('lastPhoto');
-        const fotoUrl = data.list[0].foto;
-        if (fotoUrl) {
+        if (top.foto) {
           photoEl.onerror = function () { photoEl.style.display = 'none'; };
-          photoEl.src = fotoUrl;
+          photoEl.src = top.foto;
           photoEl.style.display = 'block';
         } else {
           photoEl.style.display = 'none';
@@ -433,8 +442,15 @@
         const box = document.getElementById('lastBox');
         box.classList.add('pulse');
         setTimeout(function () { box.classList.remove('pulse'); }, 400);
-      }
 
+        lastTopSignature = signature;
+      }
+    }
+
+    // ===== Update daftar peserta & counter =====
+    // Ini cukup berdasarkan jumlah hadir saja, supaya tidak membangun ulang
+    // seluruh daftar tiap 3 detik kalau memang tidak ada peserta baru.
+    if (data.hadir !== lastKnownCount) {
       const listEl = document.getElementById('list');
       listEl.innerHTML = '';
       // data.list terurut dari yang paling baru check-in.
