@@ -407,10 +407,10 @@
   <div id="lastBox">
     <div id="lastLabel">Selamat Datang Kepada</div>
     <div id="photoWrap">
-      <img id="lastPhoto" src="" alt="Foto peserta">
+      <img id="lastPhoto" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%2310182e'/%3E%3Ccircle cx='100' cy='72' r='38' fill='%233d5a94'/%3E%3Cpath d='M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z' fill='%233d5a94'/%3E%3C/svg%3E" alt="Foto peserta">
       <div id="photoLoadingBadge">Menunggu Foto...</div>
     </div>
-    <div id="lastName">-</div>
+    <div id="lastName">Menunggu Peserta...</div>
   </div>
 
   <div id="listWrap">
@@ -487,6 +487,13 @@
 
         lastTopSignature = signature;
       }
+    } else if (lastTopSignature !== 'KOSONG') {
+      // Belum ada satupun peserta yang check-in — tampilkan siluet + teks netral,
+      // supaya tidak terlihat seperti error (foto rusak/kosong).
+      document.getElementById('lastName').innerText = 'Menunggu Peserta...';
+      document.getElementById('lastPhoto').src = DEFAULT_AVATAR;
+      document.getElementById('photoLoadingBadge').classList.remove('show');
+      lastTopSignature = 'KOSONG';
     }
 
     // ===== Update daftar peserta & counter =====
