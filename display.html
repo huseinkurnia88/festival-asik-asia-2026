@@ -230,20 +230,47 @@
     text-transform: uppercase;
     margin-bottom: 1.6vh;
   }
+  #photoWrap {
+    position: relative;
+    display: inline-block;
+    margin: 0.4vh auto 2vh;
+  }
   #lastPhoto {
-    display: none;
+    display: block;
     width: clamp(180px, 38vh, 460px);
     height: clamp(180px, 38vh, 460px);
-    border-radius: 50%;
+    border-radius: 28px;
     object-fit: cover;
-    margin: 0.4vh auto 2vh;
     border: 5px solid rgba(120,170,255,0.6);
     box-shadow: 0 0 60px rgba(120,170,255,0.5);
     animation: photoIn 0.5s ease;
+    background: #10182e;
   }
   @keyframes photoIn {
     0%   { opacity: 0; transform: scale(0.85); }
     100% { opacity: 1; transform: scale(1); }
+  }
+  #photoLoadingBadge {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    background: rgba(10,14,30,0.85);
+    border: 1px solid rgba(120,170,255,0.5);
+    color: #cfe0ff;
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+    font-size: clamp(11px, 1.5vh, 14px);
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    display: none;
+    animation: badgePulse 1.6s ease-in-out infinite;
+  }
+  #photoLoadingBadge.show { display: block; }
+  @keyframes badgePulse {
+    0%, 100% { opacity: 0.6; }
+    50%      { opacity: 1; }
   }
   #lastName {
     font-family: 'Montserrat', 'Segoe UI', sans-serif;
@@ -379,7 +406,10 @@
 
   <div id="lastBox">
     <div id="lastLabel">Selamat Datang Kepada</div>
-    <img id="lastPhoto" src="" alt="Foto peserta">
+    <div id="photoWrap">
+      <img id="lastPhoto" src="" alt="Foto peserta">
+      <div id="photoLoadingBadge">Menunggu Foto...</div>
+    </div>
     <div id="lastName">-</div>
   </div>
 
@@ -402,6 +432,15 @@
   // GANTI dengan URL Web App Apps Script kamu (setelah deploy)
   // =========================================================
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzyD3Rs3MxcRWMfl4HKaIWtaHc2ZvqejhAAYpS8r8Ik4ZalvKHBrLcIUSFN7dGC-MAKOA/exec';
+
+  // Siluet default, ditampilkan selagi foto peserta belum selesai diupload
+  const DEFAULT_AVATAR = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">' +
+    '<rect width="200" height="200" fill="#10182e"/>' +
+    '<circle cx="100" cy="72" r="38" fill="#3d5a94"/>' +
+    '<path d="M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z" fill="#3d5a94"/>' +
+    '</svg>'
+  );
 
   function refresh() {
     fetch(APPS_SCRIPT_URL + '?action=getdata')
@@ -430,13 +469,16 @@
       if (signature !== lastTopSignature) {
         document.getElementById('lastName').innerText = top.nama;
 
-        const photoEl = document.getElementById('lastPhoto');
+        const photoEl  = document.getElementById('lastPhoto');
+        const badgeEl  = document.getElementById('photoLoadingBadge');
+
         if (top.foto) {
-          photoEl.onerror = function () { photoEl.style.display = 'none'; };
+          photoEl.onerror = function () { photoEl.src = DEFAULT_AVATAR; };
           photoEl.src = top.foto;
-          photoEl.style.display = 'block';
+          badgeEl.classList.remove('show');
         } else {
-          photoEl.style.display = 'none';
+          photoEl.src = DEFAULT_AVATAR;
+          badgeEl.classList.add('show');
         }
 
         const box = document.getElementById('lastBox');
