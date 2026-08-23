@@ -6,35 +6,34 @@
 <title>Trial Class Institut Teknologi & Bisnis Asia Malang - Layar Kehadiran</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
     --gold: #ffd23f;
     --gold-soft: #ffe98a;
-    --navy-1: #05060f;
-    --navy-2: #0b1130;
-    --navy-3: #131c44;
-    --accent: #3ea6ff;
-    --green: #29d17a;
+    --navy-1: #0a1230;
+    --navy-2: #0e1a45;
+    --navy-3: #14235c;
+    --paper: #f3ede0;
+    --tape: #e8d9a0;
   }
 
   html, body {
     height: 100%;
-    background: var(--navy-1);
+    background: var(--navy-2);
     overflow: hidden; /* halaman kiosk: tidak ada scroll manual sama sekali */
   }
 
   body {
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: 'Baloo 2', sans-serif;
     color: #fff;
     position: relative;
     background:
-      radial-gradient(circle at 15% 10%, rgba(62,166,255,0.16), transparent 40%),
-      radial-gradient(circle at 85% 15%, rgba(255,210,63,0.14), transparent 40%),
-      radial-gradient(circle at 50% 100%, rgba(41,209,122,0.10), transparent 45%),
-      linear-gradient(180deg, var(--navy-1) 0%, var(--navy-2) 55%, var(--navy-1) 100%);
+      radial-gradient(circle at 10% 0%, rgba(255,255,255,0.04), transparent 40%),
+      radial-gradient(circle at 100% 100%, rgba(255,255,255,0.03), transparent 40%),
+      linear-gradient(160deg, #0c1638 0%, #101c48 45%, #0a1230 100%);
   }
 
   body::before {
@@ -42,51 +41,11 @@
     position: fixed;
     inset: 0;
     background-image:
-      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-    background-size: 46px 46px;
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 44px 44px;
     pointer-events: none;
     z-index: 0;
-  }
-
-  /* orb cahaya yang bergerak pelan di background, biar lebih hidup */
-  .glow-orb {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(60px);
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.55;
-  }
-  .glow-orb.o1 {
-    width: 380px; height: 380px;
-    background: radial-gradient(circle, rgba(255,210,63,0.35), transparent 70%);
-    top: -80px; left: -60px;
-    animation: floatA 16s ease-in-out infinite;
-  }
-  .glow-orb.o2 {
-    width: 420px; height: 420px;
-    background: radial-gradient(circle, rgba(62,166,255,0.30), transparent 70%);
-    bottom: -100px; right: -80px;
-    animation: floatB 20s ease-in-out infinite;
-  }
-  .glow-orb.o3 {
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(41,209,122,0.25), transparent 70%);
-    bottom: 10%; left: 40%;
-    animation: floatC 24s ease-in-out infinite;
-  }
-  @keyframes floatA {
-    0%,100% { transform: translate(0,0); }
-    50% { transform: translate(60px, 40px); }
-  }
-  @keyframes floatB {
-    0%,100% { transform: translate(0,0); }
-    50% { transform: translate(-50px, -35px); }
-  }
-  @keyframes floatC {
-    0%,100% { transform: translate(0,0) scale(1); }
-    50% { transform: translate(-30px, 20px) scale(1.08); }
   }
 
   /* ===== LAYOUT UTAMA: mengisi 100vh, tidak pernah terpotong ===== */
@@ -94,10 +53,9 @@
     position: relative;
     z-index: 1;
     height: 100vh;
-    padding: 1.6vh 2.5vw;
+    padding: 1.6vh 3vw;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     gap: 1vh;
   }
 
@@ -109,161 +67,162 @@
     gap: 2vw;
     flex: 0 0 auto;
   }
-
   .logo-box {
     display: flex;
     align-items: center;
-    height: clamp(40px, 7vh, 84px);
+    height: clamp(38px, 6.5vh, 78px);
     flex: 0 0 auto;
   }
   .logo-box img {
     height: 100%;
     width: auto;
     object-fit: contain;
-    filter: drop-shadow(0 0 14px rgba(255,255,255,0.15));
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.12));
   }
-
   .clock-box {
     text-align: center;
-    padding: 0.8vh 2vw;
-    border-radius: 14px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.10);
-    backdrop-filter: blur(6px);
-    min-width: 160px;
+    padding: 0.6vh 1.8vw;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.16);
+    min-width: 150px;
     flex: 0 0 auto;
   }
   #clockTime {
-    font-size: clamp(18px, 2.4vh, 30px);
-    font-weight: 800;
-    letter-spacing: 2px;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(16px, 2.1vh, 26px);
+    font-weight: 700;
+    letter-spacing: 1.5px;
     color: var(--gold);
-    text-shadow: 0 0 18px rgba(255,210,63,0.45);
     font-variant-numeric: tabular-nums;
   }
   #clockDate {
-    font-size: clamp(9px, 1.1vh, 12px);
-    color: #b9c2e0;
+    font-size: clamp(8px, 1vh, 11px);
+    color: #c7cfe8;
     letter-spacing: 1px;
-    margin-top: 2px;
+    margin-top: 1px;
     text-transform: uppercase;
   }
 
-  /* ===== HEADLINE (judul tunggal) ===== */
+  /* ===== HEADLINE ===== */
   .headline-wrap {
     text-align: center;
     flex: 0 0 auto;
   }
   h1.headline {
-    font-size: clamp(22px, 4.4vh, 46px);
-    font-weight: 900;
-    letter-spacing: 1px;
-    line-height: 1.25;
-    max-width: 90vw;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(20px, 3.8vh, 40px);
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    max-width: 92vw;
     margin: 0 auto;
-    background: linear-gradient(90deg, var(--gold-soft), var(--gold) 25%, #ffb200 50%, var(--gold) 75%, var(--gold-soft));
-    background-size: 250% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: 0 0 40px rgba(255,178,0,0.35);
+    color: var(--gold);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.35);
     text-transform: uppercase;
-    animation: shimmer 6s linear infinite;
   }
-  @keyframes shimmer {
-    0% { background-position: 0% center; }
-    100% { background-position: -250% center; }
+  .eventdate-wrap {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 0.7vh;
   }
   p.eventdate {
-    margin-top: 0.8vh;
-    font-size: clamp(13px, 1.9vh, 19px);
-    font-weight: 500;
-    color: #d9e0ff;
-    letter-spacing: 0.6px;
-    text-shadow: 0 0 18px rgba(62,166,255,0.25);
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(11px, 1.5vh, 16px);
+    font-weight: 600;
+    color: #e3e8ff;
+    letter-spacing: 0.3px;
   }
-  .divider {
-    width: 120px;
-    height: 3px;
-    margin: 1vh auto 0;
-    border-radius: 3px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    background-size: 200% auto;
-    animation: shimmer 3s linear infinite;
+  .tape-deco {
+    display: inline-block;
+    width: 46px;
+    height: 16px;
+    margin-left: 8px;
+    background: linear-gradient(100deg, var(--tape), #d8c274);
+    opacity: 0.85;
+    transform: rotate(-6deg);
+    clip-path: polygon(6% 0, 100% 10%, 94% 100%, 0% 90%);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
   }
 
-  /* ===== WELCOME BOX — sesuai referensi: kotak navy rounded, font tegak & tebal ===== */
-  #lastBox {
-    position: relative;
+  /* ===== KONTEN UTAMA: polaroid kiri + sapaan kanan ===== */
+  .main-content {
     flex: 1 1 auto;
     min-height: 0;
-    max-width: 1000px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 3vh 3vw;
-    border-radius: 24px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5vw;
+    padding: 0 2vw;
+  }
+
+  /* --- kolom polaroid --- */
+  .polaroid-col {
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(160deg, rgba(30,45,110,0.55), rgba(8,12,32,0.75));
-    border: 1.5px solid rgba(120,170,255,0.45);
-    backdrop-filter: blur(8px);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    animation: breathe 3.2s ease-in-out infinite;
+    height: 100%;
+  }
+  .polaroid {
+    position: relative;
+    background: var(--paper);
+    border-radius: 10px;
+    padding: 2.2vh 2.2vh 1.6vh;
+    width: clamp(300px, 44vh, 620px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+    transform: rotate(-2deg);
+    animation: breathe 3.4s ease-in-out infinite;
   }
   @keyframes breathe {
-    0%,100% { box-shadow: 0 0 35px rgba(120,170,255,0.18), inset 0 0 25px rgba(120,170,255,0.05); }
-    50%     { box-shadow: 0 0 55px rgba(120,170,255,0.32), inset 0 0 35px rgba(120,170,255,0.10); }
+    0%,100% { box-shadow: 0 18px 40px rgba(0,0,0,0.45); }
+    50%     { box-shadow: 0 24px 54px rgba(0,0,0,0.55), 0 0 36px rgba(120,170,255,0.25); }
   }
-  #lastBox.pulse {
-    transform: scale(1.015);
-    box-shadow: 0 0 80px rgba(120,170,255,0.45), inset 0 0 45px rgba(120,170,255,0.14) !important;
-  }
-  #lastLabel {
-    font-family: 'Montserrat', 'Segoe UI', sans-serif;
-    font-size: clamp(15px, 2.2vh, 24px);
-    letter-spacing: 3px;
-    color: #fff;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 1.6vh;
+  .polaroid .tape {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    width: 110px;
+    height: 34px;
+    margin-left: -55px;
+    background: linear-gradient(100deg, rgba(232,217,160,0.9), rgba(216,194,116,0.85));
+    transform: rotate(-4deg);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25);
   }
   #photoWrap {
     position: relative;
-    display: inline-block;
-    margin: 0.4vh auto 2vh;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #10182e;
   }
   #lastPhoto {
     display: block;
-    width: clamp(180px, 38vh, 460px);
-    height: clamp(180px, 38vh, 460px);
-    border-radius: 28px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border: 5px solid rgba(120,170,255,0.6);
-    box-shadow: 0 0 60px rgba(120,170,255,0.5);
     animation: photoIn 0.5s ease;
-    background: #10182e;
   }
   @keyframes photoIn {
-    0%   { opacity: 0; transform: scale(0.85); }
+    0%   { opacity: 0; transform: scale(0.9); }
     100% { opacity: 1; transform: scale(1); }
   }
   #photoLoadingBadge {
     position: absolute;
     left: 50%;
-    bottom: 14px;
+    bottom: 8px;
     transform: translateX(-50%);
     background: rgba(10,14,30,0.85);
     border: 1px solid rgba(120,170,255,0.5);
     color: #cfe0ff;
-    font-family: 'Montserrat', 'Segoe UI', sans-serif;
-    font-size: clamp(11px, 1.5vh, 14px);
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(9px, 1.2vh, 12px);
     font-weight: 600;
-    letter-spacing: 1px;
-    padding: 6px 16px;
-    border-radius: 20px;
+    letter-spacing: 0.5px;
+    padding: 4px 12px;
+    border-radius: 16px;
     display: none;
     animation: badgePulse 1.6s ease-in-out infinite;
   }
@@ -273,114 +232,139 @@
     50%      { opacity: 1; }
   }
   #lastName {
-    font-family: 'Montserrat', 'Segoe UI', sans-serif;
-    font-size: clamp(32px, 6.6vh, 72px);
-    font-weight: 800;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: 1px;
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: clamp(24px, 4.2vh, 46px);
+    color: #1b2647;
+    text-align: center;
+    margin-top: 1.4vh;
+    line-height: 1.15;
     word-break: break-word;
-    color: #ffffff;
-    text-transform: uppercase;
-    text-shadow: 0 0 24px rgba(150,190,255,0.55), 0 2px 6px rgba(0,0,0,0.4);
-    animation: nameIn 0.5s ease;
-  }
-  @keyframes nameIn {
-    0%   { opacity: 0; transform: translateY(8px) scale(0.97); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
   }
 
-  /* ===== LIST PESERTA — kartu pil biru bernomor, dibuat kecil ===== */
+  /* --- kolom sapaan --- */
+  .greeting-col {
+    flex: 1 1 auto;
+    max-width: 780px;
+    font-family: 'Caveat', cursive;
+    color: #fff;
+  }
+  .greet-line1 {
+    font-size: clamp(28px, 5vh, 54px);
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .greet-name {
+    font-size: clamp(36px, 7.2vh, 84px);
+    font-weight: 700;
+    color: var(--gold);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+    line-height: 1.15;
+    word-break: break-word;
+    margin: 0.4vh 0;
+  }
+  .greet-line2 {
+    font-size: clamp(28px, 5vh, 54px);
+    font-weight: 700;
+    line-height: 1.2;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    margin-top: 0.5vh;
+  }
+
+  /* ===== LIST PESERTA ===== */
   #listWrap {
     flex: 0 0 auto;
-    height: clamp(70px, 11vh, 120px);
-    max-width: 1150px;
+    height: clamp(90px, 15vh, 160px);
+    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    padding: 0.8vh 1.6vw 0.5vh;
-    border-radius: 14px;
-    background: rgba(20,30,70,0.28);
-    border: 1px solid rgba(120,170,255,0.22);
-    backdrop-filter: blur(6px);
+    padding: 1vh 1.8vw 0.6vh;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.18);
     display: flex;
     flex-direction: column;
   }
   #listTitle {
-    font-family: 'Montserrat', 'Segoe UI', sans-serif;
-    font-size: clamp(9px, 1.1vh, 12px);
-    color: #dfe8ff;
-    letter-spacing: 2px;
-    margin-bottom: 0.5vh;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(11px, 1.5vh, 15px);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    margin-bottom: 0.6vh;
     text-transform: uppercase;
     text-align: center;
     flex: 0 0 auto;
-    font-weight: 600;
+    position: relative;
+    padding-bottom: 0.7vh;
+  }
+  #listTitle::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60%;
+    max-width: 320px;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
   }
   #listScroll {
     flex: 1 1 auto;
     min-height: 0;
     overflow-y: scroll;
-    scrollbar-width: none;      /* Firefox: sembunyikan scrollbar */
-    -ms-overflow-style: none;   /* IE/Edge lama */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  #listScroll::-webkit-scrollbar { display: none; } /* Chrome/Safari: sembunyikan scrollbar */
-
+  #listScroll::-webkit-scrollbar { display: none; }
   #list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.8vh 10px;
+    gap: 0.8vh 26px;
     justify-content: center;
     align-content: flex-start;
+    padding-top: 0.4vh;
     padding-bottom: 0.6vh;
   }
   .chip {
-    font-family: 'Montserrat', 'Segoe UI', sans-serif;
-    background: linear-gradient(160deg, rgba(90,140,255,0.22), rgba(20,30,80,0.55));
-    border: 1px solid rgba(120,170,255,0.45);
-    padding: 0.7vh 18px;
-    border-radius: 24px;
-    font-size: clamp(12px, 1.6vh, 15px);
+    font-family: 'Caveat', cursive;
     font-weight: 700;
-    font-style: normal;
-    color: #ffffff;
-    letter-spacing: 0.3px;
+    font-size: clamp(14px, 2vh, 19px);
+    color: #fff;
     white-space: nowrap;
-    text-transform: uppercase;
     animation: cardIn 0.45s ease;
   }
-  .chip .num {
-    color: var(--gold);
-    font-weight: 800;
-    margin-right: 4px;
+  .chip::before {
+    content: "\2013\00A0"; /* dash + spasi */
+    color: var(--gold-soft);
   }
   @keyframes cardIn {
-    0%   { opacity: 0; transform: translateY(6px) scale(0.94); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
+    0%   { opacity: 0; transform: translateY(6px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 
-  /* ===== COUNTER ===== */
+  /* ===== COUNTER — ala sticky note ===== */
   #counterWrap {
     text-align: center;
     flex: 0 0 auto;
   }
   #counter {
     display: inline-block;
-    font-size: clamp(16px, 2.4vh, 25px);
-    font-weight: 800;
-    padding: 1vh 3vw;
-    border-radius: 40px;
-    color: var(--navy-1);
-    background: linear-gradient(90deg, var(--gold-soft), var(--gold));
-    box-shadow: 0 0 30px rgba(255,210,63,0.45);
-    letter-spacing: 0.5px;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(14px, 2vh, 21px);
+    font-weight: 700;
+    padding: 0.9vh 2.4vw;
+    border-radius: 8px;
+    color: #23305c;
+    background: var(--paper);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    transform: rotate(-1deg);
+    letter-spacing: 0.3px;
   }
-  #status { font-size: 11px; color: #5a638a; margin-top: 6px; }
+  #status { font-size: 11px; color: #7885ad; margin-top: 6px; }
 </style>
 </head>
 <body>
-<div class="glow-orb o1"></div>
-<div class="glow-orb o2"></div>
-<div class="glow-orb o3"></div>
 <div class="wrap">
 
   <div class="topbar">
@@ -400,17 +384,29 @@
 
   <div class="headline-wrap">
     <h1 class="headline">Trial Class Institut Teknologi &amp; Bisnis Asia Malang</h1>
-    <p class="eventdate">Jl. Soekarno Hatta, Rembuksari No.1A Kota Malang</p>
-    <div class="divider"></div>
+    <div class="eventdate-wrap">
+      <p class="eventdate">Jl. Soekarno Hatta, Rembuksari No.1A Kota Malang</p>
+      <span class="tape-deco"></span>
+    </div>
   </div>
 
-  <div id="lastBox">
-    <div id="lastLabel">Selamat Datang Kepada</div>
-    <div id="photoWrap">
-      <img id="lastPhoto" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%2310182e'/%3E%3Ccircle cx='100' cy='72' r='38' fill='%233d5a94'/%3E%3Cpath d='M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z' fill='%233d5a94'/%3E%3C/svg%3E" alt="Foto peserta">
-      <div id="photoLoadingBadge">Menunggu Foto...</div>
+  <div class="main-content">
+    <div class="polaroid-col">
+      <div class="polaroid">
+        <span class="tape"></span>
+        <div id="photoWrap">
+          <img id="lastPhoto" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%2310182e'/%3E%3Ccircle cx='100' cy='72' r='38' fill='%233d5a94'/%3E%3Cpath d='M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z' fill='%233d5a94'/%3E%3C/svg%3E" alt="Foto peserta">
+          <div id="photoLoadingBadge">Menunggu Foto...</div>
+        </div>
+        <div id="lastName">Menunggu Peserta...</div>
+      </div>
     </div>
-    <div id="lastName">Menunggu Peserta...</div>
+
+    <div class="greeting-col">
+      <p class="greet-line1">Hallo Kak,</p>
+      <p class="greet-name">&ldquo;<span id="greetName">PESERTA</span>&rdquo;</p>
+      <p class="greet-line2">Selamat datang di<br>Kampus Asik Kekinian</p>
+    </div>
   </div>
 
   <div id="listWrap">
@@ -457,17 +453,16 @@
   function render(data) {
     document.getElementById('status').innerText = '';
 
-    // ===== Update box "Selamat Datang" =====
+    // ===== Update polaroid + sapaan "Selamat Datang" =====
     // Dicek terpisah dari jumlah hadir, karena foto selfie sering baru
-    // selesai diupload BEBERAPA DETIK setelah check-in tercatat —
-    // jadi jumlah total peserta hadir bisa saja tidak berubah lagi,
-    // padahal fotonya baru saja siap dan perlu ditampilkan.
+    // selesai diupload BEBERAPA DETIK setelah check-in tercatat.
     if (data.list.length > 0) {
       const top = data.list[0];
       const signature = top.nama + '|' + top.foto + '|' + top.waktu;
 
       if (signature !== lastTopSignature) {
         document.getElementById('lastName').innerText = top.nama;
+        document.getElementById('greetName').innerText = top.nama.toUpperCase();
 
         const photoEl  = document.getElementById('lastPhoto');
         const badgeEl  = document.getElementById('photoLoadingBadge');
@@ -481,34 +476,26 @@
           badgeEl.classList.add('show');
         }
 
-        const box = document.getElementById('lastBox');
-        box.classList.add('pulse');
-        setTimeout(function () { box.classList.remove('pulse'); }, 400);
-
         lastTopSignature = signature;
       }
     } else if (lastTopSignature !== 'KOSONG') {
-      // Belum ada satupun peserta yang check-in — tampilkan siluet + teks netral,
-      // supaya tidak terlihat seperti error (foto rusak/kosong).
+      // Belum ada satupun peserta yang check-in — tampilkan siluet + teks netral.
       document.getElementById('lastName').innerText = 'Menunggu Peserta...';
+      document.getElementById('greetName').innerText = 'PESERTA';
       document.getElementById('lastPhoto').src = DEFAULT_AVATAR;
       document.getElementById('photoLoadingBadge').classList.remove('show');
       lastTopSignature = 'KOSONG';
     }
 
     // ===== Update daftar peserta & counter =====
-    // Ini cukup berdasarkan jumlah hadir saja, supaya tidak membangun ulang
-    // seluruh daftar tiap 3 detik kalau memang tidak ada peserta baru.
     if (data.hadir !== lastKnownCount) {
       const listEl = document.getElementById('list');
       listEl.innerHTML = '';
-      // data.list terurut dari yang paling baru check-in.
-      // Dibalik supaya urut sesuai kedatangan (#1, #2, ... ) seperti di layar referensi.
       const urutKedatangan = data.list.slice().reverse();
-      urutKedatangan.forEach(function (p, idx) {
+      urutKedatangan.forEach(function (p) {
         const span = document.createElement('span');
         span.className = 'chip';
-        span.innerHTML = '<span class="num">#' + (idx + 1) + '</span>' + p.nama;
+        span.innerText = p.nama;
         listEl.appendChild(span);
       });
 
@@ -517,7 +504,6 @@
 
       lastKnownCount = data.hadir;
 
-      // Siapkan ulang konten list untuk auto-scroll looping yang mulus
       setupSeamlessLoop();
     }
   }
@@ -544,25 +530,20 @@
   // ===== Auto-scroll daftar peserta — loop mulus tanpa jeda/lompatan =====
   const scrollEl = document.getElementById('listScroll');
   const listElForLoop = document.getElementById('list');
-  const SCROLL_SPEED = 0.35;  // px per tick — sedikit lebih pelan dari sebelumnya
-  let loopHeight = 0;         // tinggi satu set konten (sebelum digandakan)
+  const SCROLL_SPEED = 0.35;
+  let loopHeight = 0;
   let loopActive = false;
 
   function setupSeamlessLoop() {
-    // reset dulu ke satu set konten (buang duplikat lama, kalau ada)
     scrollEl.scrollTop = 0;
-
     const singleSetHeight = listElForLoop.scrollHeight;
     const containerHeight = scrollEl.clientHeight;
 
     if (singleSetHeight > containerHeight) {
-      // gandakan kontennya persis sama, supaya saat loop balik ke awal
-      // tampilannya identik dan tidak terlihat lompatan/jeda
       listElForLoop.innerHTML += listElForLoop.innerHTML;
       loopHeight = singleSetHeight;
       loopActive = true;
     } else {
-      // semua nama masih muat di layar, tidak perlu auto-scroll
       loopHeight = 0;
       loopActive = false;
     }
@@ -572,8 +553,6 @@
     if (!loopActive || loopHeight <= 0) return;
     scrollEl.scrollTop += SCROLL_SPEED;
     if (scrollEl.scrollTop >= loopHeight) {
-      // lompat balik sejauh satu set konten — karena kontennya digandakan
-      // identik, ini tidak terlihat sebagai jeda/lompatan sama sekali
       scrollEl.scrollTop -= loopHeight;
     }
   }
