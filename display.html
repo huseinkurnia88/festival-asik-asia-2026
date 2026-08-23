@@ -145,14 +145,14 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.25);
   }
 
-  /* ===== KONTEN UTAMA: polaroid kiri + sapaan kanan ===== */
+  /* ===== KONTEN UTAMA: foto - ucapan - daftar hadir, sejajar 3 kolom ===== */
   .main-content {
     flex: 1 1 auto;
     min-height: 0;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
-    gap: 5vw;
+    gap: 3vw;
     padding: 0 2vw;
   }
 
@@ -170,7 +170,7 @@
     background: var(--paper);
     border-radius: 10px;
     padding: 2.2vh 2.2vh 1.6vh;
-    width: clamp(300px, 44vh, 620px);
+    width: clamp(280px, 48vh, 620px);
     box-shadow: 0 18px 40px rgba(0,0,0,0.45);
     transform: rotate(-2deg);
     animation: breathe 3.4s ease-in-out infinite;
@@ -245,17 +245,20 @@
   /* --- kolom sapaan --- */
   .greeting-col {
     flex: 1 1 auto;
-    max-width: 780px;
+    max-width: 700px;
     font-family: 'Caveat', cursive;
     color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .greet-line1 {
-    font-size: clamp(28px, 5vh, 54px);
+    font-size: clamp(26px, 4.6vh, 50px);
     font-weight: 700;
     text-shadow: 0 2px 8px rgba(0,0,0,0.3);
   }
   .greet-name {
-    font-size: clamp(36px, 7.2vh, 84px);
+    font-size: clamp(34px, 6.6vh, 76px);
     font-weight: 700;
     color: var(--gold);
     text-shadow: 0 2px 10px rgba(0,0,0,0.35);
@@ -264,39 +267,40 @@
     margin: 0.4vh 0;
   }
   .greet-line2 {
-    font-size: clamp(28px, 5vh, 54px);
+    font-size: clamp(26px, 4.6vh, 50px);
     font-weight: 700;
     line-height: 1.2;
     text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     margin-top: 0.5vh;
   }
 
-  /* ===== LIST PESERTA ===== */
+  /* ===== LIST PESERTA — kolom persegi, sejajar dengan foto ===== */
   #listWrap {
     flex: 0 0 auto;
-    height: clamp(90px, 15vh, 160px);
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 1vh 1.8vw 0.6vh;
-    border-radius: 16px;
-    background: rgba(255,255,255,0.04);
+    width: clamp(260px, 34vh, 440px);
+    height: 100%;
+    max-height: clamp(280px, 48vh, 620px);
+    margin: 0;
+    padding: 2vh 1.6vw 1.4vh;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.18);
     display: flex;
     flex-direction: column;
+    align-self: center;
   }
   #listTitle {
     font-family: 'Baloo 2', sans-serif;
-    font-size: clamp(11px, 1.5vh, 15px);
+    font-size: clamp(12px, 1.7vh, 17px);
     font-weight: 700;
     color: #fff;
     letter-spacing: 1px;
-    margin-bottom: 0.6vh;
+    margin-bottom: 1.2vh;
     text-transform: uppercase;
     text-align: center;
     flex: 0 0 auto;
     position: relative;
-    padding-bottom: 0.7vh;
+    padding-bottom: 1vh;
   }
   #listTitle::after {
     content: "";
@@ -304,8 +308,7 @@
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
-    width: 60%;
-    max-width: 320px;
+    width: 70%;
     height: 1px;
     background: rgba(255,255,255,0.3);
   }
@@ -319,18 +322,18 @@
   #listScroll::-webkit-scrollbar { display: none; }
   #list {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.8vh 26px;
-    justify-content: center;
-    align-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6vh;
     padding-top: 0.4vh;
-    padding-bottom: 0.6vh;
+    padding-bottom: 1vh;
   }
   .chip {
     font-family: 'Caveat', cursive;
     font-weight: 700;
-    font-size: clamp(14px, 2vh, 19px);
+    font-size: clamp(16px, 2.6vh, 24px);
     color: #fff;
+    text-align: center;
     white-space: nowrap;
     animation: cardIn 0.45s ease;
   }
@@ -407,12 +410,12 @@
       <p class="greet-name">&ldquo;<span id="greetName">PESERTA</span>&rdquo;</p>
       <p class="greet-line2">Selamat datang di<br>Kampus Asik Kekinian</p>
     </div>
-  </div>
 
-  <div id="listWrap">
-    <div id="listTitle">Daftar Peserta yang Sudah Hadir</div>
-    <div id="listScroll">
-      <div id="list"></div>
+    <div id="listWrap">
+      <div id="listTitle">Daftar Peserta yang Sudah Hadir</div>
+      <div id="listScroll">
+        <div id="list"></div>
+      </div>
     </div>
   </div>
 
