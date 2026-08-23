@@ -244,9 +244,9 @@
 
   /* --- kolom sapaan --- */
   .greeting-col {
-    flex: 0 1 480px;
-    width: 480px;
-    max-width: 42vw;
+    flex: 0 1 520px;
+    width: 520px;
+    max-width: 44vw;
     font-family: 'Caveat', cursive;
     color: #fff;
     text-align: center;
@@ -255,41 +255,52 @@
     justify-content: center;
   }
   .greet-line1 {
-    font-size: clamp(22px, 3.8vh, 42px);
+    font-size: clamp(26px, 4.8vh, 52px);
     font-weight: 700;
     text-shadow: 0 2px 8px rgba(0,0,0,0.3);
   }
   .greet-name {
-    font-size: clamp(30px, 5.6vh, 62px);
-    font-weight: 700;
+    font-size: clamp(42px, 8.4vh, 100px);
+    font-weight: 800;
     color: var(--gold);
-    text-shadow: 0 2px 10px rgba(0,0,0,0.35);
-    line-height: 1.15;
+    text-shadow: 0 2px 14px rgba(255,178,0,0.4);
+    line-height: 1.1;
     word-break: break-word;
-    margin: 0.4vh 0;
+    margin: 0.6vh 0;
   }
   .greet-line2, .greet-line3 {
-    font-size: clamp(20px, 3.4vh, 36px);
+    font-size: clamp(24px, 4.4vh, 46px);
     font-weight: 700;
-    line-height: 1.25;
+    line-height: 1.3;
     text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    margin-top: 0.4vh;
+    margin-top: 0.6vh;
+  }
+  .highlight {
+    color: var(--gold);
+    font-weight: 800;
+    text-shadow: 0 2px 12px rgba(255,178,0,0.35);
   }
 
-  /* ===== LIST PESERTA — kolom persegi, sejajar dengan foto ===== */
-  #listWrap {
+  /* ===== KOLOM DAFTAR + PENCARIAN — sejajar dengan foto ===== */
+  .list-col {
     flex: 0 0 auto;
     width: clamp(260px, 34vh, 440px);
-    height: 100%;
-    max-height: clamp(280px, 48vh, 620px);
-    margin: 0;
+    height: clamp(280px, 48vh, 620px);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2vh;
+    align-self: center;
+  }
+  #listWrap {
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
     padding: 2vh 1.6vw 1.4vh;
     border-radius: 18px;
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.18);
     display: flex;
     flex-direction: column;
-    align-self: center;
   }
   #listTitle {
     font-family: 'Baloo 2', sans-serif;
@@ -348,6 +359,80 @@
     100% { opacity: 1; transform: translateY(0); }
   }
 
+  /* ===== KOTAK PENCARIAN — di bawah box peserta hadir ===== */
+  #searchBox {
+    flex: 0 0 auto;
+    width: 100%;
+    position: relative;
+  }
+  #searchInput {
+    width: 100%;
+    padding: 1.1vh 1.2vw;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.07);
+    color: #fff;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(12px, 1.7vh, 16px);
+    outline: none;
+  }
+  #searchInput::placeholder { color: #9aa5c9; }
+  #searchInput:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(255,210,63,0.22);
+  }
+  #searchResults {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    max-height: 30vh;
+    overflow-y: auto;
+    background: rgba(8,13,34,0.98);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 12px;
+    z-index: 30;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.4);
+  }
+  .searchResultItem {
+    padding: 1vh 1.2vw;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(12px, 1.7vh, 16px);
+    color: #fff;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .searchResultItem:last-child { border-bottom: none; }
+  .searchResultItem:hover, .searchResultItem.active-hover {
+    background: rgba(255,210,63,0.18);
+  }
+  .searchNoResult {
+    padding: 1vh 1.2vw;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(11px, 1.5vh, 14px);
+    color: #9aa5c9;
+  }
+  #pinnedBadge {
+    display: none;
+    margin-top: 0.6vh;
+    text-align: center;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(10px, 1.3vh, 13px);
+    color: var(--gold-soft);
+  }
+  #pinnedBadge.show { display: block; }
+  #pinnedBadge button {
+    margin-left: 6px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: inherit;
+    padding: 2px 8px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
   /* ===== COUNTER — ala sticky note ===== */
   #counterWrap {
     text-align: center;
@@ -391,7 +476,8 @@
     <h1 class="headline">Trial Class Institut Teknologi &amp; Bisnis Asia Malang</h1>
     <div class="eventdate-wrap">
       <p class="eventdate">Jl. Soekarno Hatta, Rembuksari No.1A Kota Malang</p>
-      </div>
+      <span class="tape-deco"></span>
+    </div>
   </div>
 
   <div class="main-content">
@@ -409,14 +495,22 @@
     <div class="greeting-col">
       <p class="greet-line1">Hallo kak,</p>
       <p class="greet-name"><span id="greetName">PESERTA</span></p>
-      <p class="greet-line2">Selamat datang di Institut Asia Malang</p>
-      <p class="greet-line3">Tempatnya Kuliah Asik Kekinian</p>
+      <p class="greet-line2">Selamat datang di <span class="highlight">Institut Asia Malang</span></p>
+      <p class="greet-line3">Tempatnya <span class="highlight">Kuliah Asik Kekinian</span></p>
     </div>
 
-    <div id="listWrap">
-      <div id="listTitle">Daftar Peserta yang Sudah Hadir</div>
-      <div id="listScroll">
-        <div id="list"></div>
+    <div class="list-col">
+      <div id="listWrap">
+        <div id="listTitle">Daftar Peserta yang Sudah Hadir</div>
+        <div id="listScroll">
+          <div id="list"></div>
+        </div>
+      </div>
+
+      <div id="searchBox">
+        <div id="searchResults"></div>
+        <input id="searchInput" type="text" placeholder="🔍 Cari nama peserta...">
+        <div id="pinnedBadge">Menampilkan hasil pencarian <button id="btnUnpin">Kembali ke terbaru</button></div>
       </div>
     </div>
   </div>
@@ -453,42 +547,72 @@
   }
 
   let lastKnownCount = -1;
-  let lastTopSignature = ''; // gabungan nama+foto+waktu peserta teratas, buat deteksi foto yang baru selesai diupload
+  let lastTopSignature = ''; // gabungan nama+foto+waktu peserta yang sedang ditampilkan
+
+  // ===== Fitur pencarian & "pin" tampilan =====
+  let allAttendeesList = [];   // seluruh peserta yang sudah hadir (untuk dicari)
+  let isPinned = false;        // true kalau layar sedang menampilkan hasil klik pencarian
+  let pinnedRecord = null;     // data peserta yang sedang di-pin
+
+  function showParticipant(record) {
+    document.getElementById('lastName').innerText = record.nama;
+    document.getElementById('greetName').innerText = record.nama.toUpperCase();
+
+    const photoEl = document.getElementById('lastPhoto');
+    const badgeEl = document.getElementById('photoLoadingBadge');
+
+    if (record.foto) {
+      photoEl.onerror = function () { photoEl.src = DEFAULT_AVATAR; };
+      photoEl.src = record.foto;
+      badgeEl.classList.remove('show');
+    } else {
+      photoEl.src = DEFAULT_AVATAR;
+      badgeEl.classList.add('show');
+    }
+  }
+
+  function showEmptyState() {
+    document.getElementById('lastName').innerText = 'Menunggu Peserta...';
+    document.getElementById('greetName').innerText = 'PESERTA';
+    document.getElementById('lastPhoto').src = DEFAULT_AVATAR;
+    document.getElementById('photoLoadingBadge').classList.remove('show');
+  }
+
+  function unpinDisplay() {
+    isPinned = false;
+    pinnedRecord = null;
+    document.getElementById('pinnedBadge').classList.remove('show');
+  }
 
   function render(data) {
     document.getElementById('status').innerText = '';
+    allAttendeesList = data.list;
 
-    // ===== Update polaroid + sapaan "Selamat Datang" =====
-    // Dicek terpisah dari jumlah hadir, karena foto selfie sering baru
-    // selesai diupload BEBERAPA DETIK setelah check-in tercatat.
-    if (data.list.length > 0) {
-      const top = data.list[0];
-      const signature = top.nama + '|' + top.foto + '|' + top.waktu;
+    // Kalau ada check-in BARU (jumlah hadir bertambah) selagi sedang pin hasil
+    // pencarian, otomatis lepas pin-nya dan kembali ke tampilan peserta terbaru.
+    if (isPinned && data.hadir > lastKnownCount && lastKnownCount !== -1) {
+      unpinDisplay();
+    }
 
+    // ===== Tentukan siapa yang ditampilkan di polaroid + sapaan =====
+    let displayRecord = null;
+    let signaturePrefix = '';
+
+    if (isPinned && pinnedRecord) {
+      displayRecord = pinnedRecord;
+      signaturePrefix = 'PIN:';
+    } else if (data.list.length > 0) {
+      displayRecord = data.list[0];
+    }
+
+    if (displayRecord) {
+      const signature = signaturePrefix + displayRecord.nama + '|' + displayRecord.foto + '|' + displayRecord.waktu;
       if (signature !== lastTopSignature) {
-        document.getElementById('lastName').innerText = top.nama;
-        document.getElementById('greetName').innerText = top.nama.toUpperCase();
-
-        const photoEl  = document.getElementById('lastPhoto');
-        const badgeEl  = document.getElementById('photoLoadingBadge');
-
-        if (top.foto) {
-          photoEl.onerror = function () { photoEl.src = DEFAULT_AVATAR; };
-          photoEl.src = top.foto;
-          badgeEl.classList.remove('show');
-        } else {
-          photoEl.src = DEFAULT_AVATAR;
-          badgeEl.classList.add('show');
-        }
-
+        showParticipant(displayRecord);
         lastTopSignature = signature;
       }
     } else if (lastTopSignature !== 'KOSONG') {
-      // Belum ada satupun peserta yang check-in — tampilkan siluet + teks netral.
-      document.getElementById('lastName').innerText = 'Menunggu Peserta...';
-      document.getElementById('greetName').innerText = 'PESERTA';
-      document.getElementById('lastPhoto').src = DEFAULT_AVATAR;
-      document.getElementById('photoLoadingBadge').classList.remove('show');
+      showEmptyState();
       lastTopSignature = 'KOSONG';
     }
 
@@ -515,6 +639,53 @@
 
   refresh();
   setInterval(refresh, 3000);
+
+  // ===== Pencarian peserta =====
+  const searchInputEl   = document.getElementById('searchInput');
+  const searchResultsEl = document.getElementById('searchResults');
+  const pinnedBadgeEl   = document.getElementById('pinnedBadge');
+  const btnUnpinEl      = document.getElementById('btnUnpin');
+
+  searchInputEl.addEventListener('input', function () {
+    const q = searchInputEl.value.trim().toLowerCase();
+    searchResultsEl.innerHTML = '';
+
+    if (!q) return;
+
+    const matches = allAttendeesList
+      .filter(function (p) { return p.nama.toLowerCase().indexOf(q) !== -1; })
+      .slice(0, 8);
+
+    if (matches.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'searchNoResult';
+      empty.innerText = 'Tidak ditemukan.';
+      searchResultsEl.appendChild(empty);
+      return;
+    }
+
+    matches.forEach(function (p) {
+      const item = document.createElement('div');
+      item.className = 'searchResultItem';
+      item.innerText = p.nama;
+      item.addEventListener('click', function () {
+        isPinned = true;
+        pinnedRecord = p;
+        showParticipant(p);
+        lastTopSignature = 'PIN:' + p.nama + '|' + p.foto + '|' + p.waktu;
+
+        pinnedBadgeEl.classList.add('show');
+        searchResultsEl.innerHTML = '';
+        searchInputEl.value = '';
+      });
+      searchResultsEl.appendChild(item);
+    });
+  });
+
+  btnUnpinEl.addEventListener('click', function () {
+    unpinDisplay();
+    lastTopSignature = ''; // paksa render berikutnya menampilkan ulang peserta terbaru
+  });
 
   // ===== Jam digital real-time =====
   const hariList = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
