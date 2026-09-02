@@ -6,18 +6,18 @@
 <title>Trial Class Institut Teknologi & Bisnis Asia Malang - Layar Kehadiran</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
     --gold: #ffd23f;
     --gold-soft: #ffe98a;
-    --navy-1: #0a1230;
-    --navy-2: #0e1a45;
-    --navy-3: #14235c;
-    --paper: #f3ede0;
-    --tape: #e8d9a0;
+    --cyan: #4de8ff;
+    --cyan-soft: #a6f4ff;
+    --navy-1: #060a1a;
+    --navy-2: #0a1230;
+    --navy-3: #0e1a45;
   }
 
   html, body {
@@ -27,13 +27,14 @@
   }
 
   body {
-    font-family: 'Baloo 2', sans-serif;
+    font-family: 'Rajdhani', sans-serif;
     color: #fff;
     position: relative;
     background:
-      radial-gradient(circle at 10% 0%, rgba(255,255,255,0.04), transparent 40%),
-      radial-gradient(circle at 100% 100%, rgba(255,255,255,0.03), transparent 40%),
-      linear-gradient(160deg, #0c1638 0%, #101c48 45%, #0a1230 100%);
+      radial-gradient(circle at 12% 15%, rgba(77,232,255,0.07), transparent 45%),
+      radial-gradient(circle at 88% 20%, rgba(255,210,63,0.06), transparent 45%),
+      radial-gradient(circle at 50% 100%, rgba(77,232,255,0.05), transparent 50%),
+      linear-gradient(160deg, #070c22 0%, #0b1436 45%, #060a1a 100%);
   }
 
   body::before {
@@ -89,17 +90,20 @@
     flex: 0 0 auto;
   }
   #clockTime {
-    font-family: 'Baloo 2', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: clamp(16px, 2.1vh, 26px);
     font-weight: 700;
-    letter-spacing: 1.5px;
-    color: var(--gold);
+    letter-spacing: 2px;
+    color: var(--cyan);
+    text-shadow: 0 0 12px rgba(77,232,255,0.6);
     font-variant-numeric: tabular-nums;
   }
   #clockDate {
+    font-family: 'Rajdhani', sans-serif;
     font-size: clamp(8px, 1vh, 11px);
+    font-weight: 600;
     color: #c7cfe8;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     margin-top: 1px;
     text-transform: uppercase;
   }
@@ -110,39 +114,36 @@
     flex: 0 0 auto;
   }
   h1.headline {
-    font-family: 'Baloo 2', sans-serif;
-    font-size: clamp(20px, 3.8vh, 40px);
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(19px, 3.6vh, 38px);
     font-weight: 800;
-    letter-spacing: 0.5px;
-    line-height: 1.2;
+    letter-spacing: 1.5px;
+    line-height: 1.3;
     max-width: 92vw;
     margin: 0 auto;
     color: var(--gold);
-    text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+    text-shadow: 0 0 18px rgba(255,210,63,0.4), 0 2px 10px rgba(0,0,0,0.35);
     text-transform: uppercase;
   }
   .eventdate-wrap {
     display: inline-flex;
     align-items: center;
-    margin-top: 0.7vh;
+    margin-top: 0.9vh;
   }
   p.eventdate {
-    font-family: 'Baloo 2', sans-serif;
+    font-family: 'Rajdhani', sans-serif;
     font-size: clamp(11px, 1.5vh, 16px);
     font-weight: 600;
-    color: #e3e8ff;
-    letter-spacing: 0.3px;
+    color: var(--cyan-soft);
+    letter-spacing: 1px;
   }
   .tape-deco {
     display: inline-block;
-    width: 46px;
-    height: 16px;
-    margin-left: 8px;
-    background: linear-gradient(100deg, var(--tape), #d8c274);
-    opacity: 0.85;
-    transform: rotate(-6deg);
-    clip-path: polygon(6% 0, 100% 10%, 94% 100%, 0% 90%);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+    width: 34px;
+    height: 2px;
+    margin-left: 10px;
+    background: linear-gradient(90deg, var(--cyan), transparent);
+    box-shadow: 0 0 8px rgba(77,232,255,0.8);
   }
 
   /* ===== KONTEN UTAMA: foto - ucapan - daftar hadir, sejajar 3 kolom ===== */
@@ -156,7 +157,7 @@
     padding: 0 2vw;
   }
 
-  /* --- kolom polaroid --- */
+  /* --- kolom foto (bingkai HUD/scanner) --- */
   .polaroid-col {
     flex: 0 0 auto;
     display: flex;
@@ -167,36 +168,46 @@
   }
   .polaroid {
     position: relative;
-    background: var(--paper);
-    border-radius: 10px;
-    padding: 2.2vh 2.2vh 1.6vh;
+    background: rgba(10,16,38,0.55);
+    border-radius: 14px;
+    padding: 1.6vh 1.6vh 2vh;
     width: clamp(280px, 48vh, 620px);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.45);
-    transform: rotate(-2deg);
+    border: 1px solid rgba(77,232,255,0.4);
+    box-shadow: 0 0 40px rgba(77,232,255,0.18), inset 0 0 30px rgba(77,232,255,0.05);
     animation: breathe 3.4s ease-in-out infinite;
   }
   @keyframes breathe {
-    0%,100% { box-shadow: 0 18px 40px rgba(0,0,0,0.45); }
-    50%     { box-shadow: 0 24px 54px rgba(0,0,0,0.55), 0 0 36px rgba(120,170,255,0.25); }
+    0%,100% { box-shadow: 0 0 40px rgba(77,232,255,0.18), inset 0 0 30px rgba(77,232,255,0.05); }
+    50%     { box-shadow: 0 0 62px rgba(77,232,255,0.32), inset 0 0 40px rgba(77,232,255,0.1); }
   }
-  .polaroid .tape {
+  /* bracket sudut ala HUD/scanner */
+  .polaroid .bracket {
     position: absolute;
-    top: -16px;
-    left: 50%;
-    width: 110px;
-    height: 34px;
-    margin-left: -55px;
-    background: linear-gradient(100deg, rgba(232,217,160,0.9), rgba(216,194,116,0.85));
-    transform: rotate(-4deg);
-    box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+    width: 26px;
+    height: 26px;
+    pointer-events: none;
   }
+  .polaroid .bracket::before, .polaroid .bracket::after {
+    content: "";
+    position: absolute;
+    background: var(--cyan);
+    box-shadow: 0 0 8px rgba(77,232,255,0.9);
+  }
+  .polaroid .bracket::before { width: 100%; height: 3px; }
+  .polaroid .bracket::after   { width: 3px; height: 100%; }
+  .polaroid .bracket.tl { top: -2px; left: -2px; }
+  .polaroid .bracket.tr { top: -2px; right: -2px; transform: scaleX(-1); }
+  .polaroid .bracket.bl { bottom: -2px; left: -2px; transform: scaleY(-1); }
+  .polaroid .bracket.br { bottom: -2px; right: -2px; transform: scale(-1,-1); }
+
   #photoWrap {
     position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
-    border-radius: 3px;
+    border-radius: 8px;
     overflow: hidden;
-    background: #10182e;
+    background: #0a1128;
+    border: 1px solid rgba(77,232,255,0.25);
   }
   #lastPhoto {
     display: block;
@@ -214,13 +225,14 @@
     left: 50%;
     bottom: 8px;
     transform: translateX(-50%);
-    background: rgba(10,14,30,0.85);
-    border: 1px solid rgba(120,170,255,0.5);
-    color: #cfe0ff;
-    font-family: 'Baloo 2', sans-serif;
+    background: rgba(6,10,26,0.9);
+    border: 1px solid rgba(77,232,255,0.55);
+    color: var(--cyan-soft);
+    font-family: 'Rajdhani', sans-serif;
     font-size: clamp(9px, 1.2vh, 12px);
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     padding: 4px 12px;
     border-radius: 16px;
     display: none;
@@ -232,13 +244,16 @@
     50%      { opacity: 1; }
   }
   #lastName {
-    font-family: 'Caveat', cursive;
+    font-family: 'Orbitron', sans-serif;
     font-weight: 700;
-    font-size: clamp(24px, 4.2vh, 46px);
-    color: #1b2647;
+    font-size: clamp(18px, 3.2vh, 34px);
+    color: var(--gold);
+    text-shadow: 0 0 14px rgba(255,210,63,0.4);
     text-align: center;
-    margin-top: 1.4vh;
-    line-height: 1.15;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 1.6vh;
+    line-height: 1.25;
     word-break: break-word;
   }
 
@@ -247,7 +262,7 @@
     flex: 0 1 520px;
     width: 520px;
     max-width: 44vw;
-    font-family: 'Caveat', cursive;
+    font-family: 'Rajdhani', sans-serif;
     color: #fff;
     text-align: center;
     display: flex;
@@ -255,30 +270,35 @@
     justify-content: center;
   }
   .greet-line1 {
-    font-size: clamp(26px, 4.8vh, 52px);
-    font-weight: 700;
+    font-size: clamp(20px, 3.6vh, 38px);
+    font-weight: 600;
+    letter-spacing: 1px;
     text-shadow: 0 2px 8px rgba(0,0,0,0.3);
   }
   .greet-name {
-    font-size: clamp(42px, 8.4vh, 100px);
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(32px, 6.6vh, 78px);
     font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     color: var(--gold);
-    text-shadow: 0 2px 14px rgba(255,178,0,0.4);
-    line-height: 1.1;
+    text-shadow: 0 0 22px rgba(255,178,0,0.55), 0 0 46px rgba(255,178,0,0.25);
+    line-height: 1.15;
     word-break: break-word;
-    margin: 0.6vh 0;
+    margin: 1vh 0;
   }
   .greet-line2, .greet-line3 {
-    font-size: clamp(24px, 4.4vh, 46px);
-    font-weight: 700;
-    line-height: 1.3;
+    font-size: clamp(19px, 3.3vh, 34px);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
     text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    margin-top: 0.6vh;
+    margin-top: 0.5vh;
   }
   .highlight {
-    color: var(--gold);
-    font-weight: 800;
-    text-shadow: 0 2px 12px rgba(255,178,0,0.35);
+    color: var(--cyan);
+    font-weight: 700;
+    text-shadow: 0 0 14px rgba(77,232,255,0.55);
   }
 
   /* ===== KOLOM DAFTAR + PENCARIAN — sejajar dengan foto ===== */
@@ -297,23 +317,24 @@
     width: 100%;
     padding: 2vh 1.6vw 1.4vh;
     border-radius: 18px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(10,16,38,0.4);
+    border: 1px solid rgba(77,232,255,0.28);
     display: flex;
     flex-direction: column;
   }
   #listTitle {
-    font-family: 'Baloo 2', sans-serif;
-    font-size: clamp(12px, 1.7vh, 17px);
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(11px, 1.5vh, 15px);
     font-weight: 700;
-    color: #fff;
-    letter-spacing: 1px;
+    color: var(--cyan);
+    letter-spacing: 1.5px;
     margin-bottom: 1.2vh;
     text-transform: uppercase;
     text-align: center;
     flex: 0 0 auto;
     position: relative;
     padding-bottom: 1vh;
+    text-shadow: 0 0 10px rgba(77,232,255,0.4);
   }
   #listTitle::after {
     content: "";
@@ -323,7 +344,7 @@
     transform: translateX(-50%);
     width: 70%;
     height: 1px;
-    background: rgba(255,255,255,0.3);
+    background: linear-gradient(90deg, transparent, rgba(77,232,255,0.5), transparent);
   }
   #listScroll {
     flex: 1 1 auto;
@@ -342,17 +363,18 @@
     padding-bottom: 1vh;
   }
   .chip {
-    font-family: 'Caveat', cursive;
-    font-weight: 700;
-    font-size: clamp(16px, 2.6vh, 24px);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: clamp(15px, 2.3vh, 21px);
+    letter-spacing: 0.4px;
     color: #fff;
     text-align: center;
     white-space: nowrap;
     animation: cardIn 0.45s ease;
   }
   .chip::before {
-    content: "\2013\00A0"; /* dash + spasi */
-    color: var(--gold-soft);
+    content: "\25B8\00A0"; /* panah kecil + spasi */
+    color: var(--cyan);
   }
   @keyframes cardIn {
     0%   { opacity: 0; transform: translateY(6px); }
@@ -369,10 +391,11 @@
     width: 100%;
     padding: 1.1vh 1.2vw;
     border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.25);
-    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(77,232,255,0.3);
+    background: rgba(10,16,38,0.5);
     color: #fff;
-    font-family: 'Baloo 2', sans-serif;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
     font-size: clamp(12px, 1.7vh, 16px);
     outline: none;
   }
@@ -388,15 +411,16 @@
     right: 0;
     max-height: 30vh;
     overflow-y: auto;
-    background: rgba(8,13,34,0.98);
-    border: 1px solid rgba(255,255,255,0.22);
+    background: rgba(6,10,26,0.98);
+    border: 1px solid rgba(77,232,255,0.35);
     border-radius: 12px;
     z-index: 30;
-    box-shadow: 0 10px 24px rgba(0,0,0,0.4);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.4), 0 0 20px rgba(77,232,255,0.15);
   }
   .searchResultItem {
     padding: 1vh 1.2vw;
-    font-family: 'Baloo 2', sans-serif;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
     font-size: clamp(12px, 1.7vh, 16px);
     color: #fff;
     cursor: pointer;
@@ -404,11 +428,12 @@
   }
   .searchResultItem:last-child { border-bottom: none; }
   .searchResultItem:hover, .searchResultItem.active-hover {
-    background: rgba(255,210,63,0.18);
+    background: rgba(77,232,255,0.15);
   }
   .searchNoResult {
     padding: 1vh 1.2vw;
-    font-family: 'Baloo 2', sans-serif;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
     font-size: clamp(11px, 1.5vh, 14px);
     color: #9aa5c9;
   }
@@ -416,40 +441,42 @@
     display: none;
     margin-top: 0.6vh;
     text-align: center;
-    font-family: 'Baloo 2', sans-serif;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
     font-size: clamp(10px, 1.3vh, 13px);
-    color: var(--gold-soft);
+    color: var(--cyan-soft);
   }
   #pinnedBadge.show { display: block; }
   #pinnedBadge button {
     margin-left: 6px;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(77,232,255,0.12);
+    border: 1px solid rgba(77,232,255,0.4);
     color: #fff;
-    font-family: 'Baloo 2', sans-serif;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
     font-size: inherit;
     padding: 2px 8px;
     border-radius: 10px;
     cursor: pointer;
   }
 
-  /* ===== COUNTER — ala sticky note ===== */
+  /* ===== COUNTER — panel neon ===== */
   #counterWrap {
     text-align: center;
     flex: 0 0 auto;
   }
   #counter {
     display: inline-block;
-    font-family: 'Baloo 2', sans-serif;
-    font-size: clamp(14px, 2vh, 21px);
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(13px, 1.9vh, 19px);
     font-weight: 700;
-    padding: 0.9vh 2.4vw;
-    border-radius: 8px;
-    color: #23305c;
-    background: var(--paper);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-    transform: rotate(-1deg);
-    letter-spacing: 0.3px;
+    letter-spacing: 1px;
+    padding: 1vh 2.6vw;
+    border-radius: 30px;
+    color: var(--gold);
+    background: rgba(10,16,38,0.6);
+    border: 1px solid rgba(255,210,63,0.5);
+    box-shadow: 0 0 24px rgba(255,210,63,0.25);
   }
   #status { font-size: 11px; color: #7885ad; margin-top: 6px; }
 </style>
@@ -476,13 +503,17 @@
     <h1 class="headline">Trial Class Institut Teknologi &amp; Bisnis Asia Malang</h1>
     <div class="eventdate-wrap">
       <p class="eventdate">Jl. Soekarno Hatta, Rembuksari No.1A Kota Malang</p>
-     </div>
+      <span class="tape-deco"></span>
+    </div>
   </div>
 
   <div class="main-content">
     <div class="polaroid-col">
       <div class="polaroid">
-        <span class="tape"></span>
+        <span class="bracket tl"></span>
+        <span class="bracket tr"></span>
+        <span class="bracket bl"></span>
+        <span class="bracket br"></span>
         <div id="photoWrap">
           <img id="lastPhoto" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%2310182e'/%3E%3Ccircle cx='100' cy='72' r='38' fill='%233d5a94'/%3E%3Cpath d='M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z' fill='%233d5a94'/%3E%3C/svg%3E" alt="Foto peserta">
           <div id="photoLoadingBadge">Menunggu Foto...</div>
