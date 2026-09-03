@@ -6,7 +6,7 @@
 <title>Trial Class Institut Teknologi & Bisnis Asia Malang - Layar Kehadiran</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500;1,600;1,700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -200,12 +200,12 @@
     border-left: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  /* MAIN CONTENT: 3-KOLOM */
+  /* MAIN CONTENT */
   .main-content {
     flex: 1 1 auto;
     min-height: 0;
     display: grid;
-    grid-template-columns: 1.35fr 1.15fr 1fr;
+    grid-template-columns: 1.35fr 1.2fr 1fr;
     gap: 1.6vw;
     align-items: stretch;
   }
@@ -339,13 +339,13 @@
     width: 100%;
   }
 
-  /* KOLOM SAPAAN */
+  /* KOLOM SAPAAN & PANTUN */
   .greeting-col {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     backdrop-filter: blur(20px);
     border-radius: 26px;
-    padding: 3vh 2.4vw;
+    padding: 2.2vh 2vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -366,17 +366,17 @@
     pointer-events: none;
   }
   .greet-line1 {
-    font-size: clamp(15px, 2.2vh, 24px);
+    font-size: clamp(14px, 1.9vh, 20px);
     font-weight: 600;
     color: var(--text-muted);
   }
   .greet-name {
-    font-size: clamp(28px, 5.2vh, 60px);
+    font-size: clamp(24px, 4.4vh, 48px);
     font-weight: 800;
     line-height: 1.1;
-    margin: 1.4vh 0 1.8vh;
+    margin: 0.8vh 0 1vh;
     color: var(--text-main);
-    text-shadow: 0 4px 24px rgba(255, 255, 255, 0.25);
+    text-shadow: 0 4px 20px rgba(255, 255, 255, 0.25);
     word-break: break-word;
     animation: namePop 0.5s ease;
   }
@@ -385,15 +385,60 @@
     100% { transform: translateY(0); opacity: 1; }
   }
   .greet-line2, .greet-line3 {
-    font-size: clamp(14px, 2vh, 22px);
+    font-size: clamp(13px, 1.75vh, 18px);
     font-weight: 600;
-    line-height: 1.45;
+    line-height: 1.4;
     color: #cbd5e1;
   }
   .highlight {
     color: var(--cyan);
     font-weight: 700;
     text-shadow: 0 0 12px var(--cyan-glow);
+  }
+
+  /* PANTUN BOX DENGAN SMOOTH FADE TRANSITION */
+  .pantun-box {
+    margin-top: 1.4vh;
+    padding: 1.2vh 1.4vw;
+    background: rgba(4, 8, 20, 0.65);
+    border-radius: 16px;
+    border: 1px solid rgba(245, 185, 66, 0.3);
+    border-left: 4px solid var(--gold);
+    width: 100%;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #pantunContainer {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #pantunContainer.pantun-fade-out {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .pantun-line {
+    font-size: clamp(11.5px, 1.55vh, 15.5px);
+    line-height: 1.45;
+    color: #e2e8f0;
+    font-style: italic;
+    font-weight: 500;
+  }
+  .pantun-line strong {
+    font-weight: 700;
+    font-style: normal;
+  }
+  .pantun-line .glow-gold {
+    color: var(--gold-bright);
+    text-shadow: 0 0 8px rgba(245, 185, 66, 0.4);
+  }
+  .pantun-line .glow-cyan {
+    color: var(--cyan);
+    text-shadow: 0 0 8px rgba(77, 232, 255, 0.4);
   }
 
   /* KOLOM DAFTAR HADIR */
@@ -602,14 +647,12 @@
 
 <div class="wrap">
 
-  <!-- TOP BAR: LOGO KIRI, JUDUL & ALAMAT (TENGAH), LOGO KANAN -->
+  <!-- TOP BAR -->
   <div class="topbar">
-    <!-- Logo Kiri: Institut Asia Malang -->
     <div class="logo-box">
       <img src="https://lh3.googleusercontent.com/d/1ODcDYJw19ChYr3aAA5uqcxXBHWDhz9uj" alt="Institut Asia Malang">
     </div>
 
-    <!-- Judul Trial Class & Alamat -->
     <div class="headline-wrap">
       <h1 class="headline">Trial Class Institut Teknologi &amp; Bisnis Asia Malang</h1>
       <div class="eventdate-wrap">
@@ -619,13 +662,12 @@
       </div>
     </div>
 
-    <!-- Logo Kanan: Kuliah Asik Kekinian -->
     <div class="logo-box">
       <img src="https://lh3.googleusercontent.com/d/1jZttb2ldR2vsg4mkWFi4zKwZrYBT_WWX" alt="Kuliah Asik Kekinian">
     </div>
   </div>
 
-  <!-- CLOCK BAR: LIVE CHECK-IN & WAKTU REALTIME DI BAWAHNYA -->
+  <!-- CLOCK BAR -->
   <div class="clock-bar-wrap">
     <div class="clock-box">
       <div class="live-indicator">
@@ -655,12 +697,19 @@
       <div id="lastName">Menunggu Peserta...</div>
     </div>
 
-    <!-- SISI TENGAH: SAPAAN ELEGAN -->
+    <!-- SISI TENGAH: SAPAAN & PANTUN RANDOM -->
     <div class="greeting-col">
       <p class="greet-line1">Hallo kak,</p>
       <div class="greet-name"><span id="greetName">PESERTA</span></div>
       <p class="greet-line2">Selamat datang di <span class="highlight">Institut Asia Malang</span></p>
       <p class="greet-line3">Tempatnya <span class="highlight">Kuliah Asik Kekinian</span></p>
+
+      <!-- PANTUN DISPLAY ROTASI 20 DETIK -->
+      <div class="pantun-box">
+        <div id="pantunContainer">
+          <!-- Diisi otomatis oleh JavaScript -->
+        </div>
+      </div>
     </div>
 
     <!-- SISI KANAN: DAFTAR HADIR & PENCARIAN -->
@@ -703,7 +752,58 @@
     '</svg>'
   );
 
-  // Penanganan fetch tahan-eror (mencegah teks DOCTYPE / HTML merusak tampilan)
+  // =========================================================
+  // LOGIKA ROTASI PANTUN ACAK (Setiap 20 Detik)
+  // =========================================================
+  const PANTUN_LIST = [
+    `
+      <p class="pantun-line">Pagi hari menyeduh <strong class="glow-gold">kopi</strong>,</p>
+      <p class="pantun-line">aromanya harum bikin <strong class="glow-gold">bahagia</strong>.</p>
+      <p class="pantun-line">Jangan mau kalau cuma <strong class="glow-cyan">bermimpi</strong>,</p>
+      <p class="pantun-line">saatnya bersinar bersama <strong class="glow-cyan">Institut Asia!</strong></p>
+    `,
+    `
+      <p class="pantun-line">Dingin-dingin enaknya makan <strong class="glow-gold">ketan</strong>,</p>
+      <p class="pantun-line">sambil melihat pemandangan <strong class="glow-gold">kota</strong>.</p>
+      <p class="pantun-line">Biar kamu nggak ketinggalan <strong class="glow-cyan">zaman</strong>,</p>
+      <p class="pantun-line">yuk, berkembang bersama <strong class="glow-cyan">Institut Asia!</strong></p>
+    `,
+    `
+      <p class="pantun-line">Ke Kayutangan naik <strong class="glow-gold">skuter</strong>,</p>
+      <p class="pantun-line">mampir ngopi sambil <strong class="glow-gold">bercanda</strong>.</p>
+      <p class="pantun-line">Dari peserta jadi calon <strong class="glow-cyan">master</strong>,</p>
+      <p class="pantun-line">mulainya ya, dari <strong class="glow-cyan">Institut Asia!</strong></p>
+    `
+  ];
+
+  let currentPantunIndex = -1;
+
+  function switchPantunRandom() {
+    const container = document.getElementById('pantunContainer');
+    if (!container) return;
+
+    let nextIndex;
+    do {
+      nextIndex = Math.floor(Math.random() * PANTUN_LIST.length);
+    } while (nextIndex === currentPantunIndex && PANTUN_LIST.length > 1);
+
+    currentPantunIndex = nextIndex;
+
+    // Transisi halus (fade out -> ubah teks -> fade in)
+    container.classList.add('pantun-fade-out');
+    setTimeout(function() {
+      container.innerHTML = PANTUN_LIST[nextIndex];
+      container.classList.remove('pantun-fade-out');
+    }, 400);
+  }
+
+  // Tampilkan pantun pertama saat halaman dimuat, lalu rotasi acak setiap 20 detik
+  switchPantunRandom();
+  setInterval(switchPantunRandom, 20000);
+
+  // =========================================================
+  // LOGIKA FETCH DATA APPS SCRIPT
+  // =========================================================
   function refresh() {
     fetch(APPS_SCRIPT_URL + '?action=getdata')
       .then(function (r) {
