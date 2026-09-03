@@ -6,7 +6,7 @@
 <title>Trial Class Institut Teknologi & Bisnis Asia Malang - Layar Kehadiran</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -17,7 +17,7 @@
     --cyan: #4de8ff;
     --cyan-glow: rgba(77, 232, 255, 0.35);
     --bg-dark: #04060d;
-    --card-bg: rgba(11, 17, 36, 0.82);
+    --card-bg: rgba(11, 17, 36, 0.85);
     --card-border: rgba(255, 255, 255, 0.1);
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
@@ -69,11 +69,12 @@
     gap: 1.2vh;
   }
 
-  /* TOP BAR */
+  /* TOP BAR: SATU BOX DENGAN LOGO KIRI, JUDUL & ALAMAT DI TENGAH, LOGO KANAN */
   .topbar {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    justify-content: space-between;
+    gap: 2vw;
     padding: 1vh 2vw;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -82,9 +83,10 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
   .logo-box {
-    height: clamp(48px, 6.8vh, 75px);
+    height: clamp(52px, 7.5vh, 85px);
     display: flex;
     align-items: center;
+    flex: 0 0 auto;
   }
   .logo-box img {
     height: 100%;
@@ -97,64 +99,26 @@
     transform: scale(1.03);
   }
 
-  .clock-box {
+  /* HEADLINE TENGAH DALAM TOPBAR */
+  .headline-wrap {
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
-  }
-  .live-indicator {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 10.5px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    color: var(--cyan);
-  }
-  .live-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--cyan);
-    border-radius: 50%;
-    box-shadow: 0 0 10px var(--cyan);
-    animation: livePulse 1.4s ease-in-out infinite;
-  }
-  @keyframes livePulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.3; transform: scale(0.75); }
-  }
-  #clockTime {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(22px, 3.2vh, 34px);
-    font-weight: 700;
-    color: var(--text-main);
-    letter-spacing: 1.5px;
-    line-height: 1;
-    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
-  }
-  #clockDate {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  /* HEADLINE BANNER */
-  .headline-wrap {
-    text-align: center;
-    margin: 0.2vh 0;
+    justify-content: center;
+    min-width: 0;
   }
   h1.headline {
-    font-size: clamp(18px, 2.8vh, 32px);
-    font-weight: 800;
+    font-size: clamp(20px, 3vh, 36px);
+    font-weight: 900;
     letter-spacing: 0.5px;
+    line-height: 1.15;
     background: linear-gradient(120deg, #fff 15%, var(--gold-bright) 50%, var(--gold) 85%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     text-shadow: 0 4px 20px rgba(245, 185, 66, 0.3);
+    text-transform: uppercase;
   }
   .eventdate-wrap {
     display: inline-flex;
@@ -163,7 +127,7 @@
     margin-top: 4px;
   }
   p.eventdate {
-    font-size: clamp(11px, 1.4vh, 14px);
+    font-size: clamp(11px, 1.45vh, 15px);
     font-weight: 600;
     color: var(--cyan);
     letter-spacing: 1px;
@@ -175,7 +139,68 @@
     box-shadow: 0 0 8px var(--cyan);
   }
 
-  /* MAIN CONTENT */
+  /* CLOCK BAR: LIVE CHECK-IN & WAKTU REALTIME DI BAWAH TOPBAR */
+  .clock-bar-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.1vh 0;
+  }
+  .clock-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.8vw;
+    padding: 0.7vh 2vw;
+    background: rgba(11, 17, 36, 0.75);
+    border: 1px solid rgba(77, 232, 255, 0.25);
+    border-radius: 999px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+  .live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: clamp(10px, 1.3vh, 13px);
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--cyan);
+    padding-right: 1.2vw;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .live-dot {
+    width: 9px;
+    height: 9px;
+    background: var(--cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--cyan);
+    animation: livePulse 1.4s ease-in-out infinite;
+  }
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.75); }
+  }
+  #clockTime {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(18px, 2.6vh, 28px);
+    font-weight: 700;
+    color: var(--gold-bright);
+    letter-spacing: 1.5px;
+    line-height: 1;
+    text-shadow: 0 2px 10px rgba(245, 185, 66, 0.3);
+  }
+  #clockDate {
+    font-size: clamp(10.5px, 1.35vh, 13.5px);
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-left: 1.2vw;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  /* MAIN CONTENT: 3-KOLOM */
   .main-content {
     flex: 1 1 auto;
     min-height: 0;
@@ -371,7 +396,7 @@
     text-shadow: 0 0 12px var(--cyan-glow);
   }
 
-  /* KOLOM DAFTAR HADIR DENGAN LOOPING MULUS */
+  /* KOLOM DAFTAR HADIR */
   .list-col {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -562,9 +587,12 @@
   @media (max-width: 1024px) {
     html, body { overflow: auto; }
     .wrap { height: auto; min-height: 100vh; }
+    .topbar { grid-template-columns: 1fr; text-align: center; gap: 1.5vh; }
     .main-content { grid-template-columns: 1fr; }
     .polaroid { height: 50vh; }
     .list-col { height: 45vh; }
+    .clock-box { flex-direction: column; gap: 6px; border-radius: 20px; }
+    .live-indicator, #clockDate { border: none; padding: 0; }
   }
 </style>
 </head>
@@ -574,14 +602,31 @@
 
 <div class="wrap">
 
-  <!-- TOP BAR -->
+  <!-- TOP BAR: LOGO KIRI, JUDUL & ALAMAT (TENGAH), LOGO KANAN -->
   <div class="topbar">
-    <!-- Logo Kiri: Institut Asia Malang (Direct Google Drive Link) -->
+    <!-- Logo Kiri: Institut Asia Malang -->
     <div class="logo-box">
       <img src="https://lh3.googleusercontent.com/d/1ODcDYJw19ChYr3aAA5uqcxXBHWDhz9uj" alt="Institut Asia Malang">
     </div>
 
-    <!-- Live Clock Center -->
+    <!-- Judul Trial Class & Alamat -->
+    <div class="headline-wrap">
+      <h1 class="headline">Trial Class Institut Teknologi &amp; Bisnis Asia Malang</h1>
+      <div class="eventdate-wrap">
+        <span class="tape-deco"></span>
+        <p class="eventdate">Jl. Soekarno Hatta, Rembuksari No.1A Kota Malang</p>
+        <span class="tape-deco" style="transform: rotate(180deg);"></span>
+      </div>
+    </div>
+
+    <!-- Logo Kanan: Kuliah Asik Kekinian -->
+    <div class="logo-box">
+      <img src="https://lh3.googleusercontent.com/d/1jZttb2ldR2vsg4mkWFi4zKwZrYBT_WWX" alt="Kuliah Asik Kekinian">
+    </div>
+  </div>
+
+  <!-- CLOCK BAR: LIVE CHECK-IN & WAKTU REALTIME DI BAWAHNYA -->
+  <div class="clock-bar-wrap">
     <div class="clock-box">
       <div class="live-indicator">
         <span class="live-dot"></span>
@@ -590,27 +635,12 @@
       <div id="clockTime">--:--:--</div>
       <div id="clockDate">-</div>
     </div>
-
-    <!-- Logo Kanan: Kuliah Asik Kekinian (Direct Google Drive Link) -->
-    <div class="logo-box">
-      <img src="https://lh3.googleusercontent.com/d/1jZttb2ldR2vsg4mkWFi4zKwZrYBT_WWX" alt="Kuliah Asik Kekinian">
-    </div>
-  </div>
-
-  <!-- HEADLINE -->
-  <div class="headline-wrap">
-    <h1 class="headline">Trial Class Institut Teknologi &amp; Bisnis Asia Malang</h1>
-    <div class="eventdate-wrap">
-      <span class="tape-deco"></span>
-      <p class="eventdate">Jl. Soekarno Hatta, Rembuksari No.1A Kota Malang</p>
-      <span class="tape-deco" style="transform: rotate(180deg);"></span>
-    </div>
   </div>
 
   <!-- MAIN CONTENT -->
   <div class="main-content">
     
-    <!-- SISI KIRI: FOTO PESERTA SANGAT BESAR -->
+    <!-- SISI KIRI: FOTO PESERTA BESAR -->
     <div class="polaroid-col">
       <div class="polaroid">
         <span class="bracket tl"></span>
@@ -839,21 +869,19 @@
   // Auto-scroll loop saat daftar peserta penuh/melebihi wadah
   const scrollEl = document.getElementById('listScroll');
   const listElForLoop = document.getElementById('list');
-  const SCROLL_SPEED = 0.45; // Kecepatan scroll perlahan
+  const SCROLL_SPEED = 0.45;
   let loopHeight = 0;
   let loopActive = false;
 
   function setupSeamlessLoop() {
     scrollEl.scrollTop = 0;
     
-    // Hitung apakah elemen isi melebihi tinggi wadah tampilan
     const singleSetHeight = listElForLoop.scrollHeight;
     const containerHeight = scrollEl.clientHeight;
 
     if (singleSetHeight > containerHeight && containerHeight > 0) {
-      // Gandakan elemen daftar agar setelah nama terakhir lewat, nama pertama langsung menyusul mulus
       listElForLoop.innerHTML += listElForLoop.innerHTML;
-      loopHeight = singleSetHeight + 8; // Margin perataan gap
+      loopHeight = singleSetHeight + 8;
       loopActive = true;
     } else {
       loopHeight = 0;
@@ -864,7 +892,6 @@
   function autoScrollTick() {
     if (!loopActive || loopHeight <= 0) return;
     scrollEl.scrollTop += SCROLL_SPEED;
-    // Jika sudah mencapai batas set pertama, reset kembali ke puncak secara instan (tanpa terlihat mata)
     if (scrollEl.scrollTop >= loopHeight) {
       scrollEl.scrollTop -= loopHeight;
     }
