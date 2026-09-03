@@ -31,7 +31,6 @@
     color: var(--text-main);
   }
 
-  /* Background Ambient */
   body {
     background-image: 
       radial-gradient(circle at 15% 20%, var(--gold-glow) 0%, transparent 40%),
@@ -99,7 +98,6 @@
     transform: scale(1.03);
   }
 
-  /* HEADLINE TENGAH */
   .headline-wrap {
     text-align: center;
     display: flex;
@@ -200,7 +198,7 @@
     border-left: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  /* MAIN CONTENT: 3-KOLOM */
+  /* MAIN CONTENT */
   .main-content {
     flex: 1 1 auto;
     min-height: 0;
@@ -210,7 +208,7 @@
     align-items: stretch;
   }
 
-  /* KOLOM FOTO PESERTA */
+  /* SISI KIRI: FOTO PESERTA */
   .polaroid-col {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -339,7 +337,7 @@
     width: 100%;
   }
 
-  /* KOLOM SAPAAN FUTURISTIK */
+  /* SISI TENGAH: SAPAAN */
   .greeting-col {
     background: linear-gradient(145deg, rgba(14, 23, 52, 0.92) 0%, rgba(8, 12, 28, 0.88) 100%);
     border-radius: 26px;
@@ -353,10 +351,8 @@
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(24px);
-    gap: 0;
   }
 
-  /* Animated Cyber Border Glow */
   .greeting-col::before {
     content: "";
     position: absolute;
@@ -377,7 +373,6 @@
     100% { background-position: 0% 50%; }
   }
 
-  /* Hologram Background Grid */
   .greeting-col::after {
     content: "";
     position: absolute;
@@ -391,7 +386,6 @@
     pointer-events: none;
   }
 
-  /* Cyber HUD Corner Brackets */
   .cyber-hud {
     position: absolute;
     width: 16px;
@@ -406,23 +400,21 @@
   .cyber-hud.bl { bottom: 12px; left: 12px; border-width: 0 0 2.5px 2.5px; }
   .cyber-hud.br { bottom: 12px; right: 12px; border-width: 0 2.5px 2.5px 0; }
 
-  /* Tech Status Tag */
   .tech-badge {
     position: relative;
     z-index: 2;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 18px;
-    font-weight: 900;
+    font-size: 11px;
+    font-weight: 800;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--cyan);
     background: rgba(77, 232, 255, 0.1);
     border: 1px solid rgba(77, 232, 255, 0.3);
-    padding: 4px 14px;
+    padding: 5px 16px;
     border-radius: 999px;
-    margin-top: -20vh;
     margin-bottom: 1.5vh;
     box-shadow: 0 0 14px rgba(77, 232, 255, 0.15);
   }
@@ -435,7 +427,6 @@
     animation: livePulse 1.5s infinite;
   }
 
-  /* Container Sapaan Utama */
   .greet-content-wrap {
     position: relative;
     z-index: 2;
@@ -443,7 +434,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex: 0 0 auto;
   }
 
   .greet-line1 {
@@ -493,19 +483,18 @@
     text-shadow: 0 0 14px var(--cyan-glow);
   }
 
-  /* PANTUN: POSISI LEBIH KE BAWAH & UKURAN TEKS DIBESARKAN */
+  /* PANTUN: RATA TENGAH & JARAK PROPORSIONAL */
   .pantun-area {
     position: relative;
     z-index: 2;
     width: 100%;
-    margin-top: 4.2vh;
-    padding-top: 2.2vh;
+    margin-top: 2.2vh;
+    padding-top: 1.8vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    flex: 0 0 auto;
   }
   .pantun-area::before {
     content: "";
@@ -530,12 +519,12 @@
     transform: translateY(8px);
   }
   .pantun-line {
-    font-size: clamp(16px, 2.3vh, 23px);
-    line-height: 1.6;
-    margin-bottom: 0.4vh;
+    font-size: clamp(13.5px, 1.8vh, 18px);
+    line-height: 1.55;
+    margin-bottom: 0.3vh;
     color: #e2e8f0;
     font-style: italic;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.3px;
     text-align: center;
   }
@@ -548,14 +537,14 @@
   }
   .pantun-line .glow-gold {
     color: var(--gold-bright);
-    text-shadow: 0 0 12px rgba(245, 185, 66, 0.45);
+    text-shadow: 0 0 10px rgba(245, 185, 66, 0.45);
   }
   .pantun-line .glow-cyan {
     color: var(--cyan);
-    text-shadow: 0 0 12px rgba(77, 232, 255, 0.45);
+    text-shadow: 0 0 10px rgba(77, 232, 255, 0.45);
   }
 
-  /* KOLOM DAFTAR HADIR */
+  /* SISI KANAN: DAFTAR HADIR */
   .list-col {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -721,7 +710,7 @@
     color: var(--bg-dark);
   }
 
-  /* FOOTER STATISTIK */
+  /* FOOTER */
   #counterWrap {
     display: flex;
     align-items: center;
@@ -742,7 +731,6 @@
   }
   #status { font-size: 11px; color: var(--text-muted); }
 
-  /* RESPONSIVE */
   @media (max-width: 1024px) {
     html, body { overflow: auto; }
     .wrap { height: auto; min-height: 100vh; }
@@ -796,7 +784,7 @@
   <!-- MAIN CONTENT -->
   <div class="main-content">
     
-    <!-- SISI KIRI: FOTO PESERTA BESAR -->
+    <!-- SISI KIRI: FOTO PESERTA -->
     <div class="polaroid-col">
       <div class="polaroid">
         <span class="bracket tl"></span>
@@ -811,7 +799,7 @@
       <div id="lastName">Menunggu Peserta...</div>
     </div>
 
-    <!-- SISI TENGAH: SAPAAN BESAR & PANTUN BERJARAK PROPORSIONAL -->
+    <!-- SISI TENGAH: SAPAAN & PANTUN -->
     <div class="greeting-col">
       <span class="cyber-hud tl"></span>
       <span class="cyber-hud tr"></span>
@@ -840,7 +828,7 @@
       </div>
     </div>
 
-    <!-- SISI KANAN: DAFTAR HADIR & PENCARIAN -->
+    <!-- SISI KANAN: DAFTAR HADIR -->
     <div class="list-col">
       <div id="listWrap">
         <div id="listTitle">Daftar Peserta Hadir</div>
@@ -858,7 +846,7 @@
 
   </div>
 
-  <!-- FOOTER STATISTIK -->
+  <!-- FOOTER -->
   <div id="counterWrap">
     <div id="counter">Peserta sudah datang : 0</div>
     <div id="status"></div>
@@ -867,47 +855,36 @@
 </div>
 
 <script>
-  // =========================================================
-  // URL Web App Apps Script
-  // =========================================================
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzyD3Rs3MxcRWMfl4HKaIWtaHc2ZvqejhAAYpS8r8Ik4ZalvKHBrLcIUSFN7dGC-MAKOA/exec';
 
   const DEFAULT_AVATAR = 'data:image/svg+xml;utf8,' + encodeURIComponent(
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">' +
     '<rect width="200" height="200" fill="#080c1d"/>' +
     '<circle cx="100" cy="72" r="38" fill="#1e293b"/>' +
-    '<path d="M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z' fill="#1e293b"/>' +
+    '<path d="M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z" fill="#1e293b"/>' +
     '</svg>'
   );
 
-  // =========================================================
-  // JAM REALTIME
-  // =========================================================
+  // 1. JAM REALTIME
   const hariList = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
   const bulanList = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 
   function updateClock() {
-    try {
-      const now = new Date();
-      const hh = String(now.getHours()).padStart(2,'0');
-      const mm = String(now.getMinutes()).padStart(2,'0');
-      const ss = String(now.getSeconds()).padStart(2,'0');
-      const timeEl = document.getElementById('clockTime');
-      const dateEl = document.getElementById('clockDate');
-      if (timeEl) timeEl.innerText = hh + ':' + mm + ':' + ss;
-      if (dateEl) {
-        dateEl.innerText = hariList[now.getDay()] + ', ' + now.getDate() + ' ' + bulanList[now.getMonth()] + ' ' + now.getFullYear();
-      }
-    } catch(e) {
-      console.error(e);
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2,'0');
+    const mm = String(now.getMinutes()).padStart(2,'0');
+    const ss = String(now.getSeconds()).padStart(2,'0');
+    const timeEl = document.getElementById('clockTime');
+    const dateEl = document.getElementById('clockDate');
+    if (timeEl) timeEl.innerText = hh + ':' + mm + ':' + ss;
+    if (dateEl) {
+      dateEl.innerText = hariList[now.getDay()] + ', ' + now.getDate() + ' ' + bulanList[now.getMonth()] + ' ' + now.getFullYear();
     }
   }
   updateClock();
   setInterval(updateClock, 1000);
 
-  // =========================================================
-  // ROTASI PANTUN ACAK (Setiap 20 Detik)
-  // =========================================================
+  // 2. ROTASI PANTUN
   const PANTUN_LIST = [
     '<p class="pantun-line">Pagi hari menyeduh <strong class="glow-gold">kopi</strong>,</p><p class="pantun-line">aromanya harum bikin <strong class="glow-gold">bahagia</strong>.</p><p class="pantun-line">Jangan mau kalau cuma <strong class="glow-cyan">bermimpi</strong>,</p><p class="pantun-line">saatnya bersinar bersama <strong class="glow-cyan">Institut Asia!</strong></p>',
     '<p class="pantun-line">Dingin-dingin enaknya makan <strong class="glow-gold">ketan</strong>,</p><p class="pantun-line">sambil melihat pemandangan <strong class="glow-gold">kota</strong>.</p><p class="pantun-line">Biar kamu nggak ketinggalan <strong class="glow-cyan">zaman</strong>,</p><p class="pantun-line">yuk, berkembang bersama <strong class="glow-cyan">Institut Asia!</strong></p>',
@@ -926,7 +903,6 @@
     } while (nextIndex === currentPantunIndex && PANTUN_LIST.length > 1);
 
     currentPantunIndex = nextIndex;
-
     container.classList.add('pantun-fade-out');
     setTimeout(function() {
       container.innerHTML = PANTUN_LIST[nextIndex];
@@ -935,9 +911,7 @@
   }
   setInterval(switchPantunRandom, 20000);
 
-  // =========================================================
-  // FETCH DATA & RENDER
-  // =========================================================
+  // 3. FETCH DATA
   let lastKnownCount = -1;
   let lastTopSignature = '';
   let allAttendeesList = [];
@@ -951,7 +925,7 @@
         if (data) render(data);
       })
       .catch(function(err) {
-        console.warn('Fetch pending:', err);
+        console.warn('Gagal ambil data:', err);
       });
   }
 
@@ -1051,9 +1025,7 @@
   refresh();
   setInterval(refresh, 3000);
 
-  // =========================================================
-  // PENCARIAN PESERTA
-  // =========================================================
+  // 4. PENCARIAN
   const searchInputEl = document.getElementById('searchInput');
   const searchResultsEl = document.getElementById('searchResults');
   const pinnedBadgeEl = document.getElementById('pinnedBadge');
@@ -1104,9 +1076,7 @@
     });
   }
 
-  // =========================================================
-  // AUTO-SCROLL SEAMLESS LOOP
-  // =========================================================
+  // 5. AUTO-SCROLL LOOP
   const scrollEl = document.getElementById('listScroll');
   const listElForLoop = document.getElementById('list');
   const SCROLL_SPEED = 0.45;
