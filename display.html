@@ -12,12 +12,13 @@
 
   :root {
     --gold: #f5b942;
-    --gold-glow: rgba(245, 185, 66, 0.4);
+    --gold-bright: #ffe699;
+    --gold-glow: rgba(245, 185, 66, 0.45);
     --cyan: #4de8ff;
-    --cyan-glow: rgba(77, 232, 255, 0.25);
-    --bg-dark: #050811;
-    --card-bg: rgba(13, 19, 41, 0.75);
-    --card-border: rgba(255, 255, 255, 0.08);
+    --cyan-glow: rgba(77, 232, 255, 0.35);
+    --bg-dark: #04060d;
+    --card-bg: rgba(11, 17, 36, 0.82);
+    --card-border: rgba(255, 255, 255, 0.1);
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
   }
@@ -30,35 +31,43 @@
     color: var(--text-main);
   }
 
+  /* Dynamic Ambient Background */
   body {
     background-image: 
-      radial-gradient(circle at 20% 20%, var(--gold-glow) 0%, transparent 45%),
-      radial-gradient(circle at 80% 80%, var(--cyan-glow) 0%, transparent 45%),
-      linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+      radial-gradient(circle at 15% 20%, var(--gold-glow) 0%, transparent 40%),
+      radial-gradient(circle at 85% 75%, var(--cyan-glow) 0%, transparent 40%),
+      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
     background-position: center;
   }
 
+  /* Floating Lights */
   .orb {
     position: fixed;
     border-radius: 50%;
-    filter: blur(140px);
+    filter: blur(120px);
     pointer-events: none;
     z-index: 0;
+    animation: orbFloat 14s ease-in-out infinite alternate;
   }
-  .orb-1 { width: 40vw; height: 40vw; top: -10vw; left: -10vw; background: rgba(245, 185, 66, 0.12); }
-  .orb-2 { width: 35vw; height: 35vw; bottom: -8vw; right: -5vw; background: rgba(77, 232, 255, 0.1); }
+  .orb-1 { width: 38vw; height: 38vw; top: -8vw; left: -8vw; background: rgba(245, 185, 66, 0.14); }
+  .orb-2 { width: 34vw; height: 34vw; bottom: -8vw; right: -5vw; background: rgba(77, 232, 255, 0.14); animation-delay: -6s; }
+
+  @keyframes orbFloat {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(3vw, 2vh) scale(1.08); }
+  }
 
   .wrap {
     position: relative;
     z-index: 1;
     height: 100vh;
-    padding: 1.8vh 2.2vw;
+    padding: 1.6vh 2vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 1.4vh;
+    gap: 1.2vh;
   }
 
   /* TOP BAR */
@@ -69,46 +78,63 @@
     padding: 1vh 2vw;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    backdrop-filter: blur(16px);
-    border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
   .logo-box {
-    height: clamp(42px, 6.2vh, 68px);
+    height: clamp(44px, 6.5vh, 72px);
     display: flex;
     align-items: center;
   }
-  .logo-box img {
+  .logo-box svg {
     height: 100%;
     width: auto;
-    object-fit: contain;
-    mix-blend-mode: screen; /* Menghilangkan background hitam bawaan gambar */
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
+    transition: transform 0.3s ease;
   }
+  .logo-box svg:hover {
+    transform: scale(1.03);
+  }
+
   .clock-box {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1px;
+    gap: 2px;
   }
-  .clock-box::before {
-    content: "● LIVE CHECK-IN";
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
+  .live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 2px;
     color: var(--cyan);
-    animation: blink 1.6s ease-in-out infinite;
   }
-  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--cyan);
+    animation: livePulse 1.4s ease-in-out infinite;
+  }
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.75); }
+  }
   #clockTime {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(20px, 3vh, 32px);
+    font-size: clamp(22px, 3.2vh, 34px);
     font-weight: 700;
     color: var(--text-main);
-    letter-spacing: 1px;
-    line-height: 1.1;
+    letter-spacing: 1.5px;
+    line-height: 1;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
   }
   #clockDate {
-    font-size: 10.5px;
+    font-size: 11px;
     font-weight: 600;
     color: var(--text-muted);
     text-transform: uppercase;
@@ -124,82 +150,94 @@
     font-size: clamp(18px, 2.8vh, 32px);
     font-weight: 800;
     letter-spacing: 0.5px;
-    background: linear-gradient(135deg, #ffffff 30%, var(--gold) 100%);
+    background: linear-gradient(120deg, #fff 15%, var(--gold-bright) 50%, var(--gold) 85%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0 4px 18px rgba(245, 185, 66, 0.25);
+    text-shadow: 0 4px 20px rgba(245, 185, 66, 0.3);
   }
   .eventdate-wrap {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    margin-top: 3px;
+    gap: 12px;
+    margin-top: 4px;
   }
   p.eventdate {
-    font-size: clamp(10px, 1.3vh, 13.5px);
+    font-size: clamp(11px, 1.4vh, 14px);
     font-weight: 600;
     color: var(--cyan);
     letter-spacing: 1px;
   }
   .tape-deco {
-    width: 28px;
+    width: 32px;
     height: 2px;
     background: linear-gradient(90deg, var(--cyan), transparent);
+    box-shadow: 0 0 8px var(--cyan);
   }
 
-  /* MAIN CONTENT: 3-KOLOM DENGAN FOTO PESERTA SEBAGAI FOKUS TERBESAR */
+  /* MAIN CONTENT: 3-KOLOM DENGAN FOTO MAKSIMAL */
   .main-content {
     flex: 1 1 auto;
     min-height: 0;
     display: grid;
-    grid-template-columns: minmax(360px, 42vw) 1.1fr 1fr;
-    gap: 1.8vw;
+    grid-template-columns: 1.35fr 1.15fr 1fr;
+    gap: 1.6vw;
     align-items: stretch;
   }
 
-  /* FOKUS UTAMA: FOTO PESERTA */
+  /* KOLOM FOTO PESERTA SANGAT BESAR & PENUH */
   .polaroid-col {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     backdrop-filter: blur(20px);
     border-radius: 26px;
-    padding: 2.2vh 1.8vw;
+    padding: 1.8vh 1.4vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 1.4vh;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    justify-content: space-between;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
   }
-  .polaroid-col::before {
-    content: "★ PESERTA TERBARU ★";
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 2.5px;
-    color: var(--gold);
-    background: rgba(245, 185, 66, 0.12);
-    padding: 6px 18px;
-    border-radius: 999px;
-    border: 1px solid rgba(245, 185, 66, 0.35);
-    box-shadow: 0 0 16px rgba(245, 185, 66, 0.2);
+  .polaroid-col::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 26px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, rgba(245, 185, 66, 0.5), transparent 40%, rgba(77, 232, 255, 0.5));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
   }
   .polaroid {
     position: relative;
     width: 100%;
-    max-width: 420px;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 14px;
-    border-radius: 22px;
-    border: 1.5px solid rgba(245, 185, 66, 0.4);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 35px var(--gold-glow);
+    height: calc(100% - 46px);
+    background: rgba(255, 255, 255, 0.025);
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(245, 185, 66, 0.35);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 30px var(--gold-glow);
+    display: flex;
+    flex-direction: column;
+    animation: frameBreath 4s ease-in-out infinite;
   }
+  @keyframes frameBreath {
+    0%, 100% { box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(245, 185, 66, 0.25); }
+    50% { box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 42px rgba(245, 185, 66, 0.5); }
+  }
+
+  /* Cyber Bracket Corners */
   .polaroid .bracket {
     position: absolute;
     width: 16px;
     height: 16px;
     pointer-events: none;
-    border: 2.5px solid var(--cyan);
+    border: 2.5px solid var(--gold);
+    z-index: 5;
   }
   .polaroid .bracket.tl { top: 6px; left: 6px; border-right: none; border-bottom: none; }
   .polaroid .bracket.tr { top: 6px; right: 6px; border-left: none; border-bottom: none; }
@@ -209,46 +247,73 @@
   #photoWrap {
     position: relative;
     width: 100%;
-    aspect-ratio: 4 / 5;
-    max-height: 52vh;
+    height: 100%;
     border-radius: 14px;
     overflow: hidden;
-    background: #090e1f;
-    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6);
+    background: #080c1d;
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
   }
   #lastPhoto {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
+  /* Laser Scanner Effect */
+  #photoWrap::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -30%;
+    height: 25%;
+    background: linear-gradient(180deg, transparent, rgba(77, 232, 255, 0.35), rgba(77, 232, 255, 0.6), transparent);
+    box-shadow: 0 0 20px var(--cyan);
+    animation: scanPulse 3.5s ease-in-out infinite;
+    z-index: 2;
+    pointer-events: none;
+  }
+  @keyframes scanPulse {
+    0% { top: -30%; }
+    60% { top: 110%; }
+    100% { top: 110%; }
+  }
+
   #photoLoadingBadge {
     position: absolute;
     left: 50%;
-    bottom: 14px;
+    bottom: 16px;
     transform: translateX(-50%);
-    background: rgba(5, 8, 17, 0.92);
+    background: rgba(4, 6, 15, 0.94);
     border: 1px solid var(--cyan);
     color: var(--cyan);
     font-size: 11px;
-    font-weight: 700;
-    padding: 5px 16px;
+    font-weight: 800;
+    padding: 6px 18px;
     border-radius: 999px;
     display: none;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    box-shadow: 0 0 16px var(--cyan-glow);
+    z-index: 4;
   }
   #photoLoadingBadge.show { display: block; }
+  
   #lastName {
-    font-size: clamp(16px, 2.2vh, 24px);
+    font-size: clamp(16px, 2.3vh, 25px);
     font-weight: 800;
     text-align: center;
     color: var(--gold);
-    margin-top: 12px;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-shadow: 0 2px 12px rgba(245, 185, 66, 0.3);
+    text-shadow: 0 2px 14px var(--gold-glow);
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
 
   /* KOLOM SAPAAN (TENGAH) */
@@ -257,13 +322,25 @@
     border: 1px solid var(--card-border);
     backdrop-filter: blur(20px);
     border-radius: 26px;
-    padding: 3vh 2.2vw;
+    padding: 3vh 2.4vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     text-align: left;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+  }
+  .greeting-col::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(245, 185, 66, 0.08), transparent 70%);
+    pointer-events: none;
   }
   .greet-line1 {
     font-size: clamp(15px, 2.2vh, 24px);
@@ -271,13 +348,18 @@
     color: var(--text-muted);
   }
   .greet-name {
-    font-size: clamp(28px, 5vh, 56px);
+    font-size: clamp(28px, 5.2vh, 60px);
     font-weight: 800;
-    line-height: 1.12;
+    line-height: 1.1;
     margin: 1.4vh 0 1.8vh;
     color: var(--text-main);
-    text-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+    text-shadow: 0 4px 24px rgba(255, 255, 255, 0.25);
     word-break: break-word;
+    animation: namePop 0.5s ease;
+  }
+  @keyframes namePop {
+    0% { transform: translateY(10px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
   }
   .greet-line2, .greet-line3 {
     font-size: clamp(14px, 2vh, 22px);
@@ -297,10 +379,10 @@
     border: 1px solid var(--card-border);
     backdrop-filter: blur(20px);
     border-radius: 26px;
-    padding: 2.2vh 1.6vw 1.8vh;
+    padding: 2vh 1.6vw;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
     min-height: 0;
   }
   #listWrap {
@@ -311,8 +393,8 @@
   }
   #listTitle {
     font-size: clamp(12px, 1.5vh, 15px);
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
     color: var(--gold);
     text-transform: uppercase;
     margin-bottom: 1.2vh;
@@ -327,6 +409,7 @@
     height: 16px;
     background: var(--gold);
     border-radius: 999px;
+    box-shadow: 0 0 8px var(--gold);
   }
   #listScroll {
     flex: 1 1 auto;
@@ -345,9 +428,9 @@
     font-size: clamp(12px, 1.6vh, 15px);
     font-weight: 600;
     color: var(--text-main);
-    padding: 8px 14px;
+    padding: 10px 14px;
     background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -355,6 +438,12 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: all 0.25s ease;
+  }
+  .chip:hover {
+    background: rgba(77, 232, 255, 0.1);
+    border-color: rgba(77, 232, 255, 0.3);
+    transform: translateX(4px);
   }
   .chip::before {
     content: "✓";
@@ -362,8 +451,8 @@
     font-weight: 800;
     color: var(--cyan);
     background: rgba(77, 232, 255, 0.15);
-    min-width: 18px;
-    height: 18px;
+    min-width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -379,8 +468,8 @@
   #searchInput {
     width: 100%;
     padding: 1vh 1.2vw;
-    background: rgba(8, 12, 24, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(8, 12, 24, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 12px;
     color: var(--text-main);
     font-size: 12.5px;
@@ -390,7 +479,7 @@
   }
   #searchInput:focus {
     border-color: var(--cyan);
-    box-shadow: 0 0 14px var(--cyan-glow);
+    box-shadow: 0 0 16px var(--cyan-glow);
   }
   #searchResults {
     position: absolute;
@@ -404,7 +493,7 @@
     border-radius: 12px;
     padding: 6px;
     z-index: 50;
-    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.8);
   }
   .searchResultItem {
     padding: 9px 12px;
@@ -413,9 +502,10 @@
     border-radius: 8px;
     cursor: pointer;
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: background 0.2s;
   }
   .searchResultItem:hover {
-    background: rgba(77, 232, 255, 0.15);
+    background: rgba(77, 232, 255, 0.18);
     color: var(--cyan);
   }
   .searchNoResult {
@@ -442,6 +532,11 @@
     border-radius: 999px;
     cursor: pointer;
     margin-left: 6px;
+    transition: all 0.2s;
+  }
+  #pinnedBadge button:hover {
+    background: var(--cyan);
+    color: var(--bg-dark);
   }
 
   /* FOOTER STATISTIK */
@@ -457,11 +552,11 @@
     font-weight: 700;
     color: var(--gold);
     background: rgba(245, 185, 66, 0.08);
-    border: 1px solid rgba(245, 185, 66, 0.3);
-    padding: 6px 22px;
+    border: 1px solid rgba(245, 185, 66, 0.35);
+    padding: 6px 24px;
     border-radius: 999px;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 14px var(--gold-glow);
+    box-shadow: 0 4px 16px var(--gold-glow);
   }
   #status { font-size: 11px; color: var(--text-muted); }
 
@@ -470,7 +565,7 @@
     html, body { overflow: auto; }
     .wrap { height: auto; min-height: 100vh; }
     .main-content { grid-template-columns: 1fr; }
-    .polaroid-col { max-width: 100%; }
+    .polaroid { height: 50vh; }
     .list-col { height: 45vh; }
   }
 </style>
@@ -483,19 +578,38 @@
 
   <!-- TOP BAR -->
   <div class="topbar">
+    <!-- Logo Kiri: Institut Asia Malang (Vector-Clean SVG) -->
     <div class="logo-box">
-      <!-- Logo Institut Asia Malang -->
-      <img src="data:image/jpeg;base64,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" alt="Institut Asia Malang">
+      <svg viewBox="0 0 320 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="42" cy="42" r="38" fill="#F5B942" stroke="#D32F2F" stroke-width="2.5"/>
+        <path d="M42 16C30 16 22 24 22 36C22 55 42 66 42 66C42 66 62 55 62 36C62 24 54 16 42 16Z" fill="#1A3B8B"/>
+        <path d="M42 22L36 34H48L42 22Z" fill="#FFD54F"/>
+        <text x="42" y="52" fill="#FFFFFF" font-family="'Space Grotesk', sans-serif" font-weight="800" font-size="12" text-anchor="middle">ASIA</text>
+        <text x="96" y="28" fill="#E2E8F0" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="17" letter-spacing="4">INSTITUT</text>
+        <text x="94" y="68" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="44" letter-spacing="1">ASIA</text>
+        <path d="M228 32H238V42H228Z" fill="#D32F2F"/>
+      </svg>
     </div>
 
+    <!-- Live Clock Center -->
     <div class="clock-box">
+      <div class="live-indicator">
+        <span class="live-dot"></span>
+        LIVE CHECK-IN
+      </div>
       <div id="clockTime">--:--:--</div>
       <div id="clockDate">-</div>
     </div>
 
+    <!-- Logo Kanan: Kuliah Asik Kekinian (Vector-Clean SVG) -->
     <div class="logo-box">
-      <!-- Logo Kuliah Asik Kekinian -->
-      <img src="data:image/jpeg;base64,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" alt="Kuliah Asik Kekinian">
+      <svg viewBox="0 0 280 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g transform="rotate(-3 140 42)">
+          <text x="140" y="32" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="28" font-style="italic" text-anchor="middle" stroke="#000" stroke-width="4" paint-order="stroke fill">KULIAH</text>
+          <text x="140" y="46" fill="#F5B942" font-family="'Space Grotesk', cursive, sans-serif" font-weight="800" font-size="20" text-anchor="middle" font-style="italic" stroke="#000" stroke-width="2" paint-order="stroke fill">asik</text>
+          <text x="140" y="74" fill="#F5B942" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="34" font-style="italic" text-anchor="middle" stroke="#000" stroke-width="5" paint-order="stroke fill">KEKINIAN</text>
+        </g>
+      </svg>
     </div>
   </div>
 
@@ -509,7 +623,7 @@
     </div>
   </div>
 
-  <!-- MAIN CONTENT: FOTO SEBAGAI FOCAL POINT UTAMA -->
+  <!-- MAIN CONTENT: FOTO MAKSIMAL SEBAGAI FOKUS UTAMA -->
   <div class="main-content">
     
     <!-- SISI KIRI: FOTO PESERTA SANGAT BESAR -->
@@ -520,14 +634,14 @@
         <span class="bracket bl"></span>
         <span class="bracket br"></span>
         <div id="photoWrap">
-          <img id="lastPhoto" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%2310182e'/%3E%3Ccircle cx='100' cy='72' r='38' fill='%233d5a94'/%3E%3Cpath d='M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z' fill='%233d5a94'/%3E%3C/svg%3E" alt="Foto peserta">
-          <div id="photoLoadingBadge">Menunggu Foto...</div>
+          <img id="lastPhoto" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23080c1d'/%3E%3Ccircle cx='100' cy='72' r='38' fill='%231e293b'/%3E%3Cpath d='M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z' fill='%231e293b'/%3E%3C/svg%3E" alt="Foto peserta">
+          <div id="photoLoadingBadge">MENUNGGU FOTO...</div>
         </div>
-        <div id="lastName">Menunggu Peserta...</div>
       </div>
+      <div id="lastName">Menunggu Peserta...</div>
     </div>
 
-    <!-- SISI TENGAH: SAPAAN HANGAT & ELEGAN -->
+    <!-- SISI TENGAH: SAPAAN ELEGAN -->
     <div class="greeting-col">
       <p class="greet-line1">Hallo kak,</p>
       <div class="greet-name"><span id="greetName">PESERTA</span></div>
@@ -567,12 +681,11 @@
   // =========================================================
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzyD3Rs3MxcRWMfl4HKaIWtaHc2ZvqejhAAYpS8r8Ik4ZalvKHBrLcIUSFN7dGC-MAKOA/exec';
 
-  // Siluet default, ditampilkan selagi foto peserta belum selesai diupload
   const DEFAULT_AVATAR = 'data:image/svg+xml;utf8,' + encodeURIComponent(
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">' +
-    '<rect width="200" height="200" fill="#10182e"/>' +
-    '<circle cx="100" cy="72" r="38" fill="#3d5a94"/>' +
-    '<path d="M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z" fill="#3d5a94"/>' +
+    '<rect width="200" height="200" fill="#080c1d"/>' +
+    '<circle cx="100" cy="72" r="38" fill="#1e293b"/>' +
+    '<path d="M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z" fill="#1e293b"/>' +
     '</svg>'
   );
 
@@ -586,12 +699,11 @@
   }
 
   let lastKnownCount = -1;
-  let lastTopSignature = ''; // gabungan nama+foto+waktu peserta yang sedang ditampilkan
+  let lastTopSignature = '';
 
-  // ===== Fitur pencarian & "pin" tampilan =====
-  let allAttendeesList = [];   // seluruh peserta yang sudah hadir (untuk dicari)
-  let isPinned = false;        // true kalau layar sedang menampilkan hasil klik pencarian
-  let pinnedRecord = null;     // data peserta yang sedang di-pin
+  let allAttendeesList = [];
+  let isPinned = false;
+  let pinnedRecord = null;
 
   function showParticipant(record) {
     document.getElementById('lastName').innerText = record.nama;
@@ -627,12 +739,10 @@
     document.getElementById('status').innerText = '';
     allAttendeesList = data.list;
 
-    // Lepas pin jika ada check-in baru
     if (isPinned && data.hadir > lastKnownCount && lastKnownCount !== -1) {
       unpinDisplay();
     }
 
-    // Tentukan data yang ditampilkan
     let displayRecord = null;
     let signaturePrefix = '';
 
@@ -654,7 +764,6 @@
       lastTopSignature = 'KOSONG';
     }
 
-    // Update list & counter
     if (data.hadir !== lastKnownCount) {
       const listEl = document.getElementById('list');
       listEl.innerHTML = '';
@@ -670,7 +779,6 @@
         'Peserta sudah datang : ' + data.hadir + ' / ' + data.total;
 
       lastKnownCount = data.hadir;
-
       setupSeamlessLoop();
     }
   }
@@ -678,7 +786,7 @@
   refresh();
   setInterval(refresh, 3000);
 
-  // ===== Pencarian peserta =====
+  // Pencarian
   const searchInputEl   = document.getElementById('searchInput');
   const searchResultsEl = document.getElementById('searchResults');
   const pinnedBadgeEl   = document.getElementById('pinnedBadge');
@@ -725,7 +833,7 @@
     lastTopSignature = '';
   });
 
-  // ===== Jam digital real-time =====
+  // Jam Digital
   const hariList = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
   const bulanList = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 
@@ -741,7 +849,7 @@
   updateClock();
   setInterval(updateClock, 1000);
 
-  // ===== Auto-scroll daftar peserta =====
+  // Auto-scroll loop
   const scrollEl = document.getElementById('listScroll');
   const listElForLoop = document.getElementById('list');
   const SCROLL_SPEED = 0.35;
