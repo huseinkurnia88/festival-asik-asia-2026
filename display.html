@@ -69,7 +69,7 @@
     gap: 1.2vh;
   }
 
-  /* TOP BAR: SATU BOX DENGAN LOGO KIRI, JUDUL & ALAMAT DI TENGAH, LOGO KANAN */
+  /* TOP BAR */
   .topbar {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -139,7 +139,7 @@
     box-shadow: 0 0 8px var(--cyan);
   }
 
-  /* CLOCK BAR: LIVE CHECK-IN & WAKTU REALTIME DI BAWAH TOPBAR */
+  /* CLOCK BAR */
   .clock-bar-wrap {
     display: flex;
     justify-content: center;
@@ -703,12 +703,23 @@
     '</svg>'
   );
 
+  // Penanganan fetch tahan-eror (mencegah teks DOCTYPE / HTML merusak tampilan)
   function refresh() {
     fetch(APPS_SCRIPT_URL + '?action=getdata')
-      .then(function (r) { return r.json(); })
-      .then(render)
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP status ' + r.status);
+        return r.text();
+      })
+      .then(function (text) {
+        try {
+          const data = JSON.parse(text);
+          render(data);
+        } catch (err) {
+          console.warn('Apps Script mengembalikan respons HTML/bukan JSON:', text);
+        }
+      })
       .catch(function (err) {
-        document.getElementById('status').innerText = 'Gagal ambil data: ' + err;
+        console.error('Koneksi tertunda:', err);
       });
   }
 
@@ -778,7 +789,7 @@
       lastTopSignature = 'KOSONG';
     }
 
-    // Perbarui daftar nama & hitungan kehadiran jika bertambah/berkurang
+    // Perbarui daftar kehadiran
     if (data.hadir !== lastKnownCount) {
       const listEl = document.getElementById('list');
       listEl.innerHTML = '';
@@ -795,7 +806,6 @@
 
       lastKnownCount = data.hadir;
 
-      // Inisialisasi loop bergulir otomatis
       setupSeamlessLoop();
     }
   }
@@ -866,7 +876,7 @@
   updateClock();
   setInterval(updateClock, 1000);
 
-  // Auto-scroll loop saat daftar peserta penuh/melebihi wadah
+  // Auto-scroll loop mulus
   const scrollEl = document.getElementById('listScroll');
   const listElForLoop = document.getElementById('list');
   const SCROLL_SPEED = 0.45;
