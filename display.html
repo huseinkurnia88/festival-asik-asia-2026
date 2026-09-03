@@ -343,16 +343,17 @@
   .greeting-col {
     background: linear-gradient(145deg, rgba(14, 23, 52, 0.92) 0%, rgba(8, 12, 28, 0.88) 100%);
     border-radius: 26px;
-    padding: 2.6vh 2.4vw 2vh;
+    padding: 3vh 2.4vw;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center; /* Rata tengah vertikal */
     align-items: flex-start;
     text-align: left;
     box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(24px);
+    gap: 0;
   }
 
   /* Animated Cyber Border Glow */
@@ -421,7 +422,7 @@
     border: 1px solid rgba(77, 232, 255, 0.3);
     padding: 4px 14px;
     border-radius: 999px;
-    margin-bottom: 0.4vh;
+    margin-bottom: 1.5vh;
     box-shadow: 0 0 14px rgba(77, 232, 255, 0.15);
   }
   .tech-badge-dot {
@@ -441,25 +442,23 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex: 1 1 auto;
-    padding: 0.2vh 0;
+    flex: 0 0 auto;
   }
 
-  /* GREETING TEKS JAUH LEBIH BESAR & BERJARAK NYAMAN */
   .greet-line1 {
-    font-size: clamp(24px, 3.4vh, 38px);
+    font-size: clamp(22px, 3.2vh, 34px);
     font-weight: 800;
     color: var(--text-muted);
     letter-spacing: 0.5px;
-    line-height: 1.25;
-    margin-bottom: 0.4vh;
+    line-height: 1.2;
+    margin-bottom: 0.3vh;
   }
 
   .greet-name {
-    font-size: clamp(44px, 7.2vh, 80px);
+    font-size: clamp(38px, 6.5vh, 72px);
     font-weight: 900;
     line-height: 1.05;
-    margin: 0.4vh 0 1.2vh;
+    margin: 0.4vh 0 1vh;
     background: linear-gradient(110deg, #ffffff 20%, var(--gold-bright) 45%, var(--gold) 65%, #ffffff 85%);
     background-size: 200% 100%;
     -webkit-background-clip: text;
@@ -475,16 +474,16 @@
   }
 
   .greet-line2 {
-    font-size: clamp(22px, 3.1vh, 36px);
+    font-size: clamp(19px, 2.7vh, 30px);
     font-weight: 800;
-    line-height: 1.4;
+    line-height: 1.35;
     color: #f8fafc;
-    margin-bottom: 0.4vh;
+    margin-bottom: 0.3vh;
   }
   .greet-line3 {
-    font-size: clamp(20px, 2.9vh, 34px);
+    font-size: clamp(17px, 2.5vh, 28px);
     font-weight: 800;
-    line-height: 1.4;
+    line-height: 1.35;
     color: #cbd5e1;
   }
   .highlight {
@@ -493,13 +492,13 @@
     text-shadow: 0 0 14px var(--cyan-glow);
   }
 
-  /* PANTUN: LEBIH BESAR, RATA TENGAH, RENGGANG NYAMAN */
+  /* PANTUN: JARAK PROPORSIONAL DAN TIDAK JAUH MELOMPONG */
   .pantun-area {
     position: relative;
     z-index: 2;
     width: 100%;
-    margin-top: 1.6vh;
-    padding-top: 1.6vh;
+    margin-top: 2.2vh;
+    padding-top: 1.8vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -530,13 +529,13 @@
     transform: translateY(8px);
   }
   .pantun-line {
-    font-size: clamp(14.5px, 2vh, 20.5px);
-    line-height: 1.7;
-    margin-bottom: 0.5vh;
+    font-size: clamp(13.5px, 1.8vh, 18px);
+    line-height: 1.55;
+    margin-bottom: 0.3vh;
     color: #e2e8f0;
     font-style: italic;
     font-weight: 600;
-    letter-spacing: 0.4px;
+    letter-spacing: 0.3px;
     text-align: center;
   }
   .pantun-line:last-child {
@@ -811,7 +810,7 @@
       <div id="lastName">Menunggu Peserta...</div>
     </div>
 
-    <!-- SISI TENGAH: SAPAAN BESAR, PADAT, & PANTUN RATA TENGAH -->
+    <!-- SISI TENGAH: SAPAAN BESAR & PANTUN BERJARAK PROPORSIONAL -->
     <div class="greeting-col">
       <span class="cyber-hud tl"></span>
       <span class="cyber-hud tr"></span>
@@ -881,7 +880,7 @@
   );
 
   // =========================================================
-  // JAM REALTIME (Dijalankan langsung)
+  // JAM REALTIME
   // =========================================================
   const hariList = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
   const bulanList = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
