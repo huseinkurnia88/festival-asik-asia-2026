@@ -200,12 +200,12 @@
     border-left: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  /* MAIN CONTENT */
+  /* MAIN CONTENT: 3-KOLOM */
   .main-content {
     flex: 1 1 auto;
     min-height: 0;
     display: grid;
-    grid-template-columns: 1.35fr 1.2fr 1fr;
+    grid-template-columns: 1.25fr 1.35fr 1fr;
     gap: 1.6vw;
     align-items: stretch;
   }
@@ -339,13 +339,13 @@
     width: 100%;
   }
 
-  /* KOLOM SAPAAN & PANTUN */
+  /* KOLOM SAPAAN & PANTUN (DIPERBESAR & LEBIH DOMINAN) */
   .greeting-col {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     backdrop-filter: blur(20px);
     border-radius: 26px;
-    padding: 2.2vh 2vw;
+    padding: 2.8vh 2.4vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -365,49 +365,55 @@
     background: radial-gradient(circle, rgba(245, 185, 66, 0.08), transparent 70%);
     pointer-events: none;
   }
+
+  /* TEKS SAPAAN UKURAN BESAR */
   .greet-line1 {
-    font-size: clamp(14px, 1.9vh, 20px);
-    font-weight: 600;
+    font-size: clamp(18px, 2.7vh, 30px);
+    font-weight: 700;
     color: var(--text-muted);
+    letter-spacing: 0.5px;
   }
   .greet-name {
-    font-size: clamp(24px, 4.4vh, 48px);
-    font-weight: 800;
-    line-height: 1.1;
-    margin: 0.8vh 0 1vh;
+    font-size: clamp(34px, 6.2vh, 68px);
+    font-weight: 900;
+    line-height: 1.08;
+    margin: 0.8vh 0 1.2vh;
     color: var(--text-main);
-    text-shadow: 0 4px 20px rgba(255, 255, 255, 0.25);
+    text-shadow: 0 6px 28px rgba(255, 255, 255, 0.25);
     word-break: break-word;
     animation: namePop 0.5s ease;
   }
   @keyframes namePop {
-    0% { transform: translateY(10px); opacity: 0; }
+    0% { transform: translateY(12px); opacity: 0; }
     100% { transform: translateY(0); opacity: 1; }
   }
-  .greet-line2, .greet-line3 {
-    font-size: clamp(13px, 1.75vh, 18px);
-    font-weight: 600;
-    line-height: 1.4;
+  .greet-line2 {
+    font-size: clamp(17px, 2.5vh, 28px);
+    font-weight: 700;
+    line-height: 1.35;
+    color: #f1f5f9;
+  }
+  .greet-line3 {
+    font-size: clamp(16px, 2.3vh, 26px);
+    font-weight: 700;
+    line-height: 1.35;
     color: #cbd5e1;
+    margin-top: 0.2vh;
   }
   .highlight {
     color: var(--cyan);
-    font-weight: 700;
-    text-shadow: 0 0 12px var(--cyan-glow);
+    font-weight: 800;
+    text-shadow: 0 0 14px var(--cyan-glow);
   }
 
-  /* PANTUN BOX DENGAN SMOOTH FADE TRANSITION */
-  .pantun-box {
-    margin-top: 1.4vh;
-    padding: 1.2vh 1.4vw;
-    background: rgba(4, 8, 20, 0.65);
-    border-radius: 16px;
-    border: 1px solid rgba(245, 185, 66, 0.3);
-    border-left: 4px solid var(--gold);
+  /* PANTUN TANPA BOX (CLEAN, FLOATING, PROPORSIONAL) */
+  .pantun-area {
+    margin-top: 2vh;
+    padding-top: 1.6vh;
     width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    min-height: 10vh;
+    min-height: 9.5vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -422,11 +428,12 @@
     transform: translateY(8px);
   }
   .pantun-line {
-    font-size: clamp(11.5px, 1.55vh, 15.5px);
-    line-height: 1.45;
+    font-size: clamp(12.5px, 1.75vh, 17px);
+    line-height: 1.5;
     color: #e2e8f0;
     font-style: italic;
     font-weight: 500;
+    letter-spacing: 0.2px;
   }
   .pantun-line strong {
     font-weight: 700;
@@ -697,15 +704,15 @@
       <div id="lastName">Menunggu Peserta...</div>
     </div>
 
-    <!-- SISI TENGAH: SAPAAN & PANTUN RANDOM -->
+    <!-- SISI TENGAH: SAPAAN BESAR & PANTUN BERSIH TANPA BOX -->
     <div class="greeting-col">
       <p class="greet-line1">Hallo kak,</p>
       <div class="greet-name"><span id="greetName">PESERTA</span></div>
       <p class="greet-line2">Selamat datang di <span class="highlight">Institut Asia Malang</span></p>
       <p class="greet-line3">Tempatnya <span class="highlight">Kuliah Asik Kekinian</span></p>
 
-      <!-- PANTUN DISPLAY ROTASI 20 DETIK -->
-      <div class="pantun-box">
+      <!-- PANTUN TANPA BOX (CLEAN DISPLAY) -->
+      <div class="pantun-area">
         <div id="pantunContainer">
           <!-- Diisi otomatis oleh JavaScript -->
         </div>
@@ -789,7 +796,7 @@
 
     currentPantunIndex = nextIndex;
 
-    // Transisi halus (fade out -> ubah teks -> fade in)
+    // Transisi fade out -> ubah isi -> fade in
     container.classList.add('pantun-fade-out');
     setTimeout(function() {
       container.innerHTML = PANTUN_LIST[nextIndex];
@@ -797,7 +804,7 @@
     }, 400);
   }
 
-  // Tampilkan pantun pertama saat halaman dimuat, lalu rotasi acak setiap 20 detik
+  // Tampilkan pantun pertama langsung, lalu berganti acak tiap 20 detik
   switchPantunRandom();
   setInterval(switchPantunRandom, 20000);
 
