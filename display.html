@@ -205,7 +205,7 @@
     flex: 1 1 auto;
     min-height: 0;
     display: grid;
-    grid-template-columns: 1.25fr 1.35fr 1fr;
+    grid-template-columns: 1.15fr 1.55fr 1fr;
     gap: 1.6vw;
     align-items: stretch;
   }
@@ -339,16 +339,14 @@
     width: 100%;
   }
 
-  /* =========================================================
-     KOLOM SAPAAN FUTURISTIK & MOTION ELEGAN
-     ========================================================= */
+  /* KOLOM SAPAAN FUTURISTIK */
   .greeting-col {
-    background: linear-gradient(145deg, rgba(14, 23, 52, 0.9) 0%, rgba(8, 12, 28, 0.85) 100%);
+    background: linear-gradient(145deg, rgba(14, 23, 52, 0.92) 0%, rgba(8, 12, 28, 0.88) 100%);
     border-radius: 26px;
-    padding: 3vh 2.5vw;
+    padding: 2.6vh 2.4vw 2vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-start;
     text-align: left;
     box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -378,7 +376,7 @@
     100% { background-position: 0% 50%; }
   }
 
-  /* Hologram Background Grid & Ambient Pulse */
+  /* Hologram Background Grid */
   .greeting-col::after {
     content: "";
     position: absolute;
@@ -395,17 +393,17 @@
   /* Cyber HUD Corner Brackets */
   .cyber-hud {
     position: absolute;
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     border-color: rgba(77, 232, 255, 0.5);
     border-style: solid;
     pointer-events: none;
     z-index: 3;
   }
-  .cyber-hud.tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
-  .cyber-hud.tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; }
-  .cyber-hud.bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
-  .cyber-hud.br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+  .cyber-hud.tl { top: 12px; left: 12px; border-width: 2.5px 0 0 2.5px; }
+  .cyber-hud.tr { top: 12px; right: 12px; border-width: 2.5px 2.5px 0 0; }
+  .cyber-hud.bl { bottom: 12px; left: 12px; border-width: 0 0 2.5px 2.5px; }
+  .cyber-hud.br { bottom: 12px; right: 12px; border-width: 0 2.5px 2.5px 0; }
 
   /* Tech Status Tag */
   .tech-badge {
@@ -414,52 +412,60 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 20px;
-    font-weight: 900;
+    font-size: 11px;
+    font-weight: 800;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--cyan);
-    background: rgba(77, 232, 255, 0.08);
-    border: 1px solid rgba(77, 232, 255, 0.25);
+    background: rgba(77, 232, 255, 0.1);
+    border: 1px solid rgba(77, 232, 255, 0.3);
     padding: 4px 14px;
     border-radius: 999px;
-    margin-top: -20vh;
-    margin-bottom: 1.2vh;
-    box-shadow: 0 0 12px rgba(77, 232, 255, 0.15);
+    margin-bottom: 0.4vh;
+    box-shadow: 0 0 14px rgba(77, 232, 255, 0.15);
   }
   .tech-badge-dot {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     background: var(--cyan);
     border-radius: 50%;
     box-shadow: 0 0 8px var(--cyan);
     animation: livePulse 1.5s infinite;
   }
 
-  /* Teks Sapaan Utama */
-  .greet-line1 {
+  /* Container Sapaan Utama */
+  .greet-content-wrap {
     position: relative;
     z-index: 2;
-    font-size: clamp(17px, 2.6vh, 28px);
-    font-weight: 900;
-    color: var(--text-muted);
-    letter-spacing: 0.5px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1 1 auto;
+    padding: 0.2vh 0;
   }
 
-  /* Nama Peserta dengan Shimmer Animation */
+  /* GREETING TEKS JAUH LEBIH BESAR & BERJARAK NYAMAN */
+  .greet-line1 {
+    font-size: clamp(24px, 3.4vh, 38px);
+    font-weight: 800;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    line-height: 1.25;
+    margin-bottom: 0.4vh;
+  }
+
   .greet-name {
-    position: relative;
-    z-index: 2;
-    font-size: clamp(34px, 6.2vh, 68px);
-    font-weight: 1000;
-    line-height: 1.08;
-    margin: 0.6vh 0 1vh;
-    background: linear-gradient(110deg, #ffffff 25%, var(--gold-bright) 45%, var(--gold) 65%, #ffffff 85%);
+    font-size: clamp(44px, 7.2vh, 80px);
+    font-weight: 900;
+    line-height: 1.05;
+    margin: 0.4vh 0 1.2vh;
+    background: linear-gradient(110deg, #ffffff 20%, var(--gold-bright) 45%, var(--gold) 65%, #ffffff 85%);
     background-size: 200% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0 4px 28px rgba(245, 185, 66, 0.3);
+    text-shadow: 0 6px 32px rgba(245, 185, 66, 0.35);
     word-break: break-word;
     animation: shimmerName 4s linear infinite;
   }
@@ -469,21 +475,17 @@
   }
 
   .greet-line2 {
-    position: relative;
-    z-index: 2;
-    font-size: clamp(17px, 2.5vh, 28px);
-    font-weight: 1000;
-    line-height: 1.35;
-    color: #f1f5f9;
+    font-size: clamp(22px, 3.1vh, 36px);
+    font-weight: 800;
+    line-height: 1.4;
+    color: #f8fafc;
+    margin-bottom: 0.4vh;
   }
   .greet-line3 {
-    position: relative;
-    z-index: 2;
-    font-size: clamp(16px, 2.3vh, 26px);
-    font-weight: 1000;
-    line-height: 1.35;
+    font-size: clamp(20px, 2.9vh, 34px);
+    font-weight: 800;
+    line-height: 1.4;
     color: #cbd5e1;
-    margin-top: 0.2vh;
   }
   .highlight {
     color: var(--cyan);
@@ -491,19 +493,19 @@
     text-shadow: 0 0 14px var(--cyan-glow);
   }
 
-  /* PANTUN RATA TENGAH & FLOATING */
+  /* PANTUN: LEBIH BESAR, RATA TENGAH, RENGGANG NYAMAN */
   .pantun-area {
     position: relative;
     z-index: 2;
-    margin-top: 3.5vh;
-    padding-top: 2vh;
     width: 100%;
-    min-height: 9.5vh;
+    margin-top: 1.6vh;
+    padding-top: 1.6vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    flex: 0 0 auto;
   }
   .pantun-area::before {
     content: "";
@@ -511,9 +513,9 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 60%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(245, 185, 66, 0.45), rgba(77, 232, 255, 0.45), transparent);
+    width: 75%;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(245, 185, 66, 0.5), rgba(77, 232, 255, 0.5), transparent);
   }
 
   #pantunContainer {
@@ -528,16 +530,20 @@
     transform: translateY(8px);
   }
   .pantun-line {
-    font-size: clamp(12.5px, 1.75vh, 17px);
-    line-height: 1.55;
+    font-size: clamp(14.5px, 2vh, 20.5px);
+    line-height: 1.7;
+    margin-bottom: 0.5vh;
     color: #e2e8f0;
     font-style: italic;
-    font-weight: 1000;
-    letter-spacing: 0.3px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
     text-align: center;
   }
+  .pantun-line:last-child {
+    margin-bottom: 0;
+  }
   .pantun-line strong {
-    font-weight: 1000;
+    font-weight: 800;
     font-style: normal;
   }
   .pantun-line .glow-gold {
@@ -805,29 +811,31 @@
       <div id="lastName">Menunggu Peserta...</div>
     </div>
 
-    <!-- SISI TENGAH: SAPAAN FUTURISTIK & MOTION INTERAKTIF -->
+    <!-- SISI TENGAH: SAPAAN BESAR, PADAT, & PANTUN RATA TENGAH -->
     <div class="greeting-col">
-      <!-- Cyber HUD Corner Accents -->
       <span class="cyber-hud tl"></span>
       <span class="cyber-hud tr"></span>
       <span class="cyber-hud bl"></span>
       <span class="cyber-hud br"></span>
 
-      <!-- Futuristic Status Badge -->
       <div class="tech-badge">
         <span class="tech-badge-dot"></span>
         Welcoming...
       </div>
 
-      <p class="greet-line1">Hallo kak,</p>
-      <div class="greet-name"><span id="greetName">PESERTA</span></div>
-      <p class="greet-line2">Selamat datang di <span class="highlight">Institut Asia Malang</span></p>
-      <p class="greet-line3">Tempatnya <span class="highlight">Kuliah Asik Kekinian</span></p>
+      <div class="greet-content-wrap">
+        <p class="greet-line1">Hallo kak,</p>
+        <div class="greet-name"><span id="greetName">PESERTA</span></div>
+        <p class="greet-line2">Selamat datang di <span class="highlight">Institut Asia Malang</span></p>
+        <p class="greet-line3">Tempatnya <span class="highlight">Kuliah Asik Kekinian</span></p>
+      </div>
 
-      <!-- PANTUN AREA (RATA TENGAH & PROPORSIONAL) -->
       <div class="pantun-area">
         <div id="pantunContainer">
-          <!-- Diisi otomatis oleh JavaScript -->
+          <p class="pantun-line">Pagi hari menyeduh <strong class="glow-gold">kopi</strong>,</p>
+          <p class="pantun-line">aromanya harum bikin <strong class="glow-gold">bahagia</strong>.</p>
+          <p class="pantun-line">Jangan mau kalau cuma <strong class="glow-cyan">bermimpi</strong>,</p>
+          <p class="pantun-line">saatnya bersinar bersama <strong class="glow-cyan">Institut Asia!</strong></p>
         </div>
       </div>
     </div>
@@ -873,30 +881,40 @@
   );
 
   // =========================================================
-  // LOGIKA ROTASI PANTUN ACAK (Setiap 20 Detik)
+  // JAM REALTIME (Dijalankan langsung)
+  // =========================================================
+  const hariList = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  const bulanList = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+
+  function updateClock() {
+    try {
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2,'0');
+      const mm = String(now.getMinutes()).padStart(2,'0');
+      const ss = String(now.getSeconds()).padStart(2,'0');
+      const timeEl = document.getElementById('clockTime');
+      const dateEl = document.getElementById('clockDate');
+      if (timeEl) timeEl.innerText = hh + ':' + mm + ':' + ss;
+      if (dateEl) {
+        dateEl.innerText = hariList[now.getDay()] + ', ' + now.getDate() + ' ' + bulanList[now.getMonth()] + ' ' + now.getFullYear();
+      }
+    } catch(e) {
+      console.error(e);
+    }
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // =========================================================
+  // ROTASI PANTUN ACAK (Setiap 20 Detik)
   // =========================================================
   const PANTUN_LIST = [
-    `
-      <p class="pantun-line">Pagi hari menyeduh <strong class="glow-gold">kopi</strong>,</p>
-      <p class="pantun-line">aromanya harum bikin <strong class="glow-gold">bahagia</strong>.</p>
-      <p class="pantun-line">Jangan mau kalau cuma <strong class="glow-cyan">bermimpi</strong>,</p>
-      <p class="pantun-line">saatnya bersinar bersama <strong class="glow-cyan">Institut Asia!</strong></p>
-    `,
-    `
-      <p class="pantun-line">Dingin-dingin enaknya makan <strong class="glow-gold">ketan</strong>,</p>
-      <p class="pantun-line">sambil melihat pemandangan <strong class="glow-gold">kota</strong>.</p>
-      <p class="pantun-line">Biar kamu nggak ketinggalan <strong class="glow-cyan">zaman</strong>,</p>
-      <p class="pantun-line">yuk, berkembang bersama <strong class="glow-cyan">Institut Asia!</strong></p>
-    `,
-    `
-      <p class="pantun-line">Ke Kayutangan naik <strong class="glow-gold">skuter</strong>,</p>
-      <p class="pantun-line">mampir ngopi sambil <strong class="glow-gold">bercanda</strong>.</p>
-      <p class="pantun-line">Dari peserta jadi calon <strong class="glow-cyan">master</strong>,</p>
-      <p class="pantun-line">mulainya ya, dari <strong class="glow-cyan">Institut Asia!</strong></p>
-    `
+    '<p class="pantun-line">Pagi hari menyeduh <strong class="glow-gold">kopi</strong>,</p><p class="pantun-line">aromanya harum bikin <strong class="glow-gold">bahagia</strong>.</p><p class="pantun-line">Jangan mau kalau cuma <strong class="glow-cyan">bermimpi</strong>,</p><p class="pantun-line">saatnya bersinar bersama <strong class="glow-cyan">Institut Asia!</strong></p>',
+    '<p class="pantun-line">Dingin-dingin enaknya makan <strong class="glow-gold">ketan</strong>,</p><p class="pantun-line">sambil melihat pemandangan <strong class="glow-gold">kota</strong>.</p><p class="pantun-line">Biar kamu nggak ketinggalan <strong class="glow-cyan">zaman</strong>,</p><p class="pantun-line">yuk, berkembang bersama <strong class="glow-cyan">Institut Asia!</strong></p>',
+    '<p class="pantun-line">Ke Kayutangan naik <strong class="glow-gold">skuter</strong>,</p><p class="pantun-line">mampir ngopi sambil <strong class="glow-gold">bercanda</strong>.</p><p class="pantun-line">Dari peserta jadi calon <strong class="glow-cyan">master</strong>,</p><p class="pantun-line">mulainya ya, dari <strong class="glow-cyan">Institut Asia!</strong></p>'
   ];
 
-  let currentPantunIndex = -1;
+  let currentPantunIndex = 0;
 
   function switchPantunRandom() {
     const container = document.getElementById('pantunContainer');
@@ -915,71 +933,71 @@
       container.classList.remove('pantun-fade-out');
     }, 400);
   }
-
-  switchPantunRandom();
   setInterval(switchPantunRandom, 20000);
 
   // =========================================================
-  // LOGIKA FETCH DATA APPS SCRIPT
+  // FETCH DATA & RENDER
   // =========================================================
-  function refresh() {
-    fetch(APPS_SCRIPT_URL + '?action=getdata')
-      .then(function (r) {
-        if (!r.ok) throw new Error('HTTP status ' + r.status);
-        return r.text();
-      })
-      .then(function (text) {
-        try {
-          const data = JSON.parse(text);
-          render(data);
-        } catch (err) {
-          console.warn('Apps Script mengembalikan respons HTML/bukan JSON:', text);
-        }
-      })
-      .catch(function (err) {
-        console.error('Koneksi tertunda:', err);
-      });
-  }
-
   let lastKnownCount = -1;
   let lastTopSignature = '';
-
   let allAttendeesList = [];
   let isPinned = false;
   let pinnedRecord = null;
 
-  function showParticipant(record) {
-    document.getElementById('lastName').innerText = record.nama;
-    document.getElementById('greetName').innerText = record.nama.toUpperCase();
+  function refresh() {
+    fetch(APPS_SCRIPT_URL + '?action=getdata')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data) render(data);
+      })
+      .catch(function(err) {
+        console.warn('Fetch pending:', err);
+      });
+  }
 
+  function showParticipant(record) {
+    const lastEl = document.getElementById('lastName');
+    const greetEl = document.getElementById('greetName');
     const photoEl = document.getElementById('lastPhoto');
     const badgeEl = document.getElementById('photoLoadingBadge');
 
-    if (record.foto) {
-      photoEl.onerror = function () { photoEl.src = DEFAULT_AVATAR; };
-      photoEl.src = record.foto;
-      badgeEl.classList.remove('show');
-    } else {
-      photoEl.src = DEFAULT_AVATAR;
-      badgeEl.classList.add('show');
+    if (lastEl) lastEl.innerText = record.nama || 'Peserta';
+    if (greetEl) greetEl.innerText = (record.nama || 'PESERTA').toUpperCase();
+
+    if (photoEl) {
+      if (record.foto) {
+        photoEl.onerror = function() { photoEl.src = DEFAULT_AVATAR; };
+        photoEl.src = record.foto;
+        if (badgeEl) badgeEl.classList.remove('show');
+      } else {
+        photoEl.src = DEFAULT_AVATAR;
+        if (badgeEl) badgeEl.classList.add('show');
+      }
     }
   }
 
   function showEmptyState() {
-    document.getElementById('lastName').innerText = 'Menunggu Peserta...';
-    document.getElementById('greetName').innerText = 'PESERTA';
-    document.getElementById('lastPhoto').src = DEFAULT_AVATAR;
-    document.getElementById('photoLoadingBadge').classList.remove('show');
+    const lastEl = document.getElementById('lastName');
+    const greetEl = document.getElementById('greetName');
+    const photoEl = document.getElementById('lastPhoto');
+    const badgeEl = document.getElementById('photoLoadingBadge');
+
+    if (lastEl) lastEl.innerText = 'Menunggu Peserta...';
+    if (greetEl) greetEl.innerText = 'PESERTA';
+    if (photoEl) photoEl.src = DEFAULT_AVATAR;
+    if (badgeEl) badgeEl.classList.remove('show');
   }
 
   function unpinDisplay() {
     isPinned = false;
     pinnedRecord = null;
-    document.getElementById('pinnedBadge').classList.remove('show');
+    const badge = document.getElementById('pinnedBadge');
+    if (badge) badge.classList.remove('show');
   }
 
   function render(data) {
-    document.getElementById('status').innerText = '';
+    if (!data || !data.list) return;
+
     allAttendeesList = data.list;
 
     if (isPinned && data.hadir > lastKnownCount && lastKnownCount !== -1) {
@@ -1009,17 +1027,21 @@
 
     if (data.hadir !== lastKnownCount) {
       const listEl = document.getElementById('list');
-      listEl.innerHTML = '';
-      const urutKedatangan = data.list.slice().reverse();
-      urutKedatangan.forEach(function (p) {
-        const span = document.createElement('span');
-        span.className = 'chip';
-        span.innerText = p.nama;
-        listEl.appendChild(span);
-      });
+      if (listEl) {
+        listEl.innerHTML = '';
+        const urutKedatangan = data.list.slice().reverse();
+        urutKedatangan.forEach(function(p) {
+          const span = document.createElement('span');
+          span.className = 'chip';
+          span.innerText = p.nama;
+          listEl.appendChild(span);
+        });
+      }
 
-      document.getElementById('counter').innerText =
-        'Peserta sudah datang : ' + data.hadir + ' / ' + data.total;
+      const counterEl = document.getElementById('counter');
+      if (counterEl) {
+        counterEl.innerText = 'Peserta sudah datang : ' + (data.hadir || 0) + ' / ' + (data.total || 0);
+      }
 
       lastKnownCount = data.hadir;
       setupSeamlessLoop();
@@ -1029,70 +1051,62 @@
   refresh();
   setInterval(refresh, 3000);
 
-  // Pencarian
-  const searchInputEl   = document.getElementById('searchInput');
+  // =========================================================
+  // PENCARIAN PESERTA
+  // =========================================================
+  const searchInputEl = document.getElementById('searchInput');
   const searchResultsEl = document.getElementById('searchResults');
-  const pinnedBadgeEl   = document.getElementById('pinnedBadge');
-  const btnUnpinEl      = document.getElementById('btnUnpin');
+  const pinnedBadgeEl = document.getElementById('pinnedBadge');
+  const btnUnpinEl = document.getElementById('btnUnpin');
 
-  searchInputEl.addEventListener('input', function () {
-    const q = searchInputEl.value.trim().toLowerCase();
-    searchResultsEl.innerHTML = '';
+  if (searchInputEl) {
+    searchInputEl.addEventListener('input', function() {
+      const q = searchInputEl.value.trim().toLowerCase();
+      searchResultsEl.innerHTML = '';
 
-    if (!q) return;
+      if (!q) return;
 
-    const matches = allAttendeesList
-      .filter(function (p) { return p.nama.toLowerCase().indexOf(q) !== -1; })
-      .slice(0, 8);
+      const matches = allAttendeesList
+        .filter(function(p) { return p.nama && p.nama.toLowerCase().indexOf(q) !== -1; })
+        .slice(0, 8);
 
-    if (matches.length === 0) {
-      const empty = document.createElement('div');
-      empty.className = 'searchNoResult';
-      empty.innerText = 'Tidak ditemukan.';
-      searchResultsEl.appendChild(empty);
-      return;
-    }
+      if (matches.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'searchNoResult';
+        empty.innerText = 'Tidak ditemukan.';
+        searchResultsEl.appendChild(empty);
+        return;
+      }
 
-    matches.forEach(function (p) {
-      const item = document.createElement('div');
-      item.className = 'searchResultItem';
-      item.innerText = p.nama;
-      item.addEventListener('click', function () {
-        isPinned = true;
-        pinnedRecord = p;
-        showParticipant(p);
-        lastTopSignature = 'PIN:' + p.nama + '|' + p.foto + '|' + p.waktu;
+      matches.forEach(function(p) {
+        const item = document.createElement('div');
+        item.className = 'searchResultItem';
+        item.innerText = p.nama;
+        item.addEventListener('click', function() {
+          isPinned = true;
+          pinnedRecord = p;
+          showParticipant(p);
+          lastTopSignature = 'PIN:' + p.nama + '|' + p.foto + '|' + p.waktu;
 
-        pinnedBadgeEl.classList.add('show');
-        searchResultsEl.innerHTML = '';
-        searchInputEl.value = '';
+          if (pinnedBadgeEl) pinnedBadgeEl.classList.add('show');
+          searchResultsEl.innerHTML = '';
+          searchInputEl.value = '';
+        });
+        searchResultsEl.appendChild(item);
       });
-      searchResultsEl.appendChild(item);
     });
-  });
-
-  btnUnpinEl.addEventListener('click', function () {
-    unpinDisplay();
-    lastTopSignature = '';
-  });
-
-  // Jam Digital
-  const hariList = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-  const bulanList = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-
-  function updateClock() {
-    const now = new Date();
-    const hh = String(now.getHours()).padStart(2,'0');
-    const mm = String(now.getMinutes()).padStart(2,'0');
-    const ss = String(now.getSeconds()).padStart(2,'0');
-    document.getElementById('clockTime').innerText = hh + ':' + mm + ':' + ss;
-    document.getElementById('clockDate').innerText =
-      hariList[now.getDay()] + ', ' + now.getDate() + ' ' + bulanList[now.getMonth()] + ' ' + now.getFullYear();
   }
-  updateClock();
-  setInterval(updateClock, 1000);
 
-  // Auto-scroll loop mulus
+  if (btnUnpinEl) {
+    btnUnpinEl.addEventListener('click', function() {
+      unpinDisplay();
+      lastTopSignature = '';
+    });
+  }
+
+  // =========================================================
+  // AUTO-SCROLL SEAMLESS LOOP
+  // =========================================================
   const scrollEl = document.getElementById('listScroll');
   const listElForLoop = document.getElementById('list');
   const SCROLL_SPEED = 0.45;
@@ -1100,6 +1114,7 @@
   let loopActive = false;
 
   function setupSeamlessLoop() {
+    if (!scrollEl || !listElForLoop) return;
     scrollEl.scrollTop = 0;
     
     const singleSetHeight = listElForLoop.scrollHeight;
@@ -1116,7 +1131,7 @@
   }
 
   function autoScrollTick() {
-    if (!loopActive || loopHeight <= 0) return;
+    if (!loopActive || loopHeight <= 0 || !scrollEl) return;
     scrollEl.scrollTop += SCROLL_SPEED;
     if (scrollEl.scrollTop >= loopHeight) {
       scrollEl.scrollTop -= loopHeight;
