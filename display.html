@@ -200,7 +200,7 @@
     border-left: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  /* MAIN CONTENT: 3-KOLOM (PROPORSI DISESUAIKAN AGAR SAPAAN MAKSIMAL) */
+  /* MAIN CONTENT: 3-KOLOM */
   .main-content {
     flex: 1 1 auto;
     min-height: 0;
@@ -339,16 +339,14 @@
     width: 100%;
   }
 
-  /* =========================================================
-     KOLOM SAPAAN: PADAT, PROPORSIONAL & LEBIH BESAR
-     ========================================================= */
+  /* KOLOM SAPAAN */
   .greeting-col {
     background: linear-gradient(145deg, rgba(14, 23, 52, 0.92) 0%, rgba(8, 12, 28, 0.88) 100%);
     border-radius: 26px;
     padding: 3vh 2.5vw 2.4vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Membuat isi terdistribusi merata dari atas ke bawah */
+    justify-content: space-between;
     align-items: flex-start;
     text-align: left;
     box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -447,7 +445,6 @@
     padding: 0.5vh 0;
   }
 
-  /* TEKS SAPAAN JAUH LEBIH BESAR */
   .greet-line1 {
     font-size: clamp(22px, 3.2vh, 34px);
     font-weight: 700;
@@ -456,7 +453,6 @@
     line-height: 1.15;
   }
 
-  /* Nama Peserta Sangat Menonjol */
   .greet-name {
     font-size: clamp(42px, 7vh, 78px);
     font-weight: 900;
@@ -495,7 +491,7 @@
     text-shadow: 0 0 14px var(--cyan-glow);
   }
 
-  /* PANTUN RATA TENGAH MENGISI BAGIAN BAWAH DENGAN RAPI */
+  /* PANTUN AREA */
   .pantun-area {
     position: relative;
     z-index: 2;
@@ -811,19 +807,16 @@
 
     <!-- SISI TENGAH: SAPAAN BESAR, PADAT, & PANTUN RATA TENGAH -->
     <div class="greeting-col">
-      <!-- Cyber HUD Corner Accents -->
       <span class="cyber-hud tl"></span>
       <span class="cyber-hud tr"></span>
       <span class="cyber-hud bl"></span>
       <span class="cyber-hud br"></span>
 
-      <!-- Status Terminal Tag -->
       <div class="tech-badge">
         <span class="tech-badge-dot"></span>
         Welcome Terminal
       </div>
 
-      <!-- Area Teks Sapaan Utama (Mengisi Ruang Secara Vertikal) -->
       <div class="greet-content-wrap">
         <p class="greet-line1">Hallo kak,</p>
         <div class="greet-name"><span id="greetName">PESERTA</span></div>
@@ -831,10 +824,12 @@
         <p class="greet-line3">Tempatnya <span class="highlight">Kuliah Asik Kekinian</span></p>
       </div>
 
-      <!-- PANTUN DISPLAY RATA TENGAH (BAGIAN BAWAH BOX) -->
       <div class="pantun-area">
         <div id="pantunContainer">
-          <!-- Diisi otomatis oleh JavaScript -->
+          <p class="pantun-line">Pagi hari menyeduh <strong class="glow-gold">kopi</strong>,</p>
+          <p class="pantun-line">aromanya harum bikin <strong class="glow-gold">bahagia</strong>.</p>
+          <p class="pantun-line">Jangan mau kalau cuma <strong class="glow-cyan">bermimpi</strong>,</p>
+          <p class="pantun-line">saatnya bersinar bersama <strong class="glow-cyan">Institut Asia!</strong></p>
         </div>
       </div>
     </div>
@@ -875,35 +870,45 @@
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">' +
     '<rect width="200" height="200" fill="#080c1d"/>' +
     '<circle cx="100" cy="72" r="38" fill="#1e293b"/>' +
-    '<path d="M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z' fill="#1e293b"/>' +
+    '<path d="M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z" fill="#1e293b"/>' +
     '</svg>'
   );
 
   // =========================================================
-  // LOGIKA ROTASI PANTUN ACAK (Setiap 20 Detik)
+  // JAM REALTIME (Dijalankan langsung)
+  // =========================================================
+  const hariList = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  const bulanList = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+
+  function updateClock() {
+    try {
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2,'0');
+      const mm = String(now.getMinutes()).padStart(2,'0');
+      const ss = String(now.getSeconds()).padStart(2,'0');
+      const timeEl = document.getElementById('clockTime');
+      const dateEl = document.getElementById('clockDate');
+      if (timeEl) timeEl.innerText = hh + ':' + mm + ':' + ss;
+      if (dateEl) {
+        dateEl.innerText = hariList[now.getDay()] + ', ' + now.getDate() + ' ' + bulanList[now.getMonth()] + ' ' + now.getFullYear();
+      }
+    } catch(e) {
+      console.error(e);
+    }
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // =========================================================
+  // ROTASI PANTUN ACAK (Setiap 20 Detik)
   // =========================================================
   const PANTUN_LIST = [
-    `
-      <p class="pantun-line">Pagi hari menyeduh <strong class="glow-gold">kopi</strong>,</p>
-      <p class="pantun-line">aromanya harum bikin <strong class="glow-gold">bahagia</strong>.</p>
-      <p class="pantun-line">Jangan mau kalau cuma <strong class="glow-cyan">bermimpi</strong>,</p>
-      <p class="pantun-line">saatnya bersinar bersama <strong class="glow-cyan">Institut Asia!</strong></p>
-    `,
-    `
-      <p class="pantun-line">Dingin-dingin enaknya makan <strong class="glow-gold">ketan</strong>,</p>
-      <p class="pantun-line">sambil melihat pemandangan <strong class="glow-gold">kota</strong>.</p>
-      <p class="pantun-line">Biar kamu nggak ketinggalan <strong class="glow-cyan">zaman</strong>,</p>
-      <p class="pantun-line">yuk, berkembang bersama <strong class="glow-cyan">Institut Asia!</strong></p>
-    `,
-    `
-      <p class="pantun-line">Ke Kayutangan naik <strong class="glow-gold">skuter</strong>,</p>
-      <p class="pantun-line">mampir ngopi sambil <strong class="glow-gold">bercanda</strong>.</p>
-      <p class="pantun-line">Dari peserta jadi calon <strong class="glow-cyan">master</strong>,</p>
-      <p class="pantun-line">mulainya ya, dari <strong class="glow-cyan">Institut Asia!</strong></p>
-    `
+    '<p class="pantun-line">Pagi hari menyeduh <strong class="glow-gold">kopi</strong>,</p><p class="pantun-line">aromanya harum bikin <strong class="glow-gold">bahagia</strong>.</p><p class="pantun-line">Jangan mau kalau cuma <strong class="glow-cyan">bermimpi</strong>,</p><p class="pantun-line">saatnya bersinar bersama <strong class="glow-cyan">Institut Asia!</strong></p>',
+    '<p class="pantun-line">Dingin-dingin enaknya makan <strong class="glow-gold">ketan</strong>,</p><p class="pantun-line">sambil melihat pemandangan <strong class="glow-gold">kota</strong>.</p><p class="pantun-line">Biar kamu nggak ketinggalan <strong class="glow-cyan">zaman</strong>,</p><p class="pantun-line">yuk, berkembang bersama <strong class="glow-cyan">Institut Asia!</strong></p>',
+    '<p class="pantun-line">Ke Kayutangan naik <strong class="glow-gold">skuter</strong>,</p><p class="pantun-line">mampir ngopi sambil <strong class="glow-gold">bercanda</strong>.</p><p class="pantun-line">Dari peserta jadi calon <strong class="glow-cyan">master</strong>,</p><p class="pantun-line">mulainya ya, dari <strong class="glow-cyan">Institut Asia!</strong></p>'
   ];
 
-  let currentPantunIndex = -1;
+  let currentPantunIndex = 0;
 
   function switchPantunRandom() {
     const container = document.getElementById('pantunContainer');
@@ -916,79 +921,77 @@
 
     currentPantunIndex = nextIndex;
 
-    // Transisi fade out -> ubah isi -> fade in
     container.classList.add('pantun-fade-out');
     setTimeout(function() {
       container.innerHTML = PANTUN_LIST[nextIndex];
       container.classList.remove('pantun-fade-out');
     }, 400);
   }
-
-  // Tampilkan pantun pertama langsung, lalu berganti acak tiap 20 detik
-  switchPantunRandom();
   setInterval(switchPantunRandom, 20000);
 
   // =========================================================
-  // LOGIKA FETCH DATA APPS SCRIPT
+  // FETCH DATA & RENDER
   // =========================================================
-  function refresh() {
-    fetch(APPS_SCRIPT_URL + '?action=getdata')
-      .then(function (r) {
-        if (!r.ok) throw new Error('HTTP status ' + r.status);
-        return r.text();
-      })
-      .then(function (text) {
-        try {
-          const data = JSON.parse(text);
-          render(data);
-        } catch (err) {
-          console.warn('Apps Script mengembalikan respons HTML/bukan JSON:', text);
-        }
-      })
-      .catch(function (err) {
-        console.error('Koneksi tertunda:', err);
-      });
-  }
-
   let lastKnownCount = -1;
   let lastTopSignature = '';
-
   let allAttendeesList = [];
   let isPinned = false;
   let pinnedRecord = null;
 
-  function showParticipant(record) {
-    document.getElementById('lastName').innerText = record.nama;
-    document.getElementById('greetName').innerText = record.nama.toUpperCase();
+  function refresh() {
+    fetch(APPS_SCRIPT_URL + '?action=getdata')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data) render(data);
+      })
+      .catch(function(err) {
+        console.warn('Fetch pending:', err);
+      });
+  }
 
+  function showParticipant(record) {
+    const lastEl = document.getElementById('lastName');
+    const greetEl = document.getElementById('greetName');
     const photoEl = document.getElementById('lastPhoto');
     const badgeEl = document.getElementById('photoLoadingBadge');
 
-    if (record.foto) {
-      photoEl.onerror = function () { photoEl.src = DEFAULT_AVATAR; };
-      photoEl.src = record.foto;
-      badgeEl.classList.remove('show');
-    } else {
-      photoEl.src = DEFAULT_AVATAR;
-      badgeEl.classList.add('show');
+    if (lastEl) lastEl.innerText = record.nama || 'Peserta';
+    if (greetEl) greetEl.innerText = (record.nama || 'PESERTA').toUpperCase();
+
+    if (photoEl) {
+      if (record.foto) {
+        photoEl.onerror = function() { photoEl.src = DEFAULT_AVATAR; };
+        photoEl.src = record.foto;
+        if (badgeEl) badgeEl.classList.remove('show');
+      } else {
+        photoEl.src = DEFAULT_AVATAR;
+        if (badgeEl) badgeEl.classList.add('show');
+      }
     }
   }
 
   function showEmptyState() {
-    document.getElementById('lastName').innerText = 'Menunggu Peserta...';
-    document.getElementById('greetName').innerText = 'PESERTA';
-    document.getElementById('lastPhoto').src = DEFAULT_AVATAR;
-    document.getElementById('photoLoadingBadge').classList.remove('show');
+    const lastEl = document.getElementById('lastName');
+    const greetEl = document.getElementById('greetName');
+    const photoEl = document.getElementById('lastPhoto');
+    const badgeEl = document.getElementById('photoLoadingBadge');
+
+    if (lastEl) lastEl.innerText = 'Menunggu Peserta...';
+    if (greetEl) greetEl.innerText = 'PESERTA';
+    if (photoEl) photoEl.src = DEFAULT_AVATAR;
+    if (badgeEl) badgeEl.classList.remove('show');
   }
 
   function unpinDisplay() {
     isPinned = false;
     pinnedRecord = null;
-    document.getElementById('pinnedBadge').classList.remove('show');
+    const badge = document.getElementById('pinnedBadge');
+    if (badge) badge.classList.remove('show');
   }
 
   function render(data) {
-    document.getElementById('status').innerText = '';
+    if (!data || !data.list) return;
+
     allAttendeesList = data.list;
 
     if (isPinned && data.hadir > lastKnownCount && lastKnownCount !== -1) {
@@ -1016,23 +1019,25 @@
       lastTopSignature = 'KOSONG';
     }
 
-    // Perbarui daftar kehadiran
     if (data.hadir !== lastKnownCount) {
       const listEl = document.getElementById('list');
-      listEl.innerHTML = '';
-      const urutKedatangan = data.list.slice().reverse();
-      urutKedatangan.forEach(function (p) {
-        const span = document.createElement('span');
-        span.className = 'chip';
-        span.innerText = p.nama;
-        listEl.appendChild(span);
-      });
+      if (listEl) {
+        listEl.innerHTML = '';
+        const urutKedatangan = data.list.slice().reverse();
+        urutKedatangan.forEach(function(p) {
+          const span = document.createElement('span');
+          span.className = 'chip';
+          span.innerText = p.nama;
+          listEl.appendChild(span);
+        });
+      }
 
-      document.getElementById('counter').innerText =
-        'Peserta sudah datang : ' + data.hadir + ' / ' + data.total;
+      const counterEl = document.getElementById('counter');
+      if (counterEl) {
+        counterEl.innerText = 'Peserta sudah datang : ' + (data.hadir || 0) + ' / ' + (data.total || 0);
+      }
 
       lastKnownCount = data.hadir;
-
       setupSeamlessLoop();
     }
   }
@@ -1040,70 +1045,62 @@
   refresh();
   setInterval(refresh, 3000);
 
-  // Pencarian
-  const searchInputEl   = document.getElementById('searchInput');
+  // =========================================================
+  // PENCARIAN PESERTA
+  // =========================================================
+  const searchInputEl = document.getElementById('searchInput');
   const searchResultsEl = document.getElementById('searchResults');
-  const pinnedBadgeEl   = document.getElementById('pinnedBadge');
-  const btnUnpinEl      = document.getElementById('btnUnpin');
+  const pinnedBadgeEl = document.getElementById('pinnedBadge');
+  const btnUnpinEl = document.getElementById('btnUnpin');
 
-  searchInputEl.addEventListener('input', function () {
-    const q = searchInputEl.value.trim().toLowerCase();
-    searchResultsEl.innerHTML = '';
+  if (searchInputEl) {
+    searchInputEl.addEventListener('input', function() {
+      const q = searchInputEl.value.trim().toLowerCase();
+      searchResultsEl.innerHTML = '';
 
-    if (!q) return;
+      if (!q) return;
 
-    const matches = allAttendeesList
-      .filter(function (p) { return p.nama.toLowerCase().indexOf(q) !== -1; })
-      .slice(0, 8);
+      const matches = allAttendeesList
+        .filter(function(p) { return p.nama && p.nama.toLowerCase().indexOf(q) !== -1; })
+        .slice(0, 8);
 
-    if (matches.length === 0) {
-      const empty = document.createElement('div');
-      empty.className = 'searchNoResult';
-      empty.innerText = 'Tidak ditemukan.';
-      searchResultsEl.appendChild(empty);
-      return;
-    }
+      if (matches.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'searchNoResult';
+        empty.innerText = 'Tidak ditemukan.';
+        searchResultsEl.appendChild(empty);
+        return;
+      }
 
-    matches.forEach(function (p) {
-      const item = document.createElement('div');
-      item.className = 'searchResultItem';
-      item.innerText = p.nama;
-      item.addEventListener('click', function () {
-        isPinned = true;
-        pinnedRecord = p;
-        showParticipant(p);
-        lastTopSignature = 'PIN:' + p.nama + '|' + p.foto + '|' + p.waktu;
+      matches.forEach(function(p) {
+        const item = document.createElement('div');
+        item.className = 'searchResultItem';
+        item.innerText = p.nama;
+        item.addEventListener('click', function() {
+          isPinned = true;
+          pinnedRecord = p;
+          showParticipant(p);
+          lastTopSignature = 'PIN:' + p.nama + '|' + p.foto + '|' + p.waktu;
 
-        pinnedBadgeEl.classList.add('show');
-        searchResultsEl.innerHTML = '';
-        searchInputEl.value = '';
+          if (pinnedBadgeEl) pinnedBadgeEl.classList.add('show');
+          searchResultsEl.innerHTML = '';
+          searchInputEl.value = '';
+        });
+        searchResultsEl.appendChild(item);
       });
-      searchResultsEl.appendChild(item);
     });
-  });
-
-  btnUnpinEl.addEventListener('click', function () {
-    unpinDisplay();
-    lastTopSignature = '';
-  });
-
-  // Jam Digital
-  const hariList = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-  const bulanList = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-
-  function updateClock() {
-    const now = new Date();
-    const hh = String(now.getHours()).padStart(2,'0');
-    const mm = String(now.getMinutes()).padStart(2,'0');
-    const ss = String(now.getSeconds()).padStart(2,'0');
-    document.getElementById('clockTime').innerText = hh + ':' + mm + ':' + ss;
-    document.getElementById('clockDate').innerText =
-      hariList[now.getDay()] + ', ' + now.getDate() + ' ' + bulanList[now.getMonth()] + ' ' + now.getFullYear();
   }
-  updateClock();
-  setInterval(updateClock, 1000);
 
-  // Auto-scroll loop mulus
+  if (btnUnpinEl) {
+    btnUnpinEl.addEventListener('click', function() {
+      unpinDisplay();
+      lastTopSignature = '';
+    });
+  }
+
+  // =========================================================
+  // AUTO-SCROLL SEAMLESS LOOP
+  // =========================================================
   const scrollEl = document.getElementById('listScroll');
   const listElForLoop = document.getElementById('list');
   const SCROLL_SPEED = 0.45;
@@ -1111,6 +1108,7 @@
   let loopActive = false;
 
   function setupSeamlessLoop() {
+    if (!scrollEl || !listElForLoop) return;
     scrollEl.scrollTop = 0;
     
     const singleSetHeight = listElForLoop.scrollHeight;
@@ -1127,7 +1125,7 @@
   }
 
   function autoScrollTick() {
-    if (!loopActive || loopHeight <= 0) return;
+    if (!loopActive || loopHeight <= 0 || !scrollEl) return;
     scrollEl.scrollTop += SCROLL_SPEED;
     if (scrollEl.scrollTop >= loopHeight) {
       scrollEl.scrollTop -= loopHeight;
