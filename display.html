@@ -200,7 +200,7 @@
     border-left: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  /* MAIN CONTENT: 3-KOLOM */
+  /* MAIN CONTENT */
   .main-content {
     flex: 1 1 auto;
     min-height: 0;
@@ -339,13 +339,13 @@
     width: 100%;
   }
 
-  /* KOLOM SAPAAN & PANTUN (DIPERBESAR & LEBIH DOMINAN) */
+  /* KOLOM SAPAAN & PANTUN */
   .greeting-col {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     backdrop-filter: blur(20px);
     border-radius: 26px;
-    padding: 2.8vh 2.4vw;
+    padding: 3vh 2.4vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -366,7 +366,7 @@
     pointer-events: none;
   }
 
-  /* TEKS SAPAAN UKURAN BESAR */
+  /* TEKS SAPAAN BESAR */
   .greet-line1 {
     font-size: clamp(18px, 2.7vh, 30px);
     font-weight: 700;
@@ -406,19 +406,34 @@
     text-shadow: 0 0 14px var(--cyan-glow);
   }
 
-  /* PANTUN TANPA BOX (CLEAN, FLOATING, PROPORSIONAL) */
+  /* PANTUN RATA TENGAH & POSISI AGAK KEBAWAH */
   .pantun-area {
-    margin-top: 2vh;
-    padding-top: 1.6vh;
+    margin-top: 3.5vh;
+    padding-top: 2vh;
     width: 100%;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     min-height: 9.5vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    text-align: center;
   }
+  /* Garis aksen pemisah di tengah */
+  .pantun-area::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(245, 185, 66, 0.45), rgba(77, 232, 255, 0.45), transparent);
+  }
+
   #pantunContainer {
+    width: 100%;
+    text-align: center;
     transition: opacity 0.4s ease, transform 0.4s ease;
     opacity: 1;
     transform: translateY(0);
@@ -429,11 +444,12 @@
   }
   .pantun-line {
     font-size: clamp(12.5px, 1.75vh, 17px);
-    line-height: 1.5;
+    line-height: 1.55;
     color: #e2e8f0;
     font-style: italic;
     font-weight: 500;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.3px;
+    text-align: center;
   }
   .pantun-line strong {
     font-weight: 700;
@@ -441,11 +457,11 @@
   }
   .pantun-line .glow-gold {
     color: var(--gold-bright);
-    text-shadow: 0 0 8px rgba(245, 185, 66, 0.4);
+    text-shadow: 0 0 10px rgba(245, 185, 66, 0.45);
   }
   .pantun-line .glow-cyan {
     color: var(--cyan);
-    text-shadow: 0 0 8px rgba(77, 232, 255, 0.4);
+    text-shadow: 0 0 10px rgba(77, 232, 255, 0.45);
   }
 
   /* KOLOM DAFTAR HADIR */
@@ -704,14 +720,14 @@
       <div id="lastName">Menunggu Peserta...</div>
     </div>
 
-    <!-- SISI TENGAH: SAPAAN BESAR & PANTUN BERSIH TANPA BOX -->
+    <!-- SISI TENGAH: SAPAAN & PANTUN RATA TENGAH -->
     <div class="greeting-col">
       <p class="greet-line1">Hallo kak,</p>
       <div class="greet-name"><span id="greetName">PESERTA</span></div>
       <p class="greet-line2">Selamat datang di <span class="highlight">Institut Asia Malang</span></p>
       <p class="greet-line3">Tempatnya <span class="highlight">Kuliah Asik Kekinian</span></p>
 
-      <!-- PANTUN TANPA BOX (CLEAN DISPLAY) -->
+      <!-- PANTUN DISPLAY RATA TENGAH -->
       <div class="pantun-area">
         <div id="pantunContainer">
           <!-- Diisi otomatis oleh JavaScript -->
