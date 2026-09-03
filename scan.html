@@ -4,350 +4,541 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Check-in - Trial Class Institut Asia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 <style>
-  * { box-sizing: border-box; }
-  body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #0d0d1a;
-    color: #fff;
-    margin: 0;
-    padding: 16px;
-    text-align: center;
-  }
-  h2 { color: #ffd700; margin-bottom: 4px; font-size: 20px; }
-  p.sub { margin-top: 0; color: #aaa; font-size: 13px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --gold: #f6c453;
+    --gold-2: #ffe3a1;
+    --cyan: #63e2ff;
+    --cyan-soft: #b9f0ff;
+    --ink: #eef2ff;
+    --muted: #97a1c4;
+    --line: rgba(255,255,255,0.10);
+    --glass: rgba(14,20,46,0.66);
+  }
+
+  body {
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 24px 16px 28px;
+    position: relative;
+    background:
+      radial-gradient(700px 420px at 12% -4%, rgba(99,226,255,0.14), transparent 60%),
+      radial-gradient(600px 420px at 96% 4%, rgba(246,196,83,0.12), transparent 60%),
+      radial-gradient(700px 500px at 50% 110%, rgba(99,226,255,0.06), transparent 60%),
+      linear-gradient(160deg, #04060f 0%, #0a0f24 55%, #101736 100%);
+  }
+
+  /* grid halus yang memudar */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 18%, rgba(0,0,0,0.8), transparent 75%);
+            mask-image: radial-gradient(ellipse at 50% 18%, rgba(0,0,0,0.8), transparent 75%);
+    pointer-events: none;
+  }
+
+  .shell {
+    position: relative;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .brand-badge {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    color: #0a0f24;
+    background: linear-gradient(160deg, var(--gold-2), var(--gold));
+    box-shadow: 0 0 24px rgba(246,196,83,0.45);
+  }
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  header p.sub {
+    margin-top: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--cyan-soft);
+  }
+
+  /* ===== KARTU UTAMA ===== */
+  .card {
+    background: var(--glass);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 22px 18px 24px;
+    box-shadow: 0 22px 50px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
+    backdrop-filter: blur(14px);
+  }
+
+  .section-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .section-label::before,
+  .section-label::after {
+    content: "";
+    height: 1px;
+    width: 36px;
+    background: linear-gradient(90deg, transparent, rgba(246,196,83,0.6));
+  }
+  .section-label::after { transform: scaleX(-1); }
+
+  /* ===== QR SCANNER ===== */
   #reader {
     width: 100%;
-    max-width: 420px;
-    margin: 12px auto;
-    border-radius: 12px;
+    border-radius: 18px;
     overflow: hidden;
+    border: 1px solid rgba(99,226,255,0.35);
+    box-shadow: 0 0 30px rgba(99,226,255,0.12), inset 0 0 30px rgba(0,0,0,0.4);
+    background: #000;
   }
-  #result {
-    margin-top: 16px;
-    padding: 18px;
-    border-radius: 12px;
-    font-size: 20px;
-    font-weight: bold;
-    min-height: 30px;
-    background: #1a1a2e;
-    max-width: 420px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .ok  { background: #1e7d32 !important; }
-  .dup { background: #e6a700 !important; color: #000; }
-  .err { background: #c62828 !important; }
+  #reader video { border-radius: 18px; }
 
-  /* ===== Bagian ambil selfie ===== */
+  #result {
+    margin-top: 14px;
+    padding: 16px 14px;
+    border-radius: 14px;
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+    min-height: 24px;
+    background: rgba(10,16,38,0.7);
+    border: 1px solid var(--line);
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  #result.ok {
+    background: linear-gradient(160deg, #14532d, #1e7d32);
+    border-color: rgba(55,227,154,0.6);
+    box-shadow: 0 0 24px rgba(55,227,154,0.25);
+  }
+  #result.dup {
+    background: linear-gradient(160deg, #92400e, #e6a700);
+    color: #1a1205;
+    border-color: rgba(246,196,83,0.7);
+  }
+  #result.err {
+    background: linear-gradient(160deg, #7f1d1d, #c62828);
+    border-color: rgba(255,120,120,0.6);
+    box-shadow: 0 0 24px rgba(198,40,40,0.3);
+  }
+
+  /* ===== SESI FOTO (muncul setelah check-in sukses) ===== */
   #photoSection {
     display: none;
-    max-width: 420px;
-    margin: 16px auto 0;
+    text-align: center;
   }
-  #photoSection h3 {
-    color: #7ecbff;
-    font-size: 16px;
-    margin-bottom: 10px;
+  #photoHeading {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--cyan-soft);
+    margin-bottom: 14px;
+  }
+  .photo-frame {
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(99,226,255,0.35);
+    box-shadow: 0 0 26px rgba(99,226,255,0.14), inset 0 0 30px rgba(0,0,0,0.4);
+    background: #000;
+    position: relative;
   }
   #camVideo, #camCanvas, #capturedImg {
     width: 100%;
-    max-width: 360px;
-    border-radius: 16px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 18px;
     background: #000;
   }
   #camCanvas { display: none; }
-  #capturedImg { display: none; object-fit: cover; }
+  #capturedImg { display: none; }
 
   .photo-btn {
     width: 100%;
-    max-width: 360px;
+    max-width: 340px;
     padding: 14px;
     margin-top: 12px;
     border: none;
-    border-radius: 10px;
+    border-radius: 14px;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 700;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 0.5px;
     cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s;
   }
-  .btn-primary   { background: #3ea6ff; color: #fff; }
-  .btn-secondary { background: #2a2a4a; color: #fff; }
-  .btn-success   { background: #1e7d32; color: #fff; }
-  .btn-skip      { background: transparent; color: #888; text-decoration: underline; font-weight: normal; font-size: 13px; padding: 8px; }
+  .photo-btn:active { transform: scale(0.98); }
+  .btn-primary {
+    background: linear-gradient(160deg, #3ea6ff, #2b7fd8);
+    color: #fff;
+    box-shadow: 0 8px 22px rgba(62,166,255,0.3);
+  }
+  .btn-secondary {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    border: 1px solid var(--line);
+  }
+  .btn-success {
+    background: linear-gradient(160deg, #22a05c, #1e7d32);
+    color: #fff;
+    box-shadow: 0 8px 22px rgba(34,160,92,0.3);
+  }
+  .btn-skip {
+    background: transparent;
+    color: var(--muted);
+    text-decoration: underline;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 10px;
+  }
 
   #photoStatus {
-    margin-top: 10px;
+    margin-top: 12px;
     font-size: 14px;
-    color: #aaa;
+    font-weight: 600;
+    color: var(--muted);
+    min-height: 18px;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--muted);
   }
 </style>
 </head>
 <body>
-  <h2>📷 Scan QR Peserta</h2>
-  <p class="sub">Trial Class Institut Asia</p>
+<div class="shell">
 
-  <div id="reader"></div>
-  <div id="result">Memuat...</div>
+  <header>
+    <div class="brand">
+      <div class="brand-badge">IA</div>
+    </div>
+    <h1>Check-in Peserta</h1>
+    <p class="sub">Trial Class Institut Asia Malang</p>
+  </header>
 
-  <!-- Bagian ambil selfie, muncul otomatis setelah check-in berhasil -->
-  <div id="photoSection">
-    <h3 id="photoHeading">📸 Ambil Foto Peserta</h3>
+  <main class="card">
+    <div class="section-label">Scan QR</div>
+    <div id="reader"></div>
+    <div id="result">Memuat...</div>
 
-    <video id="camVideo" autoplay playsinline muted></video>
-    <canvas id="camCanvas"></canvas>
-    <img id="capturedImg" alt="Foto hasil selfie">
+    <!-- Bagian ambil selfie, muncul otomatis setelah check-in berhasil -->
+    <div id="photoSection">
+      <h3 id="photoHeading">📸 Ambil Foto Peserta</h3>
 
-    <button id="btnCapture" class="photo-btn btn-primary">📸 Ambil Foto</button>
-    <button id="btnRetake" class="photo-btn btn-secondary" style="display:none;">🔄 Ambil Ulang</button>
-    <button id="btnUse" class="photo-btn btn-success" style="display:none;">✅ Gunakan Foto Ini</button>
-    <button id="btnSkip" class="photo-btn btn-skip">Lewati, tidak pakai foto</button>
+      <div class="photo-frame">
+        <video id="camVideo" autoplay playsinline muted></video>
+        <canvas id="camCanvas"></canvas>
+        <img id="capturedImg" alt="Foto hasil selfie">
+      </div>
 
-    <div id="photoStatus"></div>
-  </div>
+      <button id="btnCapture" class="photo-btn btn-primary">📸 Ambil Foto</button>
+      <button id="btnRetake" class="photo-btn btn-secondary" style="display:none;">🔄 Ambil Ulang</button>
+      <button id="btnUse" class="photo-btn btn-success" style="display:none;">✅ Gunakan Foto Ini</button>
+      <button id="btnSkip" class="photo-btn btn-skip">Lewati, tidak pakai foto</button>
 
-  <script>
-    // =========================================================
-    // GANTI dengan URL Web App Apps Script kamu (setelah deploy)
-    // =========================================================
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzyD3Rs3MxcRWMfl4HKaIWtaHc2ZvqejhAAYpS8r8Ik4ZalvKHBrLcIUSFN7dGC-MAKOA/exec';
+      <div id="photoStatus"></div>
+    </div>
+  </main>
 
-    const resultEl       = document.getElementById('result');
-    const readerEl       = document.getElementById('reader');
-    const photoSection   = document.getElementById('photoSection');
-    const camVideo       = document.getElementById('camVideo');
-    const camCanvas      = document.getElementById('camCanvas');
-    const capturedImg    = document.getElementById('capturedImg');
-    const btnCapture     = document.getElementById('btnCapture');
-    const btnRetake      = document.getElementById('btnRetake');
-    const btnUse         = document.getElementById('btnUse');
-    const btnSkip        = document.getElementById('btnSkip');
-    const photoStatusEl  = document.getElementById('photoStatus');
-    const photoHeading   = document.getElementById('photoHeading');
+  <footer>Kuliah Asik Kekinian · Institut Teknologi &amp; Bisnis Asia Malang</footer>
 
-    let currentStream = null;
-    let currentIdPeserta = null;
-    let capturedDataUrl = null;
-    let scanner = null; // instance Html5Qrcode, dibuat kalau mode live-scan
+</div>
 
-    function extractId(text) {
-      text = (text || '').trim();
-      try {
-        const url = new URL(text);
-        const idParam = url.searchParams.get('id');
-        if (idParam) return idParam;
-      } catch (e) {
-        // bukan URL, anggap teks mentah adalah ID
-      }
-      return text;
+<script>
+  // =========================================================
+  // GANTI dengan URL Web App Apps Script kamu (setelah deploy)
+  // =========================================================
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzyD3Rs3MxcRWMfl4HKaIWtaHc2ZvqejhAAYpS8r8Ik4ZalvKHBrLcIUSFN7dGC-MAKOA/exec';
+
+  const resultEl       = document.getElementById('result');
+  const readerEl       = document.getElementById('reader');
+  const photoSection   = document.getElementById('photoSection');
+  const camVideo       = document.getElementById('camVideo');
+  const camCanvas      = document.getElementById('camCanvas');
+  const capturedImg    = document.getElementById('capturedImg');
+  const btnCapture     = document.getElementById('btnCapture');
+  const btnRetake      = document.getElementById('btnRetake');
+  const btnUse         = document.getElementById('btnUse');
+  const btnSkip        = document.getElementById('btnSkip');
+  const photoStatusEl  = document.getElementById('photoStatus');
+  const photoHeading   = document.getElementById('photoHeading');
+
+  let currentStream = null;
+  let currentIdPeserta = null;
+  let capturedDataUrl = null;
+  let scanner = null; // instance Html5Qrcode, dibuat kalau mode live-scan
+
+  function extractId(text) {
+    text = (text || '').trim();
+    try {
+      const url = new URL(text);
+      const idParam = url.searchParams.get('id');
+      if (idParam) return idParam;
+    } catch (e) {
+      // bukan URL, anggap teks mentah adalah ID
     }
+    return text;
+  }
 
-    function checkin(id) {
-      resultEl.className = '';
-      resultEl.innerText = 'Memproses...';
-      fetch(APPS_SCRIPT_URL + '?action=checkin&id=' + encodeURIComponent(id))
-        .then(function (r) { return r.json(); })
-        .then(function (res) { showResult(res, id); })
-        .catch(function (err) {
-          resultEl.className = 'err';
-          resultEl.innerText = '✖ Gagal terhubung ke server. Cek koneksi internet.';
-          console.error(err);
-        });
-    }
-
-    function showResult(res, id) {
-      if (res.success) {
-        resultEl.className = 'ok';
-        resultEl.innerText = '✔ ' + res.nama + ' berhasil check-in!';
-        // Check-in baru & berhasil -> lanjut ke sesi ambil foto
-        openPhotoSection(id, res.nama);
-      } else if (res.duplicate) {
-        resultEl.className = 'dup';
-        resultEl.innerText = '⚠ ' + res.message;
-        scheduleBackToScan();
-      } else {
+  function checkin(id) {
+    resultEl.className = '';
+    resultEl.innerText = 'Memproses...';
+    fetch(APPS_SCRIPT_URL + '?action=checkin&id=' + encodeURIComponent(id))
+      .then(function (r) { return r.json(); })
+      .then(function (res) { showResult(res, id); })
+      .catch(function (err) {
         resultEl.className = 'err';
-        resultEl.innerText = '✖ ' + (res.message || 'Terjadi kesalahan.');
-        scheduleBackToScan();
-      }
-    }
-
-    function scheduleBackToScan(delay) {
-      setTimeout(function () {
-        resultEl.className = '';
-        resultEl.innerText = 'Arahkan kamera ke QR Code peserta';
-        if (scanner) {
-          scanner.resume();
-        }
-      }, delay || 2200);
-    }
-
-    // ================= SESI AMBIL FOTO =================
-
-    function openPhotoSection(idPeserta, namaPeserta) {
-      currentIdPeserta = idPeserta;
-      capturedDataUrl = null;
-
-      readerEl.style.display = 'none';
-      photoSection.style.display = 'block';
-      photoHeading.innerText = '📸 Ambil Foto — ' + namaPeserta;
-      photoStatusEl.innerText = '';
-
-      capturedImg.style.display = 'none';
-      camVideo.style.display = 'block';
-      btnCapture.style.display = 'block';
-      btnRetake.style.display = 'none';
-      btnUse.style.display = 'none';
-
-      navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
-        .then(function (stream) {
-          currentStream = stream;
-          camVideo.srcObject = stream;
-        })
-        .catch(function (err) {
-          photoStatusEl.innerText = 'Gagal akses kamera untuk foto: ' + err;
-        });
-    }
-
-    function stopCameraStream() {
-      if (currentStream) {
-        currentStream.getTracks().forEach(function (t) { t.stop(); });
-        currentStream = null;
-      }
-    }
-
-    function capturePhoto() {
-      const vw = camVideo.videoWidth;
-      const vh = camVideo.videoHeight;
-      if (!vw || !vh) return;
-
-      const side = Math.min(vw, vh);
-      const sx = (vw - side) / 2;
-      const sy = (vh - side) / 2;
-      const outputSize = 480;
-
-      camCanvas.width = outputSize;
-      camCanvas.height = outputSize;
-      const ctx = camCanvas.getContext('2d');
-      ctx.drawImage(camVideo, sx, sy, side, side, 0, 0, outputSize, outputSize);
-
-      capturedDataUrl = camCanvas.toDataURL('image/jpeg', 0.85);
-
-      capturedImg.src = capturedDataUrl;
-      capturedImg.style.display = 'block';
-      camVideo.style.display = 'none';
-
-      btnCapture.style.display = 'none';
-      btnRetake.style.display = 'block';
-      btnUse.style.display = 'block';
-
-      stopCameraStream();
-    }
-
-    function retakePhoto() {
-      capturedDataUrl = null;
-      capturedImg.style.display = 'none';
-      camVideo.style.display = 'block';
-      btnRetake.style.display = 'none';
-      btnUse.style.display = 'none';
-      btnCapture.style.display = 'block';
-
-      navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
-        .then(function (stream) {
-          currentStream = stream;
-          camVideo.srcObject = stream;
-        })
-        .catch(function (err) {
-          photoStatusEl.innerText = 'Gagal akses kamera untuk foto: ' + err;
-        });
-    }
-
-    function usePhoto() {
-      if (!capturedDataUrl || !currentIdPeserta) return;
-
-      btnUse.disabled = true;
-      btnRetake.disabled = true;
-      photoStatusEl.innerText = 'Mengunggah foto...';
-
-      fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({
-          action: 'uploadphoto',
-          id: currentIdPeserta,
-          image: capturedDataUrl
-        })
-      })
-        .then(function (r) { return r.json(); })
-        .then(function (res) {
-          btnUse.disabled = false;
-          btnRetake.disabled = false;
-          if (res.success) {
-            photoStatusEl.innerText = '✅ Foto berhasil disimpan!';
-            setTimeout(closePhotoSection, 1200);
-          } else {
-            photoStatusEl.innerText = '✖ Gagal simpan foto: ' + (res.message || 'coba lagi.');
-          }
-        })
-        .catch(function (err) {
-          btnUse.disabled = false;
-          btnRetake.disabled = false;
-          photoStatusEl.innerText = '✖ Gagal terhubung ke server.';
-          console.error(err);
-        });
-    }
-
-    function skipPhoto() {
-      stopCameraStream();
-      closePhotoSection();
-    }
-
-    function closePhotoSection() {
-      stopCameraStream();
-      photoSection.style.display = 'none';
-      readerEl.style.display = 'block';
-      scheduleBackToScan(300);
-    }
-
-    btnCapture.addEventListener('click', capturePhoto);
-    btnRetake.addEventListener('click', retakePhoto);
-    btnUse.addEventListener('click', usePhoto);
-    btnSkip.addEventListener('click', skipPhoto);
-
-    // ================= MULAI HALAMAN =================
-
-    // Jika halaman dibuka lewat link yang bawa ?id=xxx
-    // (misalnya hasil scan dari kamera bawaan HP / Google Lens),
-    // langsung proses check-in tanpa perlu buka kamera QR lagi.
-    const urlParams = new URLSearchParams(window.location.search);
-    const idFromLink = urlParams.get('id');
-
-    if (idFromLink) {
-      readerEl.style.display = 'none';
-      checkin(idFromLink);
-    } else {
-      // Mode kamera langsung di halaman ini (live scan QR)
-      resultEl.innerText = 'Arahkan kamera ke QR Code peserta';
-      let processing = false;
-      scanner = new Html5Qrcode('reader');
-
-      scanner.start(
-        { facingMode: 'environment' },
-        { fps: 10, qrbox: 250 },
-        function (decodedText) {
-          if (processing) return;
-          processing = true;
-          scanner.pause();
-          checkin(extractId(decodedText));
-          // processing di-reset saat kembali ke mode scan (scheduleBackToScan / closePhotoSection)
-          setTimeout(function () { processing = false; }, 500);
-        }
-      ).catch(function (err) {
-        resultEl.className = 'err';
-        resultEl.innerText = 'Gagal akses kamera: ' + err;
+        resultEl.innerText = '✖ Gagal terhubung ke server. Cek koneksi internet.';
+        console.error(err);
       });
+  }
+
+  function showResult(res, id) {
+    if (res.success) {
+      resultEl.className = 'ok';
+      resultEl.innerText = '✔ ' + res.nama + ' berhasil check-in!';
+      // Check-in baru & berhasil -> lanjut ke sesi ambil foto
+      openPhotoSection(id, res.nama);
+    } else if (res.duplicate) {
+      resultEl.className = 'dup';
+      resultEl.innerText = '⚠ ' + res.message;
+      scheduleBackToScan();
+    } else {
+      resultEl.className = 'err';
+      resultEl.innerText = '✖ ' + (res.message || 'Terjadi kesalahan.');
+      scheduleBackToScan();
     }
-  </script>
+  }
+
+  function scheduleBackToScan(delay) {
+    setTimeout(function () {
+      resultEl.className = '';
+      resultEl.innerText = 'Arahkan kamera ke QR Code peserta';
+      if (scanner) {
+        scanner.resume();
+      }
+    }, delay || 2200);
+  }
+
+  // ================= SESI AMBIL FOTO =================
+
+  function openPhotoSection(idPeserta, namaPeserta) {
+    currentIdPeserta = idPeserta;
+    capturedDataUrl = null;
+
+    readerEl.style.display = 'none';
+    photoSection.style.display = 'block';
+    photoHeading.innerText = '📸 Ambil Foto — ' + namaPeserta;
+    photoStatusEl.innerText = '';
+
+    capturedImg.style.display = 'none';
+    camVideo.style.display = 'block';
+    btnCapture.style.display = 'block';
+    btnRetake.style.display = 'none';
+    btnUse.style.display = 'none';
+
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+      .then(function (stream) {
+        currentStream = stream;
+        camVideo.srcObject = stream;
+      })
+      .catch(function (err) {
+        photoStatusEl.innerText = 'Gagal akses kamera untuk foto: ' + err;
+      });
+  }
+
+  function stopCameraStream() {
+    if (currentStream) {
+      currentStream.getTracks().forEach(function (t) { t.stop(); });
+      currentStream = null;
+    }
+  }
+
+  function capturePhoto() {
+    const vw = camVideo.videoWidth;
+    const vh = camVideo.videoHeight;
+    if (!vw || !vh) return;
+
+    const side = Math.min(vw, vh);
+    const sx = (vw - side) / 2;
+    const sy = (vh - side) / 2;
+    const outputSize = 480;
+
+    camCanvas.width = outputSize;
+    camCanvas.height = outputSize;
+    const ctx = camCanvas.getContext('2d');
+    ctx.drawImage(camVideo, sx, sy, side, side, 0, 0, outputSize, outputSize);
+
+    capturedDataUrl = camCanvas.toDataURL('image/jpeg', 0.85);
+
+    capturedImg.src = capturedDataUrl;
+    capturedImg.style.display = 'block';
+    camVideo.style.display = 'none';
+
+    btnCapture.style.display = 'none';
+    btnRetake.style.display = 'block';
+    btnUse.style.display = 'block';
+
+    stopCameraStream();
+  }
+
+  function retakePhoto() {
+    capturedDataUrl = null;
+    capturedImg.style.display = 'none';
+    camVideo.style.display = 'block';
+    btnRetake.style.display = 'none';
+    btnUse.style.display = 'none';
+    btnCapture.style.display = 'block';
+
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+      .then(function (stream) {
+        currentStream = stream;
+        camVideo.srcObject = stream;
+      })
+      .catch(function (err) {
+        photoStatusEl.innerText = 'Gagal akses kamera untuk foto: ' + err;
+      });
+  }
+
+  function usePhoto() {
+    if (!capturedDataUrl || !currentIdPeserta) return;
+
+    btnUse.disabled = true;
+    btnRetake.disabled = true;
+    photoStatusEl.innerText = 'Mengunggah foto...';
+
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        action: 'uploadphoto',
+        id: currentIdPeserta,
+        image: capturedDataUrl
+      })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        btnUse.disabled = false;
+        btnRetake.disabled = false;
+        if (res.success) {
+          photoStatusEl.innerText = '✅ Foto berhasil disimpan!';
+          setTimeout(closePhotoSection, 1200);
+        } else {
+          photoStatusEl.innerText = '✖ Gagal simpan foto: ' + (res.message || 'coba lagi.');
+        }
+      })
+      .catch(function (err) {
+        btnUse.disabled = false;
+        btnRetake.disabled = false;
+        photoStatusEl.innerText = '✖ Gagal terhubung ke server.';
+        console.error(err);
+      });
+  }
+
+  function skipPhoto() {
+    stopCameraStream();
+    closePhotoSection();
+  }
+
+  function closePhotoSection() {
+    stopCameraStream();
+    photoSection.style.display = 'none';
+    readerEl.style.display = 'block';
+    scheduleBackToScan(300);
+  }
+
+  btnCapture.addEventListener('click', capturePhoto);
+  btnRetake.addEventListener('click', retakePhoto);
+  btnUse.addEventListener('click', usePhoto);
+  btnSkip.addEventListener('click', skipPhoto);
+
+  // ================= MULAI HALAMAN =================
+
+  // Jika halaman dibuka lewat link yang bawa ?id=xxx
+  // (misalnya hasil scan dari kamera bawaan HP / Google Lens),
+  // langsung proses check-in tanpa perlu buka kamera QR lagi.
+  const urlParams = new URLSearchParams(window.location.search);
+  const idFromLink = urlParams.get('id');
+
+  if (idFromLink) {
+    readerEl.style.display = 'none';
+    checkin(idFromLink);
+  } else {
+    // Mode kamera langsung di halaman ini (live scan QR)
+    resultEl.innerText = 'Arahkan kamera ke QR Code peserta';
+    let processing = false;
+    scanner = new Html5Qrcode('reader');
+
+    scanner.start(
+      { facingMode: 'environment' },
+      { fps: 10, qrbox: 250 },
+      function (decodedText) {
+        if (processing) return;
+        processing = true;
+        scanner.pause();
+        checkin(extractId(decodedText));
+        // processing di-reset saat kembali ke mode scan (scheduleBackToScan / closePhotoSection)
+        setTimeout(function () { processing = false; }, 500);
+      }
+    ).catch(function (err) {
+      resultEl.className = 'err';
+      resultEl.innerText = 'Gagal akses kamera: ' + err;
+    });
+  }
+</script>
 </body>
 </html>
