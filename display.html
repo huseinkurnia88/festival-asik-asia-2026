@@ -346,7 +346,7 @@
     padding: 3vh 2.4vw;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Rata tengah vertikal */
+    justify-content: center;
     align-items: flex-start;
     text-align: left;
     box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -493,13 +493,13 @@
     text-shadow: 0 0 14px var(--cyan-glow);
   }
 
-  /* PANTUN: JARAK PROPORSIONAL DAN TIDAK JAUH MELOMPONG */
+  /* PANTUN: POSISI LEBIH KE BAWAH & UKURAN TEKS DIBESARKAN */
   .pantun-area {
     position: relative;
     z-index: 2;
     width: 100%;
-    margin-top: 2.2vh;
-    padding-top: 1.8vh;
+    margin-top: 4.2vh;
+    padding-top: 2.2vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -530,12 +530,12 @@
     transform: translateY(8px);
   }
   .pantun-line {
-    font-size: clamp(13.5px, 1.8vh, 18px);
-    line-height: 1.55;
-    margin-bottom: 0.3vh;
+    font-size: clamp(16px, 2.3vh, 23px);
+    line-height: 1.6;
+    margin-bottom: 0.4vh;
     color: #e2e8f0;
     font-style: italic;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.3px;
     text-align: center;
   }
@@ -548,11 +548,11 @@
   }
   .pantun-line .glow-gold {
     color: var(--gold-bright);
-    text-shadow: 0 0 10px rgba(245, 185, 66, 0.45);
+    text-shadow: 0 0 12px rgba(245, 185, 66, 0.45);
   }
   .pantun-line .glow-cyan {
     color: var(--cyan);
-    text-shadow: 0 0 10px rgba(77, 232, 255, 0.45);
+    text-shadow: 0 0 12px rgba(77, 232, 255, 0.45);
   }
 
   /* KOLOM DAFTAR HADIR */
@@ -876,7 +876,7 @@
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">' +
     '<rect width="200" height="200" fill="#080c1d"/>' +
     '<circle cx="100" cy="72" r="38" fill="#1e293b"/>' +
-    '<path d="M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z" fill="#1e293b"/>' +
+    '<path d="M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z' fill="#1e293b"/>' +
     '</svg>'
   );
 
