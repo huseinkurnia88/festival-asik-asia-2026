@@ -31,7 +31,7 @@
     color: var(--text-main);
   }
 
-  /* Dynamic Ambient Background */
+  /* Background Ambient */
   body {
     background-image: 
       radial-gradient(circle at 15% 20%, var(--gold-glow) 0%, transparent 40%),
@@ -42,7 +42,6 @@
     background-position: center;
   }
 
-  /* Floating Lights */
   .orb {
     position: fixed;
     border-radius: 50%;
@@ -83,17 +82,18 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
   .logo-box {
-    height: clamp(44px, 6.5vh, 72px);
+    height: clamp(48px, 6.8vh, 75px);
     display: flex;
     align-items: center;
   }
-  .logo-box svg {
+  .logo-box img {
     height: 100%;
     width: auto;
+    object-fit: contain;
     filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
     transition: transform 0.3s ease;
   }
-  .logo-box svg:hover {
+  .logo-box img:hover {
     transform: scale(1.03);
   }
 
@@ -175,7 +175,7 @@
     box-shadow: 0 0 8px var(--cyan);
   }
 
-  /* MAIN CONTENT: 3-KOLOM DENGAN FOTO MAKSIMAL */
+  /* MAIN CONTENT */
   .main-content {
     flex: 1 1 auto;
     min-height: 0;
@@ -185,7 +185,7 @@
     align-items: stretch;
   }
 
-  /* KOLOM FOTO PESERTA SANGAT BESAR & PENUH */
+  /* KOLOM FOTO PESERTA */
   .polaroid-col {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -230,7 +230,6 @@
     50% { box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 42px rgba(245, 185, 66, 0.5); }
   }
 
-  /* Cyber Bracket Corners */
   .polaroid .bracket {
     position: absolute;
     width: 16px;
@@ -260,7 +259,6 @@
     display: block;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  /* Laser Scanner Effect */
   #photoWrap::before {
     content: "";
     position: absolute;
@@ -298,7 +296,7 @@
     z-index: 4;
   }
   #photoLoadingBadge.show { display: block; }
-  
+
   #lastName {
     font-size: clamp(16px, 2.3vh, 25px);
     font-weight: 800;
@@ -316,7 +314,7 @@
     width: 100%;
   }
 
-  /* KOLOM SAPAAN (TENGAH) */
+  /* KOLOM SAPAAN */
   .greeting-col {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -373,7 +371,7 @@
     text-shadow: 0 0 12px var(--cyan-glow);
   }
 
-  /* KOLOM DAFTAR HADIR (KANAN) */
+  /* KOLOM DAFTAR HADIR DENGAN LOOPING MULUS */
   .list-col {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -390,6 +388,7 @@
     min-height: 0;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
   #listTitle {
     font-size: clamp(12px, 1.5vh, 15px);
@@ -401,6 +400,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    flex: 0 0 auto;
   }
   #listTitle::before {
     content: "";
@@ -414,15 +414,13 @@
   #listScroll {
     flex: 1 1 auto;
     min-height: 0;
-    overflow-y: scroll;
-    scrollbar-width: none;
+    overflow-y: hidden;
+    position: relative;
   }
-  #listScroll::-webkit-scrollbar { display: none; }
   #list {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding-right: 4px;
   }
   .chip {
     font-size: clamp(12px, 1.6vh, 15px);
@@ -578,17 +576,9 @@
 
   <!-- TOP BAR -->
   <div class="topbar">
-    <!-- Logo Kiri: Institut Asia Malang (Vector-Clean SVG) -->
+    <!-- Logo Kiri: Institut Asia Malang (Direct Google Drive Link) -->
     <div class="logo-box">
-      <svg viewBox="0 0 320 85" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="42" cy="42" r="38" fill="#F5B942" stroke="#D32F2F" stroke-width="2.5"/>
-        <path d="M42 16C30 16 22 24 22 36C22 55 42 66 42 66C42 66 62 55 62 36C62 24 54 16 42 16Z" fill="#1A3B8B"/>
-        <path d="M42 22L36 34H48L42 22Z" fill="#FFD54F"/>
-        <text x="42" y="52" fill="#FFFFFF" font-family="'Space Grotesk', sans-serif" font-weight="800" font-size="12" text-anchor="middle">ASIA</text>
-        <text x="96" y="28" fill="#E2E8F0" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="17" letter-spacing="4">INSTITUT</text>
-        <text x="94" y="68" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="44" letter-spacing="1">ASIA</text>
-        <path d="M228 32H238V42H228Z" fill="#D32F2F"/>
-      </svg>
+      <img src="https://lh3.googleusercontent.com/d/1ODcDYJw19ChYr3aAA5uqcxXBHWDhz9uj" alt="Institut Asia Malang">
     </div>
 
     <!-- Live Clock Center -->
@@ -601,15 +591,9 @@
       <div id="clockDate">-</div>
     </div>
 
-    <!-- Logo Kanan: Kuliah Asik Kekinian (Vector-Clean SVG) -->
+    <!-- Logo Kanan: Kuliah Asik Kekinian (Direct Google Drive Link) -->
     <div class="logo-box">
-      <svg viewBox="0 0 280 85" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g transform="rotate(-3 140 42)">
-          <text x="140" y="32" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="28" font-style="italic" text-anchor="middle" stroke="#000" stroke-width="4" paint-order="stroke fill">KULIAH</text>
-          <text x="140" y="46" fill="#F5B942" font-family="'Space Grotesk', cursive, sans-serif" font-weight="800" font-size="20" text-anchor="middle" font-style="italic" stroke="#000" stroke-width="2" paint-order="stroke fill">asik</text>
-          <text x="140" y="74" fill="#F5B942" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="34" font-style="italic" text-anchor="middle" stroke="#000" stroke-width="5" paint-order="stroke fill">KEKINIAN</text>
-        </g>
-      </svg>
+      <img src="https://lh3.googleusercontent.com/d/1jZttb2ldR2vsg4mkWFi4zKwZrYBT_WWX" alt="Kuliah Asik Kekinian">
     </div>
   </div>
 
@@ -623,7 +607,7 @@
     </div>
   </div>
 
-  <!-- MAIN CONTENT: FOTO MAKSIMAL SEBAGAI FOKUS UTAMA -->
+  <!-- MAIN CONTENT -->
   <div class="main-content">
     
     <!-- SISI KIRI: FOTO PESERTA SANGAT BESAR -->
@@ -764,6 +748,7 @@
       lastTopSignature = 'KOSONG';
     }
 
+    // Perbarui daftar nama & hitungan kehadiran jika bertambah/berkurang
     if (data.hadir !== lastKnownCount) {
       const listEl = document.getElementById('list');
       listEl.innerHTML = '';
@@ -779,6 +764,8 @@
         'Peserta sudah datang : ' + data.hadir + ' / ' + data.total;
 
       lastKnownCount = data.hadir;
+
+      // Inisialisasi loop bergulir otomatis
       setupSeamlessLoop();
     }
   }
@@ -849,21 +836,24 @@
   updateClock();
   setInterval(updateClock, 1000);
 
-  // Auto-scroll loop
+  // Auto-scroll loop saat daftar peserta penuh/melebihi wadah
   const scrollEl = document.getElementById('listScroll');
   const listElForLoop = document.getElementById('list');
-  const SCROLL_SPEED = 0.35;
+  const SCROLL_SPEED = 0.45; // Kecepatan scroll perlahan
   let loopHeight = 0;
   let loopActive = false;
 
   function setupSeamlessLoop() {
     scrollEl.scrollTop = 0;
+    
+    // Hitung apakah elemen isi melebihi tinggi wadah tampilan
     const singleSetHeight = listElForLoop.scrollHeight;
     const containerHeight = scrollEl.clientHeight;
 
-    if (singleSetHeight > containerHeight) {
+    if (singleSetHeight > containerHeight && containerHeight > 0) {
+      // Gandakan elemen daftar agar setelah nama terakhir lewat, nama pertama langsung menyusul mulus
       listElForLoop.innerHTML += listElForLoop.innerHTML;
-      loopHeight = singleSetHeight;
+      loopHeight = singleSetHeight + 8; // Margin perataan gap
       loopActive = true;
     } else {
       loopHeight = 0;
@@ -874,6 +864,7 @@
   function autoScrollTick() {
     if (!loopActive || loopHeight <= 0) return;
     scrollEl.scrollTop += SCROLL_SPEED;
+    // Jika sudah mencapai batas set pertama, reset kembali ke puncak secara instan (tanpa terlihat mata)
     if (scrollEl.scrollTop >= loopHeight) {
       scrollEl.scrollTop -= loopHeight;
     }
