@@ -200,12 +200,12 @@
     border-left: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  /* MAIN CONTENT: 3-KOLOM */
+  /* MAIN CONTENT: 3-KOLOM (PROPORSI DISESUAIKAN AGAR SAPAAN MAKSIMAL) */
   .main-content {
     flex: 1 1 auto;
     min-height: 0;
     display: grid;
-    grid-template-columns: 1.25fr 1.35fr 1fr;
+    grid-template-columns: 1.2fr 1.45fr 1fr;
     gap: 1.6vw;
     align-items: stretch;
   }
@@ -340,15 +340,15 @@
   }
 
   /* =========================================================
-     KOLOM SAPAAN FUTURISTIK & MOTION ELEGAN
+     KOLOM SAPAAN: PADAT, PROPORSIONAL & LEBIH BESAR
      ========================================================= */
   .greeting-col {
-    background: linear-gradient(145deg, rgba(14, 23, 52, 0.9) 0%, rgba(8, 12, 28, 0.85) 100%);
+    background: linear-gradient(145deg, rgba(14, 23, 52, 0.92) 0%, rgba(8, 12, 28, 0.88) 100%);
     border-radius: 26px;
-    padding: 3vh 2.5vw;
+    padding: 3vh 2.5vw 2.4vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between; /* Membuat isi terdistribusi merata dari atas ke bawah */
     align-items: flex-start;
     text-align: left;
     box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -378,7 +378,7 @@
     100% { background-position: 0% 50%; }
   }
 
-  /* Hologram Background Grid & Ambient Pulse */
+  /* Hologram Background Grid */
   .greeting-col::after {
     content: "";
     position: absolute;
@@ -395,17 +395,17 @@
   /* Cyber HUD Corner Brackets */
   .cyber-hud {
     position: absolute;
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     border-color: rgba(77, 232, 255, 0.5);
     border-style: solid;
     pointer-events: none;
     z-index: 3;
   }
-  .cyber-hud.tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
-  .cyber-hud.tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; }
-  .cyber-hud.bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
-  .cyber-hud.br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+  .cyber-hud.tl { top: 12px; left: 12px; border-width: 2.5px 0 0 2.5px; }
+  .cyber-hud.tr { top: 12px; right: 12px; border-width: 2.5px 2.5px 0 0; }
+  .cyber-hud.bl { bottom: 12px; left: 12px; border-width: 0 0 2.5px 2.5px; }
+  .cyber-hud.br { bottom: 12px; right: 12px; border-width: 0 2.5px 2.5px 0; }
 
   /* Tech Status Tag */
   .tech-badge {
@@ -414,51 +414,60 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 800;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--cyan);
-    background: rgba(77, 232, 255, 0.08);
-    border: 1px solid rgba(77, 232, 255, 0.25);
-    padding: 4px 14px;
+    background: rgba(77, 232, 255, 0.1);
+    border: 1px solid rgba(77, 232, 255, 0.3);
+    padding: 5px 16px;
     border-radius: 999px;
-    margin-bottom: 1.2vh;
-    box-shadow: 0 0 12px rgba(77, 232, 255, 0.15);
+    margin-bottom: 0.5vh;
+    box-shadow: 0 0 14px rgba(77, 232, 255, 0.15);
   }
   .tech-badge-dot {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     background: var(--cyan);
     border-radius: 50%;
     box-shadow: 0 0 8px var(--cyan);
     animation: livePulse 1.5s infinite;
   }
 
-  /* Teks Sapaan Utama */
-  .greet-line1 {
+  /* Container Sapaan Utama */
+  .greet-content-wrap {
     position: relative;
     z-index: 2;
-    font-size: clamp(17px, 2.6vh, 28px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1 1 auto;
+    padding: 0.5vh 0;
+  }
+
+  /* TEKS SAPAAN JAUH LEBIH BESAR */
+  .greet-line1 {
+    font-size: clamp(22px, 3.2vh, 34px);
     font-weight: 700;
     color: var(--text-muted);
     letter-spacing: 0.5px;
+    line-height: 1.15;
   }
 
-  /* Nama Peserta dengan Shimmer Animation */
+  /* Nama Peserta Sangat Menonjol */
   .greet-name {
-    position: relative;
-    z-index: 2;
-    font-size: clamp(34px, 6.2vh, 68px);
+    font-size: clamp(42px, 7vh, 78px);
     font-weight: 900;
-    line-height: 1.08;
-    margin: 0.6vh 0 1vh;
-    background: linear-gradient(110deg, #ffffff 25%, var(--gold-bright) 45%, var(--gold) 65%, #ffffff 85%);
+    line-height: 1.04;
+    margin: 0.8vh 0 1.2vh;
+    background: linear-gradient(110deg, #ffffff 20%, var(--gold-bright) 45%, var(--gold) 65%, #ffffff 85%);
     background-size: 200% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0 4px 28px rgba(245, 185, 66, 0.3);
+    text-shadow: 0 6px 32px rgba(245, 185, 66, 0.35);
     word-break: break-word;
     animation: shimmerName 4s linear infinite;
   }
@@ -468,21 +477,17 @@
   }
 
   .greet-line2 {
-    position: relative;
-    z-index: 2;
-    font-size: clamp(17px, 2.5vh, 28px);
+    font-size: clamp(20px, 2.9vh, 32px);
     font-weight: 700;
-    line-height: 1.35;
-    color: #f1f5f9;
+    line-height: 1.3;
+    color: #f8fafc;
   }
   .greet-line3 {
-    position: relative;
-    z-index: 2;
-    font-size: clamp(16px, 2.3vh, 26px);
+    font-size: clamp(18px, 2.6vh, 29px);
     font-weight: 700;
-    line-height: 1.35;
+    line-height: 1.3;
     color: #cbd5e1;
-    margin-top: 0.2vh;
+    margin-top: 0.4vh;
   }
   .highlight {
     color: var(--cyan);
@@ -490,19 +495,19 @@
     text-shadow: 0 0 14px var(--cyan-glow);
   }
 
-  /* PANTUN RATA TENGAH & FLOATING */
+  /* PANTUN RATA TENGAH MENGISI BAGIAN BAWAH DENGAN RAPI */
   .pantun-area {
     position: relative;
     z-index: 2;
-    margin-top: 3.5vh;
-    padding-top: 2vh;
     width: 100%;
-    min-height: 9.5vh;
+    margin-top: 1.5vh;
+    padding-top: 1.6vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    flex: 0 0 auto;
   }
   .pantun-area::before {
     content: "";
@@ -510,9 +515,9 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 60%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(245, 185, 66, 0.45), rgba(77, 232, 255, 0.45), transparent);
+    width: 75%;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(245, 185, 66, 0.5), rgba(77, 232, 255, 0.5), transparent);
   }
 
   #pantunContainer {
@@ -527,8 +532,8 @@
     transform: translateY(8px);
   }
   .pantun-line {
-    font-size: clamp(12.5px, 1.75vh, 17px);
-    line-height: 1.55;
+    font-size: clamp(13px, 1.8vh, 18px);
+    line-height: 1.5;
     color: #e2e8f0;
     font-style: italic;
     font-weight: 500;
@@ -804,7 +809,7 @@
       <div id="lastName">Menunggu Peserta...</div>
     </div>
 
-    <!-- SISI TENGAH: SAPAAN FUTURISTIK & MOTION INTERAKTIF -->
+    <!-- SISI TENGAH: SAPAAN BESAR, PADAT, & PANTUN RATA TENGAH -->
     <div class="greeting-col">
       <!-- Cyber HUD Corner Accents -->
       <span class="cyber-hud tl"></span>
@@ -812,18 +817,21 @@
       <span class="cyber-hud bl"></span>
       <span class="cyber-hud br"></span>
 
-      <!-- Futuristic Status Badge -->
+      <!-- Status Terminal Tag -->
       <div class="tech-badge">
         <span class="tech-badge-dot"></span>
-        Welcoming...
+        Welcome Terminal
       </div>
 
-      <p class="greet-line1">Hallo kak,</p>
-      <div class="greet-name"><span id="greetName">PESERTA</span></div>
-      <p class="greet-line2">Selamat datang di <span class="highlight">Institut Asia Malang</span></p>
-      <p class="greet-line3">Tempatnya <span class="highlight">Kuliah Asik Kekinian</span></p>
+      <!-- Area Teks Sapaan Utama (Mengisi Ruang Secara Vertikal) -->
+      <div class="greet-content-wrap">
+        <p class="greet-line1">Hallo kak,</p>
+        <div class="greet-name"><span id="greetName">PESERTA</span></div>
+        <p class="greet-line2">Selamat datang di <span class="highlight">Institut Asia Malang</span></p>
+        <p class="greet-line3">Tempatnya <span class="highlight">Kuliah Asik Kekinian</span></p>
+      </div>
 
-      <!-- PANTUN AREA (RATA TENGAH & PROPORSIONAL) -->
+      <!-- PANTUN DISPLAY RATA TENGAH (BAGIAN BAWAH BOX) -->
       <div class="pantun-area">
         <div id="pantunContainer">
           <!-- Diisi otomatis oleh JavaScript -->
@@ -867,7 +875,7 @@
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">' +
     '<rect width="200" height="200" fill="#080c1d"/>' +
     '<circle cx="100" cy="72" r="38" fill="#1e293b"/>' +
-    '<path d="M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z" fill="#1e293b"/>' +
+    '<path d="M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z' fill="#1e293b"/>' +
     '</svg>'
   );
 
@@ -908,6 +916,7 @@
 
     currentPantunIndex = nextIndex;
 
+    // Transisi fade out -> ubah isi -> fade in
     container.classList.add('pantun-fade-out');
     setTimeout(function() {
       container.innerHTML = PANTUN_LIST[nextIndex];
@@ -915,6 +924,7 @@
     }, 400);
   }
 
+  // Tampilkan pantun pertama langsung, lalu berganti acak tiap 20 detik
   switchPantunRandom();
   setInterval(switchPantunRandom, 20000);
 
@@ -1006,6 +1016,7 @@
       lastTopSignature = 'KOSONG';
     }
 
+    // Perbarui daftar kehadiran
     if (data.hadir !== lastKnownCount) {
       const listEl = document.getElementById('list');
       listEl.innerHTML = '';
@@ -1021,6 +1032,7 @@
         'Peserta sudah datang : ' + data.hadir + ' / ' + data.total;
 
       lastKnownCount = data.hadir;
+
       setupSeamlessLoop();
     }
   }
