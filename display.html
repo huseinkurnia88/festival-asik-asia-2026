@@ -12,11 +12,11 @@
 
   :root {
     --gold: #f5b942;
-    --gold-glow: rgba(245, 185, 66, 0.35);
+    --gold-glow: rgba(245, 185, 66, 0.4);
     --cyan: #4de8ff;
     --cyan-glow: rgba(77, 232, 255, 0.25);
-    --bg-dark: #070a14;
-    --card-bg: rgba(14, 21, 46, 0.72);
+    --bg-dark: #050811;
+    --card-bg: rgba(13, 19, 41, 0.75);
     --card-border: rgba(255, 255, 255, 0.08);
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
@@ -30,38 +30,35 @@
     color: var(--text-main);
   }
 
-  /* Latar belakang grid futuristik halus */
   body {
     background-image: 
-      radial-gradient(circle at 15% 10%, var(--cyan-glow) 0%, transparent 40%),
-      radial-gradient(circle at 85% 90%, var(--gold-glow) 0%, transparent 40%),
-      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+      radial-gradient(circle at 20% 20%, var(--gold-glow) 0%, transparent 45%),
+      radial-gradient(circle at 80% 80%, var(--cyan-glow) 0%, transparent 45%),
+      linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
     background-position: center;
   }
 
-  /* Ambient glowing orbs */
   .orb {
     position: fixed;
     border-radius: 50%;
-    filter: blur(120px);
+    filter: blur(140px);
     pointer-events: none;
     z-index: 0;
   }
-  .orb-1 { width: 35vw; height: 35vw; top: -10vw; left: -10vw; background: rgba(77, 232, 255, 0.12); }
-  .orb-2 { width: 30vw; height: 30vw; bottom: -8vw; right: -5vw; background: rgba(245, 185, 66, 0.1); }
+  .orb-1 { width: 40vw; height: 40vw; top: -10vw; left: -10vw; background: rgba(245, 185, 66, 0.12); }
+  .orb-2 { width: 35vw; height: 35vw; bottom: -8vw; right: -5vw; background: rgba(77, 232, 255, 0.1); }
 
-  /* Frame Utama (Kiosk 100vh) */
   .wrap {
     position: relative;
     z-index: 1;
     height: 100vh;
-    padding: 2vh 2.5vw;
+    padding: 1.8vh 2.2vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 1.5vh;
+    gap: 1.4vh;
   }
 
   /* TOP BAR */
@@ -69,15 +66,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.2vh 1.8vw;
+    padding: 1vh 2vw;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     backdrop-filter: blur(16px);
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   }
   .logo-box {
-    height: clamp(38px, 5.5vh, 60px);
+    height: clamp(42px, 6.2vh, 68px);
     display: flex;
     align-items: center;
   }
@@ -85,19 +82,19 @@
     height: 100%;
     width: auto;
     object-fit: contain;
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+    mix-blend-mode: screen; /* Menghilangkan background hitam bawaan gambar */
   }
   .clock-box {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    gap: 2px;
+    align-items: center;
+    gap: 1px;
   }
   .clock-box::before {
     content: "● LIVE CHECK-IN";
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     color: var(--cyan);
     animation: blink 1.6s ease-in-out infinite;
   }
@@ -108,10 +105,10 @@
     font-weight: 700;
     color: var(--text-main);
     letter-spacing: 1px;
-    line-height: 1;
+    line-height: 1.1;
   }
   #clockDate {
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 600;
     color: var(--text-muted);
     text-transform: uppercase;
@@ -121,93 +118,88 @@
   /* HEADLINE BANNER */
   .headline-wrap {
     text-align: center;
-    margin: 0.5vh 0;
+    margin: 0.2vh 0;
   }
   h1.headline {
-    font-size: clamp(20px, 3.2vh, 36px);
+    font-size: clamp(18px, 2.8vh, 32px);
     font-weight: 800;
     letter-spacing: 0.5px;
     background: linear-gradient(135deg, #ffffff 30%, var(--gold) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0 4px 20px rgba(245, 185, 66, 0.2);
+    text-shadow: 0 4px 18px rgba(245, 185, 66, 0.25);
   }
   .eventdate-wrap {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    margin-top: 4px;
+    gap: 10px;
+    margin-top: 3px;
   }
   p.eventdate {
-    font-size: clamp(11px, 1.4vh, 14px);
+    font-size: clamp(10px, 1.3vh, 13.5px);
     font-weight: 600;
     color: var(--cyan);
     letter-spacing: 1px;
   }
   .tape-deco {
-    width: 32px;
+    width: 28px;
     height: 2px;
     background: linear-gradient(90deg, var(--cyan), transparent);
   }
 
-  /* MAIN CONTENT: GRID 2 KOLOM BESAR */
+  /* MAIN CONTENT: 3-KOLOM DENGAN FOTO PESERTA SEBAGAI FOKUS TERBESAR */
   .main-content {
     flex: 1 1 auto;
     min-height: 0;
     display: grid;
-    grid-template-columns: 1.8fr 1.2fr;
-    gap: 2vw;
+    grid-template-columns: minmax(360px, 42vw) 1.1fr 1fr;
+    gap: 1.8vw;
     align-items: stretch;
   }
 
-  /* KARTU SAMBUTAN & FOTO (KIRI) */
-  .hero-card {
+  /* FOKUS UTAMA: FOTO PESERTA */
+  .polaroid-col {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     backdrop-filter: blur(20px);
-    border-radius: 28px;
-    padding: 3vh 2.5vw;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 3vw;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
-
-  .polaroid-col {
+    border-radius: 26px;
+    padding: 2.2vh 1.8vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.2vh;
+    justify-content: center;
+    gap: 1.4vh;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
   .polaroid-col::before {
-    content: "PESERTA TERBARU";
+    content: "★ PESERTA TERBARU ★";
     font-size: 11px;
     font-weight: 800;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     color: var(--gold);
-    background: rgba(245, 185, 66, 0.1);
-    padding: 4px 14px;
+    background: rgba(245, 185, 66, 0.12);
+    padding: 6px 18px;
     border-radius: 999px;
-    border: 1px solid rgba(245, 185, 66, 0.25);
+    border: 1px solid rgba(245, 185, 66, 0.35);
+    box-shadow: 0 0 16px rgba(245, 185, 66, 0.2);
   }
   .polaroid {
     position: relative;
-    width: clamp(220px, 34vh, 320px);
+    width: 100%;
+    max-width: 420px;
     background: rgba(255, 255, 255, 0.03);
-    padding: 12px;
+    padding: 14px;
     border-radius: 22px;
-    border: 1px solid rgba(77, 232, 255, 0.3);
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 30px var(--cyan-glow);
+    border: 1.5px solid rgba(245, 185, 66, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 35px var(--gold-glow);
   }
-  /* Corner Tech Accent */
   .polaroid .bracket {
     position: absolute;
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     pointer-events: none;
-    border: 2px solid var(--gold);
+    border: 2.5px solid var(--cyan);
   }
   .polaroid .bracket.tl { top: 6px; left: 6px; border-right: none; border-bottom: none; }
   .polaroid .bracket.tr { top: 6px; right: 6px; border-left: none; border-bottom: none; }
@@ -217,85 +209,95 @@
   #photoWrap {
     position: relative;
     width: 100%;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 4 / 5;
+    max-height: 52vh;
     border-radius: 14px;
     overflow: hidden;
     background: #090e1f;
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6);
   }
   #lastPhoto {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    display: block;
   }
   #photoLoadingBadge {
     position: absolute;
     left: 50%;
-    bottom: 12px;
+    bottom: 14px;
     transform: translateX(-50%);
-    background: rgba(7, 10, 20, 0.9);
+    background: rgba(5, 8, 17, 0.92);
     border: 1px solid var(--cyan);
     color: var(--cyan);
     font-size: 11px;
     font-weight: 700;
-    padding: 4px 14px;
+    padding: 5px 16px;
     border-radius: 999px;
     display: none;
+    letter-spacing: 1px;
   }
   #photoLoadingBadge.show { display: block; }
   #lastName {
-    font-size: clamp(14px, 1.8vh, 18px);
-    font-weight: 700;
+    font-size: clamp(16px, 2.2vh, 24px);
+    font-weight: 800;
     text-align: center;
-    color: var(--text-main);
-    margin-top: 10px;
+    color: var(--gold);
+    margin-top: 12px;
     letter-spacing: 0.5px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100%;
+    text-shadow: 0 2px 12px rgba(245, 185, 66, 0.3);
   }
 
-  /* GREETING TEXT */
+  /* KOLOM SAPAAN (TENGAH) */
   .greeting-col {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(20px);
+    border-radius: 26px;
+    padding: 3vh 2.2vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     text-align: left;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   }
   .greet-line1 {
-    font-size: clamp(16px, 2.4vh, 26px);
+    font-size: clamp(15px, 2.2vh, 24px);
     font-weight: 600;
     color: var(--text-muted);
   }
   .greet-name {
-    font-size: clamp(28px, 5.2vh, 64px);
+    font-size: clamp(28px, 5vh, 56px);
     font-weight: 800;
-    line-height: 1.1;
-    margin: 1.2vh 0 1.6vh;
-    color: var(--gold);
-    text-shadow: 0 4px 24px rgba(245, 185, 66, 0.3);
+    line-height: 1.12;
+    margin: 1.4vh 0 1.8vh;
+    color: var(--text-main);
+    text-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
     word-break: break-word;
   }
   .greet-line2, .greet-line3 {
-    font-size: clamp(15px, 2.2vh, 24px);
+    font-size: clamp(14px, 2vh, 22px);
     font-weight: 600;
-    line-height: 1.4;
+    line-height: 1.45;
     color: #cbd5e1;
   }
   .highlight {
     color: var(--cyan);
     font-weight: 700;
+    text-shadow: 0 0 12px var(--cyan-glow);
   }
 
-  /* KARTU DAFTAR KEHADIRAN (KANAN) */
+  /* KOLOM DAFTAR HADIR (KANAN) */
   .list-col {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     backdrop-filter: blur(20px);
-    border-radius: 28px;
-    padding: 2.2vh 1.8vw 1.8vh;
+    border-radius: 26px;
+    padding: 2.2vh 1.6vw 1.8vh;
     display: flex;
     flex-direction: column;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
@@ -308,12 +310,12 @@
     flex-direction: column;
   }
   #listTitle {
-    font-size: clamp(12px, 1.6vh, 16px);
+    font-size: clamp(12px, 1.5vh, 15px);
     font-weight: 700;
     letter-spacing: 1px;
     color: var(--gold);
     text-transform: uppercase;
-    margin-bottom: 1.5vh;
+    margin-bottom: 1.2vh;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -340,17 +342,19 @@
     padding-right: 4px;
   }
   .chip {
-    font-size: clamp(13px, 1.8vh, 16px);
+    font-size: clamp(12px, 1.6vh, 15px);
     font-weight: 600;
     color: var(--text-main);
-    padding: 10px 16px;
+    padding: 8px 14px;
     background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 12px;
     display: flex;
     align-items: center;
     gap: 10px;
-    transition: all 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .chip::before {
     content: "✓";
@@ -358,8 +362,8 @@
     font-weight: 800;
     color: var(--cyan);
     background: rgba(77, 232, 255, 0.15);
-    width: 20px;
-    height: 20px;
+    min-width: 18px;
+    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -369,42 +373,42 @@
   /* SEARCH BOX */
   #searchBox {
     position: relative;
-    margin-top: 1.5vh;
+    margin-top: 1.2vh;
     flex: 0 0 auto;
   }
   #searchInput {
     width: 100%;
-    padding: 1.2vh 1.4vw;
-    background: rgba(10, 15, 30, 0.85);
+    padding: 1vh 1.2vw;
+    background: rgba(8, 12, 24, 0.85);
     border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 14px;
+    border-radius: 12px;
     color: var(--text-main);
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 600;
     outline: none;
     transition: all 0.2s ease;
   }
   #searchInput:focus {
     border-color: var(--cyan);
-    box-shadow: 0 0 16px var(--cyan-glow);
+    box-shadow: 0 0 14px var(--cyan-glow);
   }
   #searchResults {
     position: absolute;
     bottom: calc(100% + 8px);
     left: 0;
     right: 0;
-    max-height: 25vh;
+    max-height: 24vh;
     overflow-y: auto;
-    background: rgba(10, 15, 30, 0.98);
+    background: rgba(8, 12, 24, 0.98);
     border: 1px solid rgba(77, 232, 255, 0.3);
-    border-radius: 14px;
+    border-radius: 12px;
     padding: 6px;
     z-index: 50;
     box-shadow: 0 14px 30px rgba(0, 0, 0, 0.6);
   }
   .searchResultItem {
-    padding: 10px 14px;
-    font-size: 13px;
+    padding: 9px 12px;
+    font-size: 12.5px;
     font-weight: 600;
     border-radius: 8px;
     cursor: pointer;
@@ -415,15 +419,15 @@
     color: var(--cyan);
   }
   .searchNoResult {
-    padding: 10px;
-    font-size: 12px;
+    padding: 8px;
+    font-size: 11.5px;
     color: var(--text-muted);
     text-align: center;
   }
   #pinnedBadge {
     display: none;
-    margin-top: 8px;
-    font-size: 12px;
+    margin-top: 6px;
+    font-size: 11.5px;
     color: var(--cyan);
     text-align: center;
   }
@@ -432,7 +436,7 @@
     background: rgba(77, 232, 255, 0.15);
     border: 1px solid var(--cyan);
     color: var(--text-main);
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 700;
     padding: 2px 10px;
     border-radius: 999px;
@@ -440,35 +444,34 @@
     margin-left: 6px;
   }
 
-  /* FOOTER COUNTER */
+  /* FOOTER STATISTIK */
   #counterWrap {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 16px;
-    padding-top: 0.5vh;
+    padding-top: 0.3vh;
   }
   #counter {
-    font-size: clamp(12px, 1.6vh, 16px);
+    font-size: clamp(12px, 1.5vh, 15px);
     font-weight: 700;
     color: var(--gold);
     background: rgba(245, 185, 66, 0.08);
     border: 1px solid rgba(245, 185, 66, 0.3);
-    padding: 8px 24px;
+    padding: 6px 22px;
     border-radius: 999px;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 16px var(--gold-glow);
+    box-shadow: 0 4px 14px var(--gold-glow);
   }
   #status { font-size: 11px; color: var(--text-muted); }
 
-  /* RESPONSIVE FALLBACK */
-  @media (max-width: 980px) {
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
     html, body { overflow: auto; }
     .wrap { height: auto; min-height: 100vh; }
     .main-content { grid-template-columns: 1fr; }
-    .hero-card { grid-template-columns: 1fr; justify-items: center; text-align: center; }
-    .greeting-col { align-items: center; text-align: center; }
-    .list-col { height: 50vh; }
+    .polaroid-col { max-width: 100%; }
+    .list-col { height: 45vh; }
   }
 </style>
 </head>
@@ -481,7 +484,18 @@
   <!-- TOP BAR -->
   <div class="topbar">
     <div class="logo-box">
-      <img src="data:image/png;base64,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" alt="Kuliah Asik Kekinian">
+      <!-- Logo Institut Asia Malang -->
+      <img src="data:image/jpeg;base64,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" alt="Institut Asia Malang">
+    </div>
+
+    <div class="clock-box">
+      <div id="clockTime">--:--:--</div>
+      <div id="clockDate">-</div>
+    </div>
+
+    <div class="logo-box">
+      <!-- Logo Kuliah Asik Kekinian -->
+      <img src="data:image/jpeg;base64,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" alt="Kuliah Asik Kekinian">
     </div>
   </div>
 
@@ -495,31 +509,30 @@
     </div>
   </div>
 
-  <!-- MAIN DYNAMIC CONTENT -->
+  <!-- MAIN CONTENT: FOTO SEBAGAI FOCAL POINT UTAMA -->
   <div class="main-content">
     
-    <!-- SISI KIRI: SAMBUTAN & FOTO HERO -->
-    <div class="hero-card">
-      <div class="polaroid-col">
-        <div class="polaroid">
-          <span class="bracket tl"></span>
-          <span class="bracket tr"></span>
-          <span class="bracket bl"></span>
-          <span class="bracket br"></span>
-          <div id="photoWrap">
-            <img id="lastPhoto" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%2310182e'/%3E%3Ccircle cx='100' cy='72' r='38' fill='%233d5a94'/%3E%3Cpath d='M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z' fill='%233d5a94'/%3E%3C/svg%3E" alt="Foto peserta">
-            <div id="photoLoadingBadge">Menunggu Foto...</div>
-          </div>
-          <div id="lastName">Menunggu Peserta...</div>
+    <!-- SISI KIRI: FOTO PESERTA SANGAT BESAR -->
+    <div class="polaroid-col">
+      <div class="polaroid">
+        <span class="bracket tl"></span>
+        <span class="bracket tr"></span>
+        <span class="bracket bl"></span>
+        <span class="bracket br"></span>
+        <div id="photoWrap">
+          <img id="lastPhoto" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%2310182e'/%3E%3Ccircle cx='100' cy='72' r='38' fill='%233d5a94'/%3E%3Cpath d='M22 190 C22 128 58 98 100 98 C142 98 178 128 178 190 Z' fill='%233d5a94'/%3E%3C/svg%3E" alt="Foto peserta">
+          <div id="photoLoadingBadge">Menunggu Foto...</div>
         </div>
+        <div id="lastName">Menunggu Peserta...</div>
       </div>
+    </div>
 
-      <div class="greeting-col">
-        <p class="greet-line1">Hallo kak,</p>
-        <div class="greet-name"><span id="greetName">PESERTA</span></div>
-        <p class="greet-line2">Selamat datang di <span class="highlight">Institut Asia Malang</span></p>
-        <p class="greet-line3">Tempatnya <span class="highlight">Kuliah Asik Kekinian</span></p>
-      </div>
+    <!-- SISI TENGAH: SAPAAN HANGAT & ELEGAN -->
+    <div class="greeting-col">
+      <p class="greet-line1">Hallo kak,</p>
+      <div class="greet-name"><span id="greetName">PESERTA</span></div>
+      <p class="greet-line2">Selamat datang di <span class="highlight">Institut Asia Malang</span></p>
+      <p class="greet-line3">Tempatnya <span class="highlight">Kuliah Asik Kekinian</span></p>
     </div>
 
     <!-- SISI KANAN: DAFTAR HADIR & PENCARIAN -->
@@ -550,7 +563,7 @@
 
 <script>
   // =========================================================
-  // GANTI dengan URL Web App Apps Script kamu (setelah deploy)
+  // URL Web App Apps Script
   // =========================================================
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzyD3Rs3MxcRWMfl4HKaIWtaHc2ZvqejhAAYpS8r8Ik4ZalvKHBrLcIUSFN7dGC-MAKOA/exec';
 
@@ -614,13 +627,12 @@
     document.getElementById('status').innerText = '';
     allAttendeesList = data.list;
 
-    // Kalau ada check-in BARU (jumlah hadir bertambah) selagi sedang pin hasil
-    // pencarian, otomatis lepas pin-nya dan kembali ke tampilan peserta terbaru.
+    // Lepas pin jika ada check-in baru
     if (isPinned && data.hadir > lastKnownCount && lastKnownCount !== -1) {
       unpinDisplay();
     }
 
-    // ===== Tentukan siapa yang ditampilkan di polaroid + sapaan =====
+    // Tentukan data yang ditampilkan
     let displayRecord = null;
     let signaturePrefix = '';
 
@@ -642,7 +654,7 @@
       lastTopSignature = 'KOSONG';
     }
 
-    // ===== Update daftar peserta & counter =====
+    // Update list & counter
     if (data.hadir !== lastKnownCount) {
       const listEl = document.getElementById('list');
       listEl.innerHTML = '';
@@ -710,7 +722,7 @@
 
   btnUnpinEl.addEventListener('click', function () {
     unpinDisplay();
-    lastTopSignature = ''; // paksa render berikutnya menampilkan ulang peserta terbaru
+    lastTopSignature = '';
   });
 
   // ===== Jam digital real-time =====
@@ -729,7 +741,7 @@
   updateClock();
   setInterval(updateClock, 1000);
 
-  // ===== Auto-scroll daftar peserta — loop mulus tanpa jeda/lompatan =====
+  // ===== Auto-scroll daftar peserta =====
   const scrollEl = document.getElementById('listScroll');
   const listElForLoop = document.getElementById('list');
   const SCROLL_SPEED = 0.35;
